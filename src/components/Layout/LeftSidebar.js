@@ -17,7 +17,7 @@ const LeftSidebar = ({ toogleActive }) => {
             className="d-block text-decoration-none position-relative"
           >
             <Image
-              src="/images/logo-icon.png"
+              src="/images/chambiar-logo-wo-text.png"
               alt="logo-icon"
               width={26}
               height={26}
