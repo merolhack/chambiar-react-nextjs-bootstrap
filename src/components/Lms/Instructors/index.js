@@ -16,7 +16,7 @@ const instructorsData = [
     },
     courses: 55,
     totalEarnings: "$6,855.00",
-    email: "olivia@trezo.com",
+    email: "olivia@chambiar.ai",
     ratings: [
       {
         star: "ri-star-fill",
@@ -46,7 +46,7 @@ const instructorsData = [
     },
     courses: 120,
     totalEarnings: "$258.00",
-    email: "ava@trezo.com",
+    email: "ava@chambiar.ai",
     ratings: [
       {
         star: "ri-star-fill",
@@ -75,7 +75,7 @@ const instructorsData = [
     },
     courses: 86,
     totalEarnings: "$3890.00",
-    email: "lucas@trezo.com",
+    email: "lucas@chambiar.ai",
     ratings: [
       {
         star: "ri-star-fill",
@@ -104,7 +104,7 @@ const instructorsData = [
     },
     courses: 75,
     totalEarnings: "$2500.00",
-    email: "isabella@trezo.com",
+    email: "isabella@chambiar.ai",
     ratings: [
       {
         star: "ri-star-fill",
@@ -133,7 +133,7 @@ const instructorsData = [
     },
     courses: 55,
     totalEarnings: "$6,855.00",
-    email: "olivia@trezo.com",
+    email: "olivia@chambiar.ai",
     ratings: [
       {
         star: "ri-star-fill",
@@ -162,7 +162,7 @@ const instructorsData = [
     },
     courses: 120,
     totalEarnings: "$258.00",
-    email: "ava@trezo.com",
+    email: "ava@chambiar.ai",
     ratings: [
       {
         star: "ri-star-fill",
@@ -191,7 +191,7 @@ const instructorsData = [
     },
     courses: 86,
     totalEarnings: "$3890.00",
-    email: "lucas@trezo.com",
+    email: "lucas@chambiar.ai",
     ratings: [
       {
         star: "ri-star-fill",
@@ -220,7 +220,7 @@ const instructorsData = [
     },
     courses: 75,
     totalEarnings: "$2500.00",
-    email: "isabella@trezo.com",
+    email: "isabella@chambiar.ai",
     ratings: [
       {
         star: "ri-star-fill",
@@ -249,7 +249,7 @@ const instructorsData = [
     },
     courses: 55,
     totalEarnings: "$6,855.00",
-    email: "olivia@trezo.com",
+    email: "olivia@chambiar.ai",
     ratings: [
       {
         star: "ri-star-fill",
@@ -278,7 +278,7 @@ const instructorsData = [
     },
     courses: 120,
     totalEarnings: "$258.00",
-    email: "ava@trezo.com",
+    email: "ava@chambiar.ai",
     ratings: [
       {
         star: "ri-star-fill",

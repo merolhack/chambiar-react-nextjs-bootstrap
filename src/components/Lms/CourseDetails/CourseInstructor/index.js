@@ -22,7 +22,7 @@ const CourseInstructor = () => {
             </div>
             <div className="flex-grow-1 ms-3">
               <h4 className="fs-17 fw-medium mb-1">Aliva Cohen</h4>
-              <span>aliva@trezo.com</span>
+              <span>aliva@chambiar.ai</span>
             </div>
           </div>
 

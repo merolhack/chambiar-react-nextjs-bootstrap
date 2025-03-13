@@ -22,7 +22,7 @@ const LeftSidebar = ({ toogleActive }) => {
               width={26}
               height={26}
             />
-            <span className="logo-text fw-bold text-dark">Trezo</span>
+            <span className="logo-text fw-bold text-dark">Chambiar</span>
           </Link>
           <button
             className="sidebar-burger-menu bg-transparent p-0 border-0 opacity-0 z-n1 position-absolute top-50 end-0 translate-middle-y"

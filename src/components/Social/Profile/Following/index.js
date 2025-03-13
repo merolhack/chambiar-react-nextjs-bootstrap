@@ -8,31 +8,31 @@ const followingData = [
   {
     image: "/images/user-6.jpg",
     name: "Alex Davis",
-    email: "alex@trezo.com",
+    email: "alex@chambiar.ai",
     link: "#", 
   },
   {
     image: "/images/user-7.jpg",
     name: "Laura Martinez",
-    email: "laura@trezo.com",
+    email: "laura@chambiar.ai",
     link: "#", 
   },
   {
     image: "/images/user-8.jpg",
     name: "Mark Thompson",
-    email: "mark@trezo.com",
+    email: "mark@chambiar.ai",
     link: "#", 
   },
   {
     image: "/images/user-9.jpg",
     name: "Rachel White",
-    email: "rachel@trezo.com",
+    email: "rachel@chambiar.ai",
     link: "#", 
   },
   {
     image: "/images/user-10.jpg",
     name: "Kevin Lee",
-    email: "kevin@trezo.com",
+    email: "kevin@chambiar.ai",
     link: "#", 
   },
 ];

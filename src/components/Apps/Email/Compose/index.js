@@ -99,12 +99,12 @@ const Compose = () => {
                     aria-label="Default select example"
                   >
                     <option defaultValue="0">Select</option>
-                    <option defaultValue="1">james@trezo.com</option>
-                    <option defaultValue="2">andy@trezo.com</option>
-                    <option defaultValue="3">mateo@trezo.com</option>
-                    <option defaultValue="4">luca@trezo.com</option>
-                    <option defaultValue="5">luca@trezo.com</option>
-                    <option defaultValue="6">tomato@trezo.com</option>
+                    <option defaultValue="1">james@chambiar.ai</option>
+                    <option defaultValue="2">andy@chambiar.ai</option>
+                    <option defaultValue="3">mateo@chambiar.ai</option>
+                    <option defaultValue="4">luca@chambiar.ai</option>
+                    <option defaultValue="5">luca@chambiar.ai</option>
+                    <option defaultValue="6">tomato@chambiar.ai</option>
                   </Form.Select>
                 </Form.Group>
               </Col>
@@ -119,12 +119,12 @@ const Compose = () => {
                     aria-label="Default select example"
                   >
                     <option defaultValue="0">Select</option>
-                    <option defaultValue="1">james@trezo.com</option>
-                    <option defaultValue="2">andy@trezo.com</option>
-                    <option defaultValue="3">mateo@trezo.com</option>
-                    <option defaultValue="4">luca@trezo.com</option>
-                    <option defaultValue="5">luca@trezo.com</option>
-                    <option defaultValue="6">tomato@trezo.com</option>
+                    <option defaultValue="1">james@chambiar.ai</option>
+                    <option defaultValue="2">andy@chambiar.ai</option>
+                    <option defaultValue="3">mateo@chambiar.ai</option>
+                    <option defaultValue="4">luca@chambiar.ai</option>
+                    <option defaultValue="5">luca@chambiar.ai</option>
+                    <option defaultValue="6">tomato@chambiar.ai</option>
                   </Form.Select>
                 </Form.Group>
               </Col>
@@ -139,12 +139,12 @@ const Compose = () => {
                     aria-label="Default select example"
                   >
                     <option defaultValue="0">Select</option>
-                    <option defaultValue="1">james@trezo.com</option>
-                    <option defaultValue="2">andy@trezo.com</option>
-                    <option defaultValue="3">mateo@trezo.com</option>
-                    <option defaultValue="4">luca@trezo.com</option>
-                    <option defaultValue="5">luca@trezo.com</option>
-                    <option defaultValue="6">tomato@trezo.com</option>
+                    <option defaultValue="1">james@chambiar.ai</option>
+                    <option defaultValue="2">andy@chambiar.ai</option>
+                    <option defaultValue="3">mateo@chambiar.ai</option>
+                    <option defaultValue="4">luca@chambiar.ai</option>
+                    <option defaultValue="5">luca@chambiar.ai</option>
+                    <option defaultValue="6">tomato@chambiar.ai</option>
                   </Form.Select>
                 </Form.Group>
               </Col>

@@ -15,7 +15,7 @@ const teamMembersData = [
   {
     image: "/images/user-7.jpg",
     name: "Laura Martinez",
-    designation: "laura@trezo.com",
+    designation: "laura@chambiar.ai",
     tasks: "125",
     progress: "80",
     progressBg: "success",
@@ -23,7 +23,7 @@ const teamMembersData = [
   {
     image: "/images/user-8.jpg",
     name: "Mark Thompson",
-    designation: "mark@trezo.com",
+    designation: "mark@chambiar.ai",
     tasks: 78,
     progress: "70",
     progressBg: "info",
@@ -31,7 +31,7 @@ const teamMembersData = [
   {
     image: "/images/user-9.jpg",
     name: "Rachel White",
-    designation: "rachel@trezo.com",
+    designation: "rachel@chambiar.ai",
     tasks: 95,
     progress: "40",
     progressBg: "danger",
@@ -39,7 +39,7 @@ const teamMembersData = [
   {
     image: "/images/user-10.jpg",
     name: "Kevin Lee",
-    designation: "kevin@trezo.com",
+    designation: "kevin@chambiar.ai",
     tasks: 134,
     progress: "80",
     progressBg: "warning",

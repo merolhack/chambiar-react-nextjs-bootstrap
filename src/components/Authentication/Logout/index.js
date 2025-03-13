@@ -23,7 +23,7 @@ const Logout = () => {
             <div className="mw-480 ms-lg-auto">
               <div className="d-inline-block mb-4">
                 <Image
-                  src="/images/logo.svg"
+                  src="/images/chambiar-logo.svg"
                   className="rounded-3 for-light-logo"
                   alt="login"
                   width={100}
@@ -38,7 +38,7 @@ const Logout = () => {
                 />
               </div>
 
-              <h3 className="fs-28 mb-2">Welcome back to Trezo!</h3>
+              <h3 className="fs-28 mb-2">Welcome back to Chambiar!</h3>
               <p className="fw-medium fs-16 mb-4">You Are Logged out</p>
 
               <div className="d-flex align-items-center gap-2 mb-3">

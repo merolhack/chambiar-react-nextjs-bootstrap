@@ -8,31 +8,31 @@ const topPerformerData = [
   {
     userImg: "/images/user-6.jpg",
     userName: "Alex Davis",
-    email: "alex@trezo.com",
+    email: "alex@chambiar.ai",
     link: "#",
   },
   {
     userImg: "/images/user-7.jpg",
     userName: "Laura Martinez",
-    email: "laura@trezo.com",
+    email: "laura@chambiar.ai",
     link: "#",
   },
   {
     userImg: "/images/user-8.jpg",
     userName: "Mark Thompson",
-    email: "mark@trezo.com",
+    email: "mark@chambiar.ai",
     link: "#",
   },
   {
     userImg: "/images/user-9.jpg",
     userName: "Rachel White",
-    email: "rachel@trezo.com",
+    email: "rachel@chambiar.ai",
     link: "#",
   },
   {
     userImg: "/images/user-10.jpg",
     userName: "Kevin Lee",
-    email: "kevin@trezo.com",
+    email: "kevin@chambiar.ai",
     link: "#",
   },
 ];

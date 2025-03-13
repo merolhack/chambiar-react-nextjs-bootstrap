@@ -69,7 +69,7 @@ const Profile = () => {
           <div className="mb-3">
             <span>Billing Email:</span>
             <span className="d-block fw-medium text-secondary mt-1">
-              ava@trezo.com
+              ava@chambiar.ai
             </span>
           </div>
 

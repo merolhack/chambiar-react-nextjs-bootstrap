@@ -94,7 +94,7 @@ const TeamMembers = () => {
 
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">turner@trezo.com</span>
+                <span className="ms-1">turner@chambiar.ai</span>
               </div>
 
               <div className="d-flex align-items-center mb-2 pb-1">
@@ -212,7 +212,7 @@ const TeamMembers = () => {
 
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">parker@trezo.com</span>
+                <span className="ms-1">parker@chambiar.ai</span>
               </div>
 
               <div className="d-flex align-items-center mb-2 pb-1">
@@ -329,7 +329,7 @@ const TeamMembers = () => {
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">lee@trezo.com</span>
+                <span className="ms-1">lee@chambiar.ai</span>
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Phone Number:</span>
@@ -444,7 +444,7 @@ const TeamMembers = () => {
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">torres@trezo.com</span>
+                <span className="ms-1">torres@chambiar.ai</span>
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Phone Number:</span>
@@ -559,7 +559,7 @@ const TeamMembers = () => {
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">lucas@trezo.com</span>
+                <span className="ms-1">lucas@chambiar.ai</span>
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Phone Number:</span>
@@ -674,7 +674,7 @@ const TeamMembers = () => {
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">morgan@trezo.com</span>
+                <span className="ms-1">morgan@chambiar.ai</span>
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Phone Number:</span>
@@ -789,7 +789,7 @@ const TeamMembers = () => {
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">sophia@trezo.com</span>
+                <span className="ms-1">sophia@chambiar.ai</span>
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Phone Number:</span>
@@ -904,7 +904,7 @@ const TeamMembers = () => {
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">meade@trezo.com</span>
+                <span className="ms-1">meade@chambiar.ai</span>
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Phone Number:</span>
@@ -1019,7 +1019,7 @@ const TeamMembers = () => {
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">michael@trezo.com</span>
+                <span className="ms-1">michael@chambiar.ai</span>
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Phone Number:</span>
@@ -1134,7 +1134,7 @@ const TeamMembers = () => {
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">charles@trezo.com</span>
+                <span className="ms-1">charles@chambiar.ai</span>
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Phone Number:</span>
@@ -1249,7 +1249,7 @@ const TeamMembers = () => {
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">tina@trezo.com</span>
+                <span className="ms-1">tina@chambiar.ai</span>
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Phone Number:</span>
@@ -1364,7 +1364,7 @@ const TeamMembers = () => {
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Email Address:</span>
-                <span className="ms-1">melvin@trezo.com</span>
+                <span className="ms-1">melvin@chambiar.ai</span>
               </div>
               <div className="d-flex align-items-center mb-2 pb-1">
                 <span className="text-secondary">Phone Number:</span>

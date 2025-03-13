@@ -5,7 +5,16 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true,
-  }, 
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/dashboard/marketing',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 export default nextConfig;

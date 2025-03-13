@@ -71,7 +71,7 @@ const toDoListData = [
   },
   {
     id: "#846",
-    taskTitle: "Schedule meeting with Trezo",
+    taskTitle: "Schedule meeting with Chambiar",
     assignedTo: "Catalina Engles",
     dueDate: "15 Apr 2024",
     priority: "High",

@@ -55,7 +55,7 @@ const Reviews = () => {
                         />
                         <div className="ms-2 ps-1">
                           <h6 className="fw-medium fs-14 mb-0">Olivia Clark</h6>
-                          <span className="text-body">olivia@trezo.com</span>
+                          <span className="text-body">olivia@chambiar.ai</span>
                         </div>
                       </div>
                     </td>
@@ -134,7 +134,7 @@ const Reviews = () => {
                         />
                         <div className="ms-2 ps-1">
                           <h6 className="fw-medium fs-14 mb-0">Zephyr Zing</h6>
-                          <span className="text-body">zephyr@trezo.com</span>
+                          <span className="text-body">zephyr@chambiar.ai</span>
                         </div>
                       </div>
                     </td>
@@ -213,7 +213,7 @@ const Reviews = () => {
                         />
                         <div className="ms-2 ps-1">
                           <h6 className="fw-medium fs-14 mb-0">Nova Nectar</h6>
-                          <span className="text-body">nova@trezo.com</span>
+                          <span className="text-body">nova@chambiar.ai</span>
                         </div>
                       </div>
                     </td>

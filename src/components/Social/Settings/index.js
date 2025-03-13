@@ -43,7 +43,7 @@ const Settings = () => {
                       <input
                         type="email"
                         className="form-control h-55"
-                        defaultValue="johnson@trezo.com"
+                        defaultValue="johnson@chambiar.ai"
                       />
                     </Form.Group>
                   </Col>
@@ -200,7 +200,7 @@ const Settings = () => {
                       <input
                         type="text"
                         className="form-control h-55"
-                        defaultValue="Trezo Admin"
+                        defaultValue="Chambiar Admin"
                       />
                     </Form.Group>
                   </Col>

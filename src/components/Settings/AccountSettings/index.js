@@ -48,7 +48,7 @@ const AccountSettings = () => {
                 <Form.Control
                   type="email"
                   className="text-dark ps-5 h-55"
-                  defaultValue="olivia@trezo.com"
+                  defaultValue="olivia@chambiar.ai"
                 />
                 <i className="ri-mail-line position-absolute top-50 start-0 translate-middle-y fs-20 text-gray-light ps-20"></i>
               </Form.Group>
@@ -210,7 +210,7 @@ const AccountSettings = () => {
                 <Form.Control
                   type="text"
                   className="text-dark ps-5 h-55"
-                  defaultValue="Trezo Admin"
+                  defaultValue="Chambiar Admin"
                 />
                 <i className="ri-phone-line position-absolute top-50 start-0 translate-middle-y fs-20 text-gray-light ps-20"></i>
               </Form.Group>

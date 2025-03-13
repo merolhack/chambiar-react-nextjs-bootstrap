@@ -23,7 +23,7 @@ const ResetPasswordForm = () => {
             <div className="mw-480 ms-lg-auto">
               <div className="d-inline-block mb-4">
                 <Image
-                  src="/images/logo.svg"
+                  src="/images/chambiar-logo.svg"
                   className="rounded-3 for-light-logo"
                   alt="login"
                   width={100}

@@ -9,31 +9,31 @@ const Teachers = () => {
   const [teachers] = useState([
     {
       name: "Sarah W.",
-      email: "sarah@trezo.com",
+      email: "sarah@chambiar.ai",
       subject: "Mathematics",
       image: "/images/user-1.jpg",
     },
     {
       name: "Michael T.",
-      email: "michael@trezo.com",
+      email: "michael@chambiar.ai",
       subject: "English",
       image: "/images/user-2.jpg",
     },
     {
       name: "Emily J.",
-      email: "emily@trezo.com",
+      email: "emily@chambiar.ai",
       subject: "History",
       image: "/images/user-3.jpg",
     },
     {
       name: "David A.",
-      email: "david@trezo.com",
+      email: "david@chambiar.ai",
       subject: "Art",
       image: "/images/user-4.jpg",
     },
     {
       name: "Jessica M.",
-      email: "jessica@trezo.com",
+      email: "jessica@chambiar.ai",
       subject: "Music",
       image: "/images/user-5.jpg",
     },

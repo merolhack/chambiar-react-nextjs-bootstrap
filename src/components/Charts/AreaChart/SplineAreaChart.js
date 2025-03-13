@@ -13,7 +13,7 @@ const SplineAreaChart = () => {
 
   const series = [
     {
-      name: "Trezo",
+      name: "Chambiar",
       data: [31, 40, 28, 51, 42, 109, 100],
     },
     {

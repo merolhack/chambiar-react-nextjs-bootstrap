@@ -17,7 +17,7 @@ const BillingDetails = () => {
 
           <div className="d-flex align-items-center mb-2">
             <span className="text-secondary">Email:</span>
-            <span className="ms-1">example@trezo.com</span>
+            <span className="ms-1">example@chambiar.ai</span>
           </div>
 
           <div className="d-flex align-items-center mb-2">

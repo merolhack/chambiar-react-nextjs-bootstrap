@@ -81,7 +81,7 @@ const Footer = () => {
                 <ul className="ps-0 mb-0 list-unstyled">
                   <li className="mb-2 pb-1">
                     <a href="#" className="text-decoration-none">
-                      Trezo Dashboard
+                      Chambiar Dashboard
                     </a>
                   </li>
                   <li className="mb-2 pb-1">
@@ -165,7 +165,7 @@ const Footer = () => {
       <div className="copyright-area bg-white text-center py-4">
         <div className="container">
           <p className="fs-14">
-            © <span className="text-primary-div">Trezo</span> is Proudly Owned
+            © <span className="text-primary-div">Chambiar</span> is Proudly Owned
             by{" "}
             <a
               href="https://envytheme.com/"

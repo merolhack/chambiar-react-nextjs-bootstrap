@@ -23,7 +23,7 @@ const SignUpForm = () => {
             <div className="mw-480 ms-lg-auto">
               <div className="d-inline-block mb-4">
                 <Image
-                  src="/images/logo.svg"
+                  src="/images/chambiar-logo.svg"
                   className="rounded-3 for-light-logo"
                   alt="login"
                   width={100}
@@ -38,7 +38,7 @@ const SignUpForm = () => {
                 />
               </div>
 
-              <h3 className="fs-28 mb-2">Sign up to Trezo Dashboard</h3>
+              <h3 className="fs-28 mb-2">Sign up to Chambiar Dashboard</h3>
               <p className="fw-medium fs-16 mb-4">
                 Sign up with social account or enter your details
               </p>
@@ -114,7 +114,7 @@ const SignUpForm = () => {
                   <Form.Control
                     type="email"
                     className="h-55"
-                    placeholder="example@trezo.com"
+                    placeholder="example@chambiar.ai"
                   />
                 </Form.Group>
 

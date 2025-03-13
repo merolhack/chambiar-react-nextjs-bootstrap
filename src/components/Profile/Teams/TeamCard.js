@@ -807,7 +807,7 @@ const TeamCard = () => {
                 className="d-block py-2 px-3 text-center rounded-pill fw-medium text-secondary mb-3 bg-for-dark-mode"
                 style={{ backgroundColor: "#DAEBFF" }}
               >
-                Trezo - Angular
+                Chambiar - Angular
               </span>
 
               <span className="d-block text-center text-body mb-3">

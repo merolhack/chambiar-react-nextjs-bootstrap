@@ -55,7 +55,7 @@ const Sellers = () => {
                     >
                       Ava Turner
                     </Link>
-                    <span className="d-block">turner@trezo.com</span>
+                    <span className="d-block">turner@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -140,7 +140,7 @@ const Sellers = () => {
                     >
                       Ethan Parker
                     </Link>
-                    <span className="d-block">ethan@trezo.com</span>
+                    <span className="d-block">ethan@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -225,7 +225,7 @@ const Sellers = () => {
                     >
                       Isabella
                     </Link>
-                    <span className="d-block">isabella@trezo.com</span>
+                    <span className="d-block">isabella@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -310,7 +310,7 @@ const Sellers = () => {
                     >
                       Thompson
                     </Link>
-                    <span className="d-block">thompson@trezo.com</span>
+                    <span className="d-block">thompson@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -395,7 +395,7 @@ const Sellers = () => {
                     >
                       Lucas
                     </Link>
-                    <span className="d-block">lucas@trezo.com</span>
+                    <span className="d-block">lucas@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -480,7 +480,7 @@ const Sellers = () => {
                     >
                       Morgan
                     </Link>
-                    <span className="d-block">morgan@trezo.com</span>
+                    <span className="d-block">morgan@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -565,7 +565,7 @@ const Sellers = () => {
                     >
                       Sophia
                     </Link>
-                    <span className="d-block">sophia@trezo.com</span>
+                    <span className="d-block">sophia@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -650,7 +650,7 @@ const Sellers = () => {
                     >
                       Rodriguez
                     </Link>
-                    <span className="d-block">rodriguez@trezo.com</span>
+                    <span className="d-block">rodriguez@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -735,7 +735,7 @@ const Sellers = () => {
                     >
                       Olivia Taylor
                     </Link>
-                    <span className="d-block">olivia@trezo.com</span>
+                    <span className="d-block">olivia@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -820,7 +820,7 @@ const Sellers = () => {
                     >
                       David Smith
                     </Link>
-                    <span className="d-block">david@trezo.com</span>
+                    <span className="d-block">david@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -905,7 +905,7 @@ const Sellers = () => {
                     >
                       Alice Johnson
                     </Link>
-                    <span className="d-block">alice@trezo.com</span>
+                    <span className="d-block">alice@chambiar.ai</span>
                   </div>
                 </div>
 
@@ -990,7 +990,7 @@ const Sellers = () => {
                     >
                       Emily Brown
                     </Link>
-                    <span className="d-block">emily@trezo.com</span>
+                    <span className="d-block">emily@chambiar.ai</span>
                   </div>
                 </div>
 

@@ -12,7 +12,7 @@ const ConfirmEmail = () => {
             <Card.Body className="p-4">
               <div className="mb-3 mb-md-4">
                 <Image
-                  src="/images/logo.svg"
+                  src="/images/chambiar-logo.svg"
                   alt="logo"
                   width={100}
                   height={26}
@@ -30,7 +30,7 @@ const ConfirmEmail = () => {
               <h4 className="fs-20 fw-semibold mb-2">Success !</h4>
 
               <p className="mb-4">
-                A email has been send to <strong>hello@trezo.com</strong>.
+                A email has been send to <strong>hello@chambiar.ai</strong>.
                 Please check for an email from company and click on the included
                 link to reset your password.
               </p>

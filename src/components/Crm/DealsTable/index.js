@@ -96,7 +96,7 @@ const dealsData = [
   },
   {
     id: "#845",
-    companyName: "Trezo Admin",
+    companyName: "Chambiar Admin",
     contactPerson: "David Warner",
     amount: "$12,421.00",
     stage: "Discovery",

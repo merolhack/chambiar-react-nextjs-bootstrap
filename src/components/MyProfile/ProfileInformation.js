@@ -23,7 +23,7 @@ const ProfileInformation = () => {
             <li className="d-flex align-items-center mb-2 pb-1">
               <span>Email:</span>
               <span className="text-secondary fw-medium ms-1">
-                olivia@trezo.com
+                olivia@chambiar.ai
               </span>
             </li>
 

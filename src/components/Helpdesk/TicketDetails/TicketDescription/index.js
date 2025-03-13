@@ -23,7 +23,7 @@ const TicketDescription = () => {
           </p>
 
           <h4 className="fs-15 mb-2 pb-1 mt-4">
-            Network Infrastructure for Trezo
+            Network Infrastructure for Chambiar
           </h4>
 
           <ul className="mb-0">

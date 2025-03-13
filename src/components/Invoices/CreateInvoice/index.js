@@ -53,7 +53,7 @@ const CreateInvoice = () => {
                 <div className="mb-0 border p-4 rounded-3 position-relative">
                   <p className="mb-4 text-secondary fw-medium">From:</p>
                   <p className="mb-1 fw-medium text-secondary">Olivia John</p>
-                  <p className="mb-1 text-body">olivia@trezo.com</p>
+                  <p className="mb-1 text-body">olivia@chambiar.ai</p>
                   <p className="mb-1 text-body">
                     4545 Seth Street Ballinger, TX 78965
                   </p>

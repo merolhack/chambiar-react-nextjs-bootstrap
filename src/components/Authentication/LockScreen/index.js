@@ -12,7 +12,7 @@ const LockScreen = () => {
             <Card.Body className="p-4 pb-5 my-2">
               <div className="mw-350 text-center">
                 <h3 className="text-primary fw-semibold fs-20 mb-2">
-                  Welcome to Trezo Dashboard !
+                  Welcome to Chambiar Dashboard !
                 </h3>
 
                 <p className="text-primary fs-15">

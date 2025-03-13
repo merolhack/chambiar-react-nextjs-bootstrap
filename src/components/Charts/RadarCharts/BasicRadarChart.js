@@ -13,7 +13,7 @@ const BasicRadarChart = () => {
 
   const series = [
     {
-      name: "Trezo",
+      name: "Chambiar",
       data: [80, 50, 30, 40, 100, 20],
     },
   ];

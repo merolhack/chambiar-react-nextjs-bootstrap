@@ -23,7 +23,7 @@ const Profile = () => {
                 <div className="text-decoration-none text-secondary fw-medium fs-16 mb-1">
                   Ava Turner
                 </div>
-                <span className="d-block">turner@trezo.com</span>
+                <span className="d-block">turner@chambiar.ai</span>
               </div>
             </div>
 

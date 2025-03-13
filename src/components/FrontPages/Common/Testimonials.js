@@ -11,7 +11,7 @@ const Testimonials = () => {
             <span className="top-title">
               <span>Testimonials</span>
             </span>
-            <h2>Inspiring Feedback: What Users Love About Trezo Dashboard</h2>
+            <h2>Inspiring Feedback: What Users Love About Chambiar Dashboard</h2>
           </div>
 
           <div className="masonrow">
@@ -36,7 +36,7 @@ const Testimonials = () => {
                 </ul>
 
                 <p>
-                  Trezo Dashboard Template has transformed how we manage our
+                  Chambiar Dashboard Template has transformed how we manage our
                   data. Its intuitive design and customizable features have
                   streamlined our analytics process, enabling us to make
                   informed decisions faster than ever before.
@@ -82,7 +82,7 @@ const Testimonials = () => {
 
                 <p>
                   As a developer, I appreciate the flexibility and robustness of
-                  Trezo Dashboard Template. It offers a wide range of features
+                  Chambiar Dashboard Template. It offers a wide range of features
                   that cater to our diverse needs, and its clean codebase has
                   made customization a breeze. Highly recommended!
                 </p>
@@ -126,7 +126,7 @@ const Testimonials = () => {
                 </ul>
 
                 <p>
-                  Trezo Dashboard Template has been a lifesaver for our
+                  Chambiar Dashboard Template has been a lifesaver for our
                   organization. It helped us streamline our reporting
                   processes and communicate insights effectively across
                   departments. The time saved has allowed us to focus more on
@@ -172,7 +172,7 @@ const Testimonials = () => {
                 </ul>
 
                 <p>
-                  I can not recommend Trezo Dashboard Template enough. It helped
+                  I can not recommend Chambiar Dashboard Template enough. It helped
                   us gain a deeper understanding of our business metrics and
                   identify areas for improvement. The responsive support team is
                   an added bonus, always ready to assist whenever we need it.
@@ -217,7 +217,7 @@ const Testimonials = () => {
                 </ul>
 
                 <p>
-                  Using Trezo Dashboard Template has been a game-changer for our
+                  Using Chambiar Dashboard Template has been a game-changer for our
                   team. The ability to customize widgets to suit our specific
                   needs has allowed us to gain deeper insights into our
                   performance metrics and drive business growth.
@@ -263,7 +263,7 @@ const Testimonials = () => {
 
                 <p>
                   As a startup, we needed a dashboard solution that was both
-                  powerful and cost-effective. Trezo Dashboard Template checked
+                  powerful and cost-effective. Chambiar Dashboard Template checked
                   all the boxes for us. It helped us stay agile and
                   competitive in a fast-paced market.
                 </p>

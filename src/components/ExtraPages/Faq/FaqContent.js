@@ -10,7 +10,7 @@ const FaqContent = () => {
           <div className="mb-3 mb-lg-4 text-center" style={{ maxWidth: '500px', margin: 'auto' }}>
             <h3 className="mb-2">Frequently Asked Questions</h3>
 
-            <p>Trezo offers customization options to tailor the platform to your team&apos;s unique requirements. You can customize workflows, templates, and dashboards to align with your processes.</p>
+            <p>Chambiar offers customization options to tailor the platform to your team&apos;s unique requirements. You can customize workflows, templates, and dashboards to align with your processes.</p>
           </div>
 
           <Accordion className="trezo-accordion" defaultActiveKey="0">
@@ -22,11 +22,11 @@ const FaqContent = () => {
                     fontSize: '16px'
                   }}
                 >
-                  What is Trezo?
+                  What is Chambiar?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+                Chambiar is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
               </Accordion.Body>
             </Accordion.Item>
 
@@ -38,11 +38,11 @@ const FaqContent = () => {
                     fontSize: '16px'
                   }}
                 >
-                  What features does Trezo offer?
+                  What features does Chambiar offer?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+                Chambiar is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
               </Accordion.Body>
             </Accordion.Item>
 
@@ -54,11 +54,11 @@ const FaqContent = () => {
                     fontSize: '16px'
                   }}
                 >
-                  Is Trezo suitable for small businesses?
+                  Is Chambiar suitable for small businesses?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+                Chambiar is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
               </Accordion.Body>
             </Accordion.Item>
 
@@ -70,11 +70,11 @@ const FaqContent = () => {
                     fontSize: '16px'
                   }}
                 >
-                  Can I customize Trezo to fit my team&apos;s specific needs?
+                  Can I customize Chambiar to fit my team&apos;s specific needs?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+                Chambiar is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
               </Accordion.Body>
             </Accordion.Item>
 
@@ -86,11 +86,11 @@ const FaqContent = () => {
                     fontSize: '16px'
                   }}
                 >
-                  Is Trezo cloud-based or on-premises?
+                  Is Chambiar cloud-based or on-premises?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+                Chambiar is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
               </Accordion.Body>
             </Accordion.Item>
 
@@ -102,11 +102,11 @@ const FaqContent = () => {
                     fontSize: '16px'
                   }}
                 >
-                  Does Trezo integrate with other tools?
+                  Does Chambiar integrate with other tools?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+                Chambiar is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
               </Accordion.Body>
             </Accordion.Item>
 
@@ -118,11 +118,11 @@ const FaqContent = () => {
                     fontSize: '16px'
                   }}
                 >
-                  How secure is Trezo?
+                  How secure is Chambiar?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+                Chambiar is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
               </Accordion.Body>
             </Accordion.Item>
 
@@ -134,11 +134,11 @@ const FaqContent = () => {
                     fontSize: '16px'
                   }}
                 >
-                  Can I try Trezo before purchasing?
+                  Can I try Chambiar before purchasing?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+                Chambiar is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
               </Accordion.Body>
             </Accordion.Item>
 
@@ -150,11 +150,11 @@ const FaqContent = () => {
                     fontSize: '16px'
                   }}
                 >
-                  What type of customer support does Trezo provide?
+                  What type of customer support does Chambiar provide?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+                Chambiar is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
               </Accordion.Body>
             </Accordion.Item>
 
@@ -166,11 +166,11 @@ const FaqContent = () => {
                     fontSize: '16px'
                   }}
                 >
-                  How do I get started with Trezo?
+                  How do I get started with Chambiar?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+                Chambiar is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

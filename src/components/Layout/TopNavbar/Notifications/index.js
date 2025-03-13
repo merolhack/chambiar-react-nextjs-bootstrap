@@ -54,7 +54,7 @@ const Notifications = () => {
                     </i>
                   </div>
                   <div className="flex-grow-1 ms-3">
-                    <p>A new user added in Trezo</p>
+                    <p>A new user added in Chambiar</p>
                     <span className="fs-13">3 hrs ago</span>
                   </div>
                 </div>

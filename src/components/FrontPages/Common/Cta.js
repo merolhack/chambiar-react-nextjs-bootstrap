@@ -11,9 +11,9 @@ const Cta = () => {
           <div className="border-bottom pb-150">
             <div className="row">
               <div className="unlock-content">
-                <h2>Unlock a world of possibilities with Trezo Dashboard.</h2>
+                <h2>Unlock a world of possibilities with Chambiar Dashboard.</h2>
                 <p>
-                  Experience the difference with Trezo Dashboard. Sign up for a
+                  Experience the difference with Chambiar Dashboard. Sign up for a
                   free trial today and see how our intuitive platform can
                   revolutionize your data analysis process.
                 </p>

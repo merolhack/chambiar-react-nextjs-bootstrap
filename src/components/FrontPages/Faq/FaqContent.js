@@ -11,7 +11,7 @@ const FaqContent = () => {
             <span className="top-title">
               <span>FAQ’s</span>
             </span>
-            <h2>Inspiring Feedback: What Users Love About Trezo Dashboard</h2>
+            <h2>Inspiring Feedback: What Users Love About Chambiar Dashboard</h2>
           </div>
 
           <Accordion defaultActiveKey="0" className="faq-wrapper mw-740 m-auto">
@@ -23,11 +23,11 @@ const FaqContent = () => {
                     fontSize: "16px",
                   }}
                 >
-                  What is Trezo?
+                  What is Chambiar?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to
+                Chambiar is a comprehensive project management software designed to
                 help teams streamline their workflow, collaborate effectively,
                 and achieve project success.
               </Accordion.Body>
@@ -41,11 +41,11 @@ const FaqContent = () => {
                     fontSize: "16px",
                   }}
                 >
-                  What features does Trezo offer?
+                  What features does Chambiar offer?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to
+                Chambiar is a comprehensive project management software designed to
                 help teams streamline their workflow, collaborate effectively,
                 and achieve project success.
               </Accordion.Body>
@@ -59,11 +59,11 @@ const FaqContent = () => {
                     fontSize: "16px",
                   }}
                 >
-                  Is Trezo suitable for small businesses?
+                  Is Chambiar suitable for small businesses?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to
+                Chambiar is a comprehensive project management software designed to
                 help teams streamline their workflow, collaborate effectively,
                 and achieve project success.
               </Accordion.Body>
@@ -77,11 +77,11 @@ const FaqContent = () => {
                     fontSize: "16px",
                   }}
                 >
-                  Can I customize Trezo to fit my team&apos;s specific needs?
+                  Can I customize Chambiar to fit my team&apos;s specific needs?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to
+                Chambiar is a comprehensive project management software designed to
                 help teams streamline their workflow, collaborate effectively,
                 and achieve project success.
               </Accordion.Body>
@@ -95,11 +95,11 @@ const FaqContent = () => {
                     fontSize: "16px",
                   }}
                 >
-                  Is Trezo cloud-based or on-premises?
+                  Is Chambiar cloud-based or on-premises?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to
+                Chambiar is a comprehensive project management software designed to
                 help teams streamline their workflow, collaborate effectively,
                 and achieve project success.
               </Accordion.Body>
@@ -113,11 +113,11 @@ const FaqContent = () => {
                     fontSize: "16px",
                   }}
                 >
-                  Does Trezo integrate with other tools?
+                  Does Chambiar integrate with other tools?
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-                Trezo is a comprehensive project management software designed to
+                Chambiar is a comprehensive project management software designed to
                 help teams streamline their workflow, collaborate effectively,
                 and achieve project success.
               </Accordion.Body>

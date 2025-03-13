@@ -66,7 +66,7 @@ const ControlPanel = () => {
             className="btn btn-primary px-3"
             target="_blank"
           >
-            Buy Trezo
+            Buy Chambiar
           </a>
         </div>
       </div>

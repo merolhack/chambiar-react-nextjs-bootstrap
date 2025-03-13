@@ -17,8 +17,8 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Trezo - React Nextjs Admin Dashboard Template",
-  description: "Trezo - React Nextjs Admin Dashboard Template",
+  title: "Chambiar - React Nextjs Admin Dashboard Template",
+  description: "Chambiar - React Nextjs Admin Dashboard Template",
 };
 
 export default function RootLayout({ children }) {
