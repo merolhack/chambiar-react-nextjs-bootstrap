@@ -46,6 +46,17 @@ const LeftSidebar = ({ toogleActive }) => {
               </Accordion.Header>
               <Accordion.Body>
                 <ul className="sub-menu">
+                <li className="menu-item">
+                    <Link
+                      href="/dashboard/coworker/"
+                      className={`menu-link ${
+                        pathname === "/dashboard/coworker/" ? "active" : ""
+                      }`}
+                    >
+                      Co-Worker
+                    </Link>
+                  </li>
+
                   <li className="menu-item">
                     <Link
                       href="/dashboard/ecommerce/"
