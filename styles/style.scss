@@ -37,9 +37,13 @@ $custom-colors: (
     "primary-div": $primary-div,
     "primary-div-50": $primary-div-50,
     "primary-50": $primary-50,
+    "primary-60": $primary-60,
+    "primary-70": $primary-70,
     "danger-50": $danger-50,
     "success-50": $success-50,
     "success-60": $success-60,
+    "success-70": $success-70,
+    "success-80": $success-80,
     "body-bg": $body-bg,
     "danger-div": $danger-div,
     "rating-color": $rating-color,
@@ -111,6 +115,10 @@ $utilities: (
 @import "./components/analytics";
 @import "./components/marketing";
 @import "./components/nft";
+@import "./components/restaurant";
+
+// Horizontal navbar.scss
+@import "./components/horizontal-navbar.scss";
 
 // settings-sidebar
 @import "./components/settings-sidebar"; 

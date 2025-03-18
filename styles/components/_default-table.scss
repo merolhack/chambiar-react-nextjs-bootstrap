@@ -1023,7 +1023,7 @@
  
 }
 
-@media only screen and (max-width : 576px) {
+@media only screen and (max-width: 576px) {
 
     .default-table-area {
         &.top-selling-products {
@@ -1114,7 +1114,7 @@
     
 }
 
-@media only screen and (max-width : 685px) {
+@media only screen and (max-width: 685px) {
 
     .default-table-area {
         &.recent-orders {
@@ -1188,7 +1188,7 @@
 }
 
 /* Min width 768px to Max width 992px */
-@media only screen and (min-width : 768px) and (max-width : 991px) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
 
     .default-table-area {
         &.email-list {
@@ -1254,7 +1254,7 @@
     }
 }
 
-@media only screen and (max-width : 685px) {
+@media only screen and (max-width: 685px) {
 
     .default-table-area {
         &.recent-orders {
@@ -1295,7 +1295,7 @@
 
 }
 
-@media only screen and (max-width : 900px) {
+@media only screen and (max-width: 900px) {
     .default-table-area {
         &.campaigns-table {
             &.style-two {
@@ -1309,7 +1309,7 @@
     }
 }
 
-@media only screen and (min-width : 992px) and (max-width : 1405px) {
+@media only screen and (min-width: 992px) and (max-width: 1405px) {
 
     .default-table-area {
         &.style-three {
@@ -1325,7 +1325,7 @@
 
 
 /* Min width 992px to Max width 1199px */
-@media only screen and (min-width : 992px) and (max-width : 1199px)  {
+@media only screen and (min-width: 992px) and (max-width: 1199px)  {
 
     .default-table-area {
         &.recent-leads {
@@ -1364,7 +1364,7 @@
 }
 
 /* Min width 1200px to Max width 1399px */
-@media only screen and (min-width : 1200px) and (max-width : 1399px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
 
     .default-table-area {
         &.top-selling-products {
@@ -1422,7 +1422,7 @@
 }
 
 /* Min width 1400px to Max width 1500px */
-@media only screen and (min-width : 1400px) and (max-width : 1550px) {
+@media only screen and (min-width: 1400px) and (max-width: 1550px) {
 
     .crypto-th-table {
         width: 715px;
@@ -1452,9 +1452,35 @@
                 width: 1300px !important;
             }
         }
+        &.recent-order-list-table {
+            &.style-two {
+                .table-responsive {
+                    .table {
+                        width: 1061px !important;
+                    }
+                }
+            }
+        }
+        &.recent-order-list-table {
+            &.style-two {
+                .table-responsive {
+                    .table {
+                        width: 1061px !important;
+                    }
+                }
+            }
+        }
+        &.customer-ratings-table {
+            &.style-two {
+                .table-responsive {
+                    .table {
+                        width: 1061px !important;
+                    }
+                }
+            }
+        }
     }
     
-
 }
 
 @media only screen and (max-width: 1550px) {

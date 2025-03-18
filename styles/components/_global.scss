@@ -209,6 +209,12 @@ textarea {
         color: #fff !important;
     }
 }
+.border-color-primary {
+    border-color: $primary !important;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
 
 .py-38 {
     padding-top: 38px !important;
@@ -340,7 +346,7 @@ textarea {
     }
 }
 /* Max width 767px */
-@media only screen and (max-width : 767px) {
+@media only screen and (max-width: 767px) {
 
     #preloader {
         .preloader {
@@ -1573,6 +1579,7 @@ Swiper Slider Style
             background-color: #f6f7f9;
             padding: 10px 30px; 
             color: $secondary; 
+            text-transform: capitalize;
 
             &.active {
                 background-color: $primary; 
@@ -1587,7 +1594,7 @@ Swiper Slider Style
 }
 
 .main-content:has(div.auth-main-content) { 
-    padding: 0;
+    padding: 0 !important;
 }
 .main-content:has(div.fp-wrapper) { 
     padding: 0;
@@ -2015,26 +2022,11 @@ Swiper Slider Style
         }
     }
 }
-// .single-play {
-//     .audio-play-btn {
-//         opacity: 0;
-//         transition: $transition;
-//     }
-//     &:hover {
-//         .audio-play-btn {
-//             opacity: 1;
-//         }
-//     }
-//     &.active {
-//         .audio-play-btn {
-//             opacity: 1;
-//         }
-//     }
-// }
 
 .doctor-cover-bg {
     position: relative;
-    z-index: 1;
+    z-index: 0;
+
     &::before {
         content: "";
         position: absolute;
@@ -2259,7 +2251,7 @@ Swiper Slider Style
 
 
 /* Max width 767px */
-@media only screen and (max-width : 767px) {
+@media only screen and (max-width: 767px) {
 
     .p-4 {
         padding: 15px !important;
@@ -2311,7 +2303,7 @@ Swiper Slider Style
 }
 
 /* Min width 768px to Max width 992px */
-@media only screen and (min-width : 768px) and (max-width : 991px) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
 
     .p-4 {
         padding: 20px !important;
@@ -2322,7 +2314,7 @@ Swiper Slider Style
 }
 
 /* Min width 992px to Max width 1199px */
-@media only screen and (min-width : 992px) and (max-width : 1199px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
 
     .mw-123 {
         max-width: 98px;
@@ -2344,7 +2336,7 @@ Swiper Slider Style
 }
 
 /* Min width 1200px to Max width 1399px */
-@media only screen and (min-width : 1200px) and (max-width : 1399px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
     
     .p-4 {
         padding: 20px !important;
@@ -2376,7 +2368,7 @@ Swiper Slider Style
 }
 
 /* Min width 1400px to Max width 1799px */
-@media only screen and (min-width : 1400px) and (max-width : 1799px) {
+@media only screen and (min-width: 1400px) and (max-width: 1799px) {
     .py-38 {
         padding-top: 30px !important;
         padding-bottom: 30px !important;
@@ -2428,7 +2420,7 @@ Swiper Slider Style
     }
 }
 
-@media only screen and (min-width : 1920px) {
+@media only screen and (min-width: 1920px) {
     .custom-xxxl-10 {
         flex: 0 0 auto;
         width: 77%;
@@ -2443,4 +2435,277 @@ Swiper Slider Style
         display: none;
     }
 }
+
+// Social media dashboard
+.-right-10 {
+    right: -10px;
+}
+
+[dir="rtl"] {
+    .-right-10 {
+        right: auto;
+        left: -10px;
+    }
+}
+// End Social media dashboard
+
+// Beauty salon dashboard
+.text-000 {
+    color: #000 !important;
+}
+.bsts-products-slide {
+    .swiper-button-prev, .swiper-button-next {
+        background-color: $primary;
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+
+        &::after {
+            font-size: 18px;
+        }
+        &.swiper-button-disabled {
+            cursor: auto;
+            pointer-events: auto;
+        }
+    }
+}
+.ra-calendar {
+    .react-calendar__month-view__days {
+        .react-calendar__tile {
+            background-color: #E6EFF2;
+            border-radius: 10px;
+            border: 2px solid #fff;
+            height: 50px;
+        }
+    }
+}
+
+.dark { 
+    .ra-calendar {
+        .react-calendar__month-view__days {
+            .react-calendar__tile {
+                background-color: #000; 
+                border: 2px solid #333; 
+            }
+        }
+    }
+}
+
+.bs-rs-appointments {
+    padding-left: 11px;
+    padding-right: 5px;
+
+    .bs-rs-appointments-list {
+        border-left: 1px dashed #D5D9E2;
+        padding-left: 37px;
+
+        .verifyIcon {
+            left: -37px !important;
+        }
+    }
+}
+
+[dir="rtl"] {
+    .bs-rs-appointments {
+        padding-left: 5px;
+        padding-right: 11px;
+    
+        .bs-rs-appointments-list { 
+            padding-left: 0;
+            padding-right: 37px;
+            border-left: none;
+            border-right: 1px dashed #D5D9E2;
+    
+            .verifyIcon {
+                left: auto !important;
+                right: -60px !important;
+            }
+        }
+    }
+}
+
+
+
+// Resoinsive
+@media only screen and (max-width: 767px) {
+    .default-table-area {
+        &.campaigns-table {
+            &.style-two {
+                &.bs-top-customers {
+                    .table-responsive {
+                        .table {
+                            width: 940px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px)  {
+    .default-table-area {
+        &.campaigns-table {
+            &.style-two {
+                &.bs-top-customers {
+                    .table-responsive {
+                        .table {
+                            width: 940px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// End Beauty salon dashboard
+
+// Dctor dashboard
+.pr-5 {
+    padding-right: 5px;
+}
+.doctor-welcome-card {
+    padding-left: 105px;
+    padding-right: 80px;
+}
+.doctor-main-wrapper {
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.pd-text-content {
+    h1 {
+        font-size: 20px;
+    }
+    h2 {
+        font-size: 19px;
+    }
+    h3 {
+        font-size: 18px;
+    }
+    h4 {
+        font-size: 17px;
+    }
+    h5 {
+        font-size: 16px;
+    }
+    h6 {
+        font-size: 15px;
+    }
+    ul, ol {
+        margin-bottom: 0;
+        margin-top: 15px;
+        padding-left: 17px;
+
+        li {
+            line-height: 1.8;
+            margin-bottom: 5px;
+
+            &::marker {
+                color: $primary;
+                font-size: 18px;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+.-po-left-26 {
+    left: -26px !important;
+}
+.recent-appointment-notify {
+    border-left: 1px dashed #D5D9E2;
+    padding-left: 26px,
+}
+
+.dark {
+    .doctor-cover-bg {
+        &::before {
+            background-color: #000;
+        }
+    }
+}
  
+[dir="rtl"] {
+    .pr-5 {
+        padding-right: 0;
+        padding-left: 5px;
+    }
+    .pd-text-content {
+        ul, ol {
+            padding-left: 0;
+            padding-right: 17px;
+        }
+    }
+    .-po-left-26 {
+        left: 0 !important;
+        right: -50px !important;
+    }
+    .recent-appointment-notify {
+        border-left: none;
+        border-right: 1px dashed #D5D9E2;
+        padding-left: 0;
+        padding-right: 26px;
+    }
+}
+
+// Resoinsive
+@media only screen and (min-width: 992px) { 
+    .default-table-area {
+        &.campaigns-table {
+            &.latest-transaction-table {
+                &.doctor-patients-table {
+                    .table-responsive {
+                        .table {
+                            width: 100% !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}   
+
+@media only screen and (max-width: 1199px) {
+    .doctor-welcome-card {
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .doctor-main-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 25px !important;
+    }
+}
+
+ 
+@media only screen and (min-width: 1200px) and (max-width: 1399px)  {
+    .doctor-welcome-card { 
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    .doctor-main-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 25px !important;
+    }
+}
+
+@media only screen and (min-width: 1400px) and (max-width: 1599px)  {
+    .doctor-welcome-card { 
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    .doctor-main-wrapper {
+        padding-left: 30px;
+        padding-right: 30px; 
+    }
+}
+// End Dctor dashboard
+
+// Restaurant dashboard
+  
+// End Restaurant dashboard
