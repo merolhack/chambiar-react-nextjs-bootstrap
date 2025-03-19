@@ -69,6 +69,28 @@ const LeftSidebar = ({ toogleActive }) => {
                 <ul className="sub-menu">
                   <li className="menu-item">
                     <Link
+                      href="/dashboard/restaurant/"
+                      className={`menu-link ${
+                        pathname === "/dashboard/restaurant/" ? "active" : ""
+                      }`}
+                    >
+                      Restaurant
+                      <span className="hot tag">New</span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link
+                      href="/dashboard/coworker/"
+                      className={`menu-link ${
+                        pathname === "/dashboard/coworker/" ? "active" : ""
+                      }`}
+                    >
+                      CoWorker
+                    </Link>
+                  </li>
+
+                  <li className="menu-item">
+                    <Link
                       href="/dashboard/ecommerce/"
                       className={`menu-link ${
                         pathname === "/dashboard/ecommerce/" ? "active" : ""
@@ -334,18 +356,6 @@ const LeftSidebar = ({ toogleActive }) => {
                       }`}
                     >
                       Store Analytics
-                      <span className="hot tag">New</span>
-                    </Link>
-                  </li>
-
-                  <li className="menu-item">
-                    <Link
-                      href="/dashboard/restaurant/"
-                      className={`menu-link ${
-                        pathname === "/dashboard/restaurant/" ? "active" : ""
-                      }`}
-                    >
-                      Restaurant
                       <span className="hot tag">New</span>
                     </Link>
                   </li>
