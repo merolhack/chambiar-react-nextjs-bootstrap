@@ -16,10 +16,10 @@ const Welcome = () => {
               color: "#FFE8D4",
             }}
           >
-            Hello William!
+            Hello Yvonne!
           </span>
         </div>
-        <h2>Here Your Restaurant Stats Today.</h2>
+        <h2>Here Your Work Stats Today.</h2>
 
         <div className="d-flex align-items-center" style={{ gap: "40px" }}>
           <div className="d-flex" style={{ gap: "10px" }}>
