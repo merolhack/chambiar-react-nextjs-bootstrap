@@ -9,7 +9,7 @@ const SignUpForm = () => {
     <>
       <div className="auth-main-content m-auto m-1230 px-3">
         <Row className="align-items-center">
-          <Col lg={6} className="d-none d-lg-block">
+          {/*<Col lg={6} className="d-none d-lg-block">
             <Image
               src="/images/register.jpg"
               className="rounded-3"
@@ -17,17 +17,17 @@ const SignUpForm = () => {
               width={646}
               height={804}
             />
-          </Col>
+          </Col>*/}
 
-          <Col lg={6}>
+          <Col lg={12}>
             <div className="mw-480 ms-lg-auto">
               <div className="d-inline-block mb-4">
                 <Image
                   src="/images/chambiar-logo.svg"
                   className="rounded-3 for-light-logo"
                   alt="login"
-                  width={100}
-                  height={26}
+                  width={200}
+                  height={52}
                 />
                 <Image
                   src="/images/white-logo.svg"

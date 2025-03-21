@@ -1,15 +1,62 @@
-"use client";
+"use client"; // Mark this component as a Client Component
 
-import { Row, Col, Form } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { redirect } from 'next/navigation'
 import Link from "next/link";
 import Image from "next/image";
+import { login, checkStatus } from "../../../services/auth";
+import { getProfile } from "../../../services/users";
+import { getInitialPrompt } from "../../../services/prompts";
+import AlertDismissible from "../../AlertDismissible"
 
 const SignInForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [profile, setProfile] = useState(null);
+  const [prompts, setPrompts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent form submission from refreshing the page
+    setLoading(true);
+    setError(null);
+
+    let loginResponse = null;
+
+    try {
+      // Perform login
+      loginResponse = await login(username, password);
+      localStorage.setItem("access_token", loginResponse.access_token);
+
+      // Fetch profile
+      // const profileResponse = await getProfile();
+      // setProfile(profileResponse);
+
+      // Fetch initial prompts
+      // const promptsResponse = await getInitialPrompt();
+      // setPrompts(promptsResponse);
+
+      // Check status
+      const statusResponse = await checkStatus();
+      console.log(statusResponse);
+    } catch (error) {
+      console.error(error);
+      setError(error.message || "An error occurred during login.");
+    } finally {
+      setLoading(false);
+      if (loginResponse && loginResponse.access_token) {
+        redirect('/dashboard/restaurant')
+      }
+    }
+  };
+
   return (
     <>
       <div className="auth-main-content m-auto m-1230 px-3">
         <Row className="align-items-center">
-          <Col lg={6} className="d-none d-lg-block">
+          {/*<Col lg={6} className="d-none d-lg-block">
             <Image
               src="/images/login.jpg"
               className="rounded-3"
@@ -17,32 +64,40 @@ const SignInForm = () => {
               width={646}
               height={804}
             />
-          </Col>
+          </Col>*/}
 
-          <Col lg={6}>
+          <Col lg={12}>
             <div className="mw-480 ms-lg-auto">
               <div className="d-inline-block mb-4">
                 <Image
                   src="/images/chambiar-logo.svg"
                   className="rounded-3 for-light-logo"
                   alt="login"
-                  width={100}
-                  height={26}
+                  width={200}
+                  height={52}
                 />
               </div>
+
+              {error && <AlertDismissible 
+                alertHeading="Error" 
+                alertText={error}
+              />}
 
               <h3 className="fs-28 mb-2">Welcome back to Chambiar!</h3>
               <p className="fw-medium fs-16 mb-4">
                 Enter your details
               </p>
 
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-4">
-                  <label className="label text-secondary">Email Address</label>
+                  <label className="label text-secondary">Username</label>
                   <Form.Control
-                    type="email"
+                    type="text"
                     className="h-55"
-                    placeholder="example@chambiar.ai"
+                    placeholder="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
                   />
                 </Form.Group>
 
@@ -52,6 +107,9 @@ const SignInForm = () => {
                     type="password"
                     className="h-55"
                     placeholder="Type password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </Form.Group>
 
