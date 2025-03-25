@@ -44,7 +44,7 @@ const SignInForm: React.FC = () => {
       // console.log(statusResponse);
 
       // Immediate redirect after successful login
-      router.push('/dashboard/restaurant');
+      router.push('/dashboard/main');
       router.refresh(); // Ensure the page refreshes to apply auth changes
 
       // Use window.location for immediate, reliable redirect
