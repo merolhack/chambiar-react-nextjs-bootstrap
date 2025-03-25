@@ -1,3 +1,4 @@
+// services/prompts.js
 import apiClient from './api';
 
 export const getInitialPrompt = async () => {

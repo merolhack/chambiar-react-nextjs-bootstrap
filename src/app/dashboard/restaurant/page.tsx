@@ -1,3 +1,6 @@
+// app/dashboard/restaurant/page.tsx
+'use client';
+
 import CustomerRatings from "@/components/Dashboard/Restaurant/CustomerRatings";
 import Expense from "@/components/Dashboard/Restaurant/Expense";
 import LowStockAlerts from "@/components/Dashboard/Restaurant/LowStockAlerts";
@@ -14,7 +17,9 @@ import Order from "@/components/Dashboard/Restaurant/TotalOrders";
 import Welcome from "@/components/Dashboard/Restaurant/Welcome";
 import { Row, Col } from "react-bootstrap";
 
-export default function Page() {
+import { withAuth } from '@/components/withAuth';
+
+function Page() {
   return (
     <>
       <Row className="justify-content-center">
@@ -79,3 +84,5 @@ export default function Page() {
     </>
   );
 }
+
+export default withAuth(Page);

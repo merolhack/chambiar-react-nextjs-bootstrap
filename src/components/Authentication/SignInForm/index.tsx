@@ -1,8 +1,10 @@
+// app/components/Authentication/SignInForm/index.tsx
 "use client"; // Mark this component as a Client Component
 
 import { useEffect, useState } from "react";
 import { Row, Col, Form, Button, Alert } from "react-bootstrap";
-import { redirect } from 'next/navigation'
+import  {redirect, useRouter } from 'next/navigation'; // Changed from redirect to useRouter
+
 import Link from "next/link";
 import Image from "next/image";
 import { login, checkStatus } from "../../../services/auth";
@@ -10,15 +12,16 @@ import { getProfile } from "../../../services/users";
 import { getInitialPrompt } from "../../../services/prompts";
 import AlertDismissible from "../../AlertDismissible"
 
-const SignInForm = () => {
+const SignInForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [profile, setProfile] = useState(null);
   const [prompts, setPrompts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const router = useRouter(); // Add this line
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent form submission from refreshing the page
     setLoading(true);
     setError(null);
@@ -28,8 +31,25 @@ const SignInForm = () => {
     try {
       // Perform login
       loginResponse = await login(username, password);
+
+      if (!loginResponse?.access_token) {
+        throw new Error("No access token received");
+      }
+
+      console.log('loginResponse', loginResponse);
       localStorage.setItem("access_token", loginResponse.access_token);
 
+      // Check status
+      // const statusResponse = await checkStatus();
+      // console.log(statusResponse);
+
+      // Immediate redirect after successful login
+      router.push('/dashboard/restaurant');
+      router.refresh(); // Ensure the page refreshes to apply auth changes
+
+      // Use window.location for immediate, reliable redirect
+      // window.location.href = '/dashboard/restaurant';
+      
       // Fetch profile
       // const profileResponse = await getProfile();
       // setProfile(profileResponse);
@@ -37,18 +57,11 @@ const SignInForm = () => {
       // Fetch initial prompts
       // const promptsResponse = await getInitialPrompt();
       // setPrompts(promptsResponse);
-
-      // Check status
-      const statusResponse = await checkStatus();
-      console.log(statusResponse);
     } catch (error) {
       console.error(error);
       setError(error.message || "An error occurred during login.");
     } finally {
       setLoading(false);
-      if (loginResponse && loginResponse.access_token) {
-        redirect('/dashboard/restaurant')
-      }
     }
   };
 

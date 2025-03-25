@@ -1,3 +1,4 @@
+// services/users.js
 import apiClient from './api';
 
 export const getProfile = async () => {

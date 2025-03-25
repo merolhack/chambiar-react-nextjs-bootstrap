@@ -1,11 +1,24 @@
+// services/auth.js
 import apiClient from './api';
 
 export const login = async (username, password) => {
+  console.log("username", username);
+  console.log("password", password);
   try {
-    const response = await apiClient.post('/auth/login', { username, password });
+    const response = await apiClient.post('/auth/login', {
+      username,
+      password
+    }, {
+      withCredentials: true // For HttpOnly cookies
+    });
+    // If your backend doesn't set HttpOnly cookies, set them client-side
+    if (response.data.access_token) {
+      document.cookie = `access_token=${response.data.access_token}; path=/; Secure; SameSite=Strict`;
+    }
     return response.data;
   } catch (error) {
-    throw error.response ? error.response.data : error.message;
+    // Generic error message to prevent info leakage
+    throw new Error("Login failed. Please check your credentials.");
   }
 };
 

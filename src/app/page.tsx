@@ -1,3 +1,5 @@
+// app/page.tsx
+
 import ContactUs from "@/components/FrontPages/Common/ContactUs";
 import KeyFeatures from "@/components/FrontPages/Common/KeyFeatures";
 import Navbar from "@/components/FrontPages/Common/Navbar";
@@ -9,31 +11,20 @@ import HeroBanner from "@/components/FrontPages/Home/HeroBanner";
 import Cta from "@/components/FrontPages/Common/Cta";
 import Footer from "@/components/FrontPages/Common/Footer";
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <>
       <div className="fp-wrapper">
-
         <Navbar />
-  
         <HeroBanner />
-
         <KeyFeatures />
-
         <Widget />
-
         <Testimonials />
-
         <OurTeamSlider />
-
         <FaqContent />
-
         <ContactUs />
-
         <Cta />
-
         <Footer />
-
       </div>
     </>
   );

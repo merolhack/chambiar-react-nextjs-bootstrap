@@ -9,7 +9,7 @@ const Logout = () => {
     <>
       <div className="auth-main-content m-auto m-1230 px-3">
         <Row className="align-items-center">
-          <Col lg={6} className="d-none d-lg-block">
+          {/*<Col lg={6} className="d-none d-lg-block">
             <Image
               src="/images/login.jpg"
               className="rounded-3"
@@ -17,9 +17,9 @@ const Logout = () => {
               width={646}
               height={804}
             />
-          </Col>
+          </Col>*/}
 
-          <Col lg={6}>
+          <Col lg={12}>
             <div className="mw-480 ms-lg-auto">
               <div className="d-inline-block mb-4">
                 <Image
