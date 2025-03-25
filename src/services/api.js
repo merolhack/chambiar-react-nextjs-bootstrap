@@ -1,8 +1,10 @@
 // services/api.js
 import axios from 'axios';
 
+const backendHost = process.env.NEXT_PUBLIC_API_HOST || 'https://chambiar-prod-backend-app-563127813488.us-central1.run.app';
+
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_HOST,
+  baseURL: backendHost,
   headers: {
     'Content-Type': 'application/json',
   },
