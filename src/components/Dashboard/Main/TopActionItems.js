@@ -61,11 +61,11 @@ const TopActionItems = () => {
 
 
           {topActionItems.slice(0, 4).map((item) => (
-            <Row>
-              <Col key={item.id} sm={12} md={12}>
-                <h5 className="fs-14 fw-semibold mb-0 text-secondary-50">
+            <Row key={item.id}>
+              <Col sm={12} md={12}>
+                <h4 className="fs-14 fw-semibold mb-0 text-secondary-50">
                   {item.name}
-                </h5>
+                </h4>
                 <Row>
                   <Col sm={8}>
                     <h6>Context:</h6>
