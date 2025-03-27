@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { Row, Col, Form, Button, Alert } from "react-bootstrap";
-import  {redirect, useRouter } from 'next/navigation'; // Changed from redirect to useRouter
+import { redirect, useRouter } from 'next/navigation'; // Changed from redirect to useRouter
 
 import Link from "next/link";
 import Image from "next/image";
@@ -19,7 +19,15 @@ const SignInForm: React.FC = () => {
   const [prompts, setPrompts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const router = useRouter(); // Add this line
+  const router = useRouter();
+
+  // Add this state near your other useState hooks
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Add this toggle function
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent form submission from refreshing the page
@@ -49,7 +57,7 @@ const SignInForm: React.FC = () => {
 
       // Use window.location for immediate, reliable redirect
       // window.location.href = '/dashboard/restaurant';
-      
+
       // Fetch profile
       // const profileResponse = await getProfile();
       // setProfile(profileResponse);
@@ -91,8 +99,8 @@ const SignInForm: React.FC = () => {
                 />
               </div>
 
-              {error && <AlertDismissible 
-                alertHeading="Error" 
+              {error && <AlertDismissible
+                alertHeading="Error"
                 alertText={error}
               />}
 
@@ -116,15 +124,24 @@ const SignInForm: React.FC = () => {
 
                 <Form.Group className="mb-4">
                   <label className="label text-secondary">Password</label>
-                  <Form.Control
-                    type="password"
-                    className="h-55"
-                    placeholder="Type password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
+                  <div className="password-wrapper position-relative">
+                    <Form.Control
+                      type={showPassword ? "text" : "password"}
+                      className="h-55"
+                      placeholder="Type password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <i
+                      style={{ color: "#A9A9C8", fontSize: "16px", right: "15px", cursor: "pointer" }}
+                      className={`translate-middle-y top-50 end-0 position-absolute ${showPassword ? "ri-eye-line" : "ri-eye-off-line"}`}
+                      onClick={togglePasswordVisibility}
+                      aria-hidden="true"
+                    ></i>
+                  </div>
                 </Form.Group>
+
 
                 <Form.Group className="mb-4">
                   <Link href='/authentication/forgot-password/' className="fw-medium text-primary text-decoration-none">
