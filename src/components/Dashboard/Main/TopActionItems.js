@@ -3,40 +3,27 @@
 import React from "react";
 import Link from "next/link";
 import { Row, Col, Card, Dropdown } from "react-bootstrap";
+import context from "react-bootstrap/esm/AccordionContext";
 
 const topActionItems = [
   {
     id: 1,
-    name: "Lorem",
-    image: "/images/top-item-1.jpg",
-    rating: 5.0,
-    sold: 1235,
-    link: "/restaurant/dish-details",
+    name: "Approve Q2 Hiring Plan",
+    context: "The task is tied to a company wide hiring goal and blocks 2 other...",
+    action: "Review & Approve by 3am",
   },
   {
     id: 2,
-    name: "Ipsum",
-    image: "/images/top-item-2.jpg",
-    rating: 4.8,
-    sold: 1045,
-    link: "/restaurant/dish-details",
+    name: "Delegate two tasks",
+    context: "Your focus time ratio dropped below 30% offboard these low priorities",
+    action: "Free 2.4 hours this week",
   },
   {
     id: 3,
-    name: "Dolor",
-    image: "/images/top-item-3.jpg",
-    rating: 4.9,
-    sold: 1015,
-    link: "/restaurant/dish-details",
-  },
-  {
-    id: 4,
-    name: "Sit",
-    image: "/images/top-item-4.jpg",
-    rating: 4.8,
-    sold: 996,
-    link: "/restaurant/dish-details",
-  },
+    name: "Product launch",
+    context: "Coworker attending meeting, your shared notes. More follow up required",
+    action: "Send feedback EOD or schedule...",
+  }
 ];
 
 const TopActionItems = () => {
@@ -45,7 +32,7 @@ const TopActionItems = () => {
       <Card className="bg-white border-0 rounded-3 mb-4">
         <Card.Body className="p-4">
           <div className="d-flex justify-content-between align-items-center flex-wrap gap-3">
-            <h3 className="mb-0 text-secondary-50">Top Action Items</h3>
+            <h3 className="mb-0 text-secondary-50">Top Action</h3>
 
             <Dropdown className="dropdown select-dropdown">
               <Dropdown.Toggle
@@ -72,58 +59,32 @@ const TopActionItems = () => {
             </Dropdown>
           </div>
 
-          <Row>
-            {topActionItems.slice(0, 4).map((item) => (
-              <Col key={item.id} sm={6} md={3}>
-                <Link
-                  href={item.link}
-                  className="text-decoration-none d-block"
-                  style={{ marginTop: "22px" }}
-                >
-                  <div className="position-relative mb-2 pb-1">
-                    <div
-                      className="bg-img"
-                      style={{
-                        backgroundImage: `url(${item.image})`,
-                        height: "145px",
-                        borderRadius: "10px",
-                      }}
-                    ></div>
-                    <div
-                      className="d-inline-block position-absolute top-0 end-0"
-                      style={{
-                        padding: "3px",
-                      }}
-                    >
-                      <div
-                        className="d-flex align-items-center bg-dark rounded-pill"
-                        style={{
-                          gap: "2px",
-                          padding: "1.5px 5px",
-                        }}
-                      >
-                        <i className="ri-star-fill fs-14 text-danger"></i>
-                        <span
-                          className="fs-12 fw-semibold"
-                          style={{
-                            color: "#FFF5ED",
-                          }}
-                        >
-                          {item.rating}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <h4 className="fs-14 fw-semibold mb-0 text-secondary-50">
-                    {item.name}
-                  </h4>
-                  <span className="fs-12 fw-medium text-body">
-                    {item.sold} sold
-                  </span>
-                </Link>
+
+          {topActionItems.slice(0, 4).map((item) => (
+            <Row>
+              <Col key={item.id} sm={12} md={12}>
+                <h5 className="fs-14 fw-semibold mb-0 text-secondary-50">
+                  {item.name}
+                </h5>
+                <Row>
+                  <Col sm={8}>
+                    <h6>Context:</h6>
+                    <p className="fs-12 fw-medium text-body">
+                      {item.context}
+                    </p>
+                  </Col>
+                  <Col sm={4}>
+                    <h6>Action:</h6>
+                    <p className="fs-12 fw-medium text-body">
+                      {item.action}
+                    </p>
+                  </Col>
+                </Row>
+
               </Col>
-            ))}
-          </Row>
+            </Row>
+          ))}
+
         </Card.Body>
       </Card>
     </>
