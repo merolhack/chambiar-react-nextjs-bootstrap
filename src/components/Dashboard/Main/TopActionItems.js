@@ -22,7 +22,7 @@ const topActionItems = [
     id: 3,
     name: "Product launch",
     context: "Coworker attending meeting, your shared notes. More follow up required",
-    action: "Send feedback EOD or schedule...",
+    action: "Send feedback EOD or schedule meeting",
   }
 ];
 
@@ -32,33 +32,8 @@ const TopActionItems = () => {
       <Card className="bg-white border-0 rounded-3 mb-4">
         <Card.Body className="p-4">
           <div className="d-flex justify-content-between align-items-center flex-wrap gap-3">
-            <h3 className="mb-0 text-secondary-50">Top Action</h3>
-
-            <Dropdown className="dropdown select-dropdown">
-              <Dropdown.Toggle
-                variant="secondary"
-                id="dropdown-basic"
-                className="dropdown-toggle bg-border-color border text-body rounded-2"
-              >
-                Weekly
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu className="bg-white border box-shadow">
-                <Dropdown.Item href="#" className="text-secondary py-2 px-3">
-                  Weekly
-                </Dropdown.Item>
-
-                <Dropdown.Item href="#" className="text-secondary py-2 px-3">
-                  Monthly
-                </Dropdown.Item>
-
-                <Dropdown.Item href="#" className="text-secondary py-2 px-3">
-                  Yearly
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <h3 className="mb-0 text-secondary-50">TOP ACTIONS</h3>
           </div>
-
 
           {topActionItems.slice(0, 4).map((item) => (
             <Row key={item.id}>
@@ -67,17 +42,21 @@ const TopActionItems = () => {
                   {item.name}
                 </h4>
                 <Row>
-                  <Col sm={8}>
-                    <h6>Context:</h6>
+                  <Col sm={7}>
                     <p className="fs-12 fw-medium text-body">
                       {item.context}
                     </p>
                   </Col>
                   <Col sm={4}>
-                    <h6>Action:</h6>
+                    <h6 className="fs-12">Action:</h6>
                     <p className="fs-12 fw-medium text-body">
                       {item.action}
                     </p>
+                  </Col>
+                  <Col sm={1}>
+                    <span class="material-symbols-outlined fs-40">
+                      outbound
+                    </span>
                   </Col>
                 </Row>
 
