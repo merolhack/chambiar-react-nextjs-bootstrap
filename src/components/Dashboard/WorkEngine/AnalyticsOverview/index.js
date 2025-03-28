@@ -128,7 +128,7 @@ const AnalyticsOverview = () => {
       <Card className="border-0 p-4 bg-white rounded-3 mb-4">
         <div className="d-flex flex-wrap gap-2 justify-content-between mb-30 pb-lg-2">
           <div>
-            <h3 className="mb-1">BURNOUT RISK</h3>
+            <h3 className="mb-1">Burnout Risk</h3>
             <span>Direct Reports</span>
           </div>
 

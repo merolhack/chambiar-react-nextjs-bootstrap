@@ -4,11 +4,11 @@ import AnalyticsOverview from "@/components/Dashboard/WorkEngine/AnalyticsOvervi
 import Stats from "@/components/Dashboard/WorkEngine/Stats";
 import RealtimeActiveUsers from "@/components/Dashboard/WorkEngine/RealtimeActiveUsers";
 import BrowserUsedByUsers from "@/components/Dashboard/Analytics/BrowserUsedByUsers";
-import DeviceSessions from "@/components/Dashboard/Analytics/DeviceSessions";
+import DeviceSessions from "@/components/Dashboard/WorkEngine/DeviceSessions";
 import Clicks from "@/components/Dashboard/Analytics/Clicks";
 import Impressions from "@/components/Dashboard/Analytics/Impressions";
 import Sessions from "@/components/Dashboard/Analytics/Sessions";
-import SessionsByChannel from "@/components/Dashboard/Analytics/SessionsByChannel";
+import SessionsByChannel from "@/components/Dashboard/WorkEngine/SessionsByChannel";
 import ClicksByKeywords from "@/components/Dashboard/WorkEngine/ClicksByKeywords";
 import TopBrowsingPagesToday from "@/components/Dashboard/WorkEngine/TopBrowsingPagesToday";
 import UsersByCountry from "@/components/Dashboard/Analytics/UsersByCountry";
