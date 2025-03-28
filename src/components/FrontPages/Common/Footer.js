@@ -165,15 +165,7 @@ const Footer = () => {
       <div className="copyright-area bg-white text-center py-4">
         <div className="container">
           <p className="fs-14">
-            © <span className="text-primary-div">Chambiar</span> is Proudly Owned
-            by{" "}
-            <a
-              href="https://envytheme.com/"
-              target="_blank"
-              className="text-decoration-none text-primary"
-            >
-              EnvyTheme
-            </a>
+            © <span className="text-primary-div">Chambiar</span> 2025
           </p>
         </div>
       </div>
