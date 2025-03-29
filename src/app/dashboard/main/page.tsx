@@ -35,13 +35,13 @@ function Page() {
               <Avatar />
             </Col>
             <Col sm={12}>
-              <WorkingSchedule />
+              <TopActionItems />
             </Col>
           </Row>
         </Col>
 
         <Col xxl={6}>
-          <TopActionItems />
+          <WorkingSchedule />
 
           <KeyMeetingsAndSummaries />
         </Col>
@@ -51,7 +51,7 @@ function Page() {
         </Col>
 
         <Col lg={12}>
-          <CommunicationHub />
+          <RecentOrdersList />
         </Col>
 
         <Col xxl={3}>
@@ -78,7 +78,7 @@ function Page() {
           <Tickets />
         </Col>
 
-        
+
       </Row>
     </>
   );

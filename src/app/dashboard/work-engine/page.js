@@ -11,6 +11,7 @@ import Sessions from "@/components/Dashboard/Analytics/Sessions";
 import SessionsByChannel from "@/components/Dashboard/WorkEngine/SessionsByChannel";
 import ClicksByKeywords from "@/components/Dashboard/WorkEngine/ClicksByKeywords";
 import TopBrowsingPagesToday from "@/components/Dashboard/WorkEngine/TopBrowsingPagesToday";
+import TopBrowsingPagesTodayV2 from "@/components/Dashboard/WorkEngine/TopBrowsingPagesTodayV2";
 import UsersByCountry from "@/components/Dashboard/Analytics/UsersByCountry";
 
 export default function Page() {
@@ -69,6 +70,12 @@ export default function Page() {
 
         <Col xs={12} md={12} lg={12} xl={12} xxl={4}>
           <UsersByCountry />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col xs={12} md={12} lg={12} xl={12} xxl={12}>
+          <TopBrowsingPagesTodayV2 />
         </Col>
       </Row>
     </>

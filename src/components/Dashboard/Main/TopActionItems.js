@@ -54,7 +54,7 @@ const TopActionItems = () => {
                     </p>
                   </Col>
                   <Col sm={1}>
-                    <span class="material-symbols-outlined fs-40">
+                    <span className="material-symbols-outlined fs-40">
                       outbound
                     </span>
                   </Col>
