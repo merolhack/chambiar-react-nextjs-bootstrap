@@ -7,8 +7,9 @@ import Video from "@/components/Dashboard/Main/Video";
 interface VideoData {
   src: string;
   duration: number;
-  showComponents?: string[]; // Array of component names to show after this video
+  showComponents?: string[];
   delayBeforePlay?: number;
+  message?: string; // Optional message to display during delay
 }
 
 const Avatar = ({ onVideoEnd, onConversationStart }: {
@@ -18,23 +19,29 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [started, setStarted] = useState(false);
   const [isPreloading, setIsPreloading] = useState(true);
-  const [isPausing, setIsPausing] = useState(false);
-  const [isVideoLoading, setIsVideoLoading] = useState(false);
+  const [conversationEnded, setConversationEnded] = useState(false);
 
-  // Video sources with durations and components to show after each
+  // Video sources with durations, delays, and components to show
   const videoData: VideoData[] = [
     {
       src: "/videos/klingai-demo-001.mp4",
       duration: 5,
-      delayBeforePlay: 5000 // 2 second delay before this video plays
+      delayBeforePlay: 5000, // 5 second delay
+      message: "Preparing response..."
+    },
+    { 
+      src: "/videos/klingai-demo-002.mp4", 
+      duration: 10,
+      delayBeforePlay: 3000, // 3 second delay
+      showComponents: ['TopActionItems', 'KeyMeetingsAndSummaries', 'WorkingSchedule'],
+      message: "Analyzing your request..."
     },
     {
-      src: "/videos/klingai-demo-002.mp4",
-      duration: 10,
-      showComponents: ['TopActionItems', 'KeyMeetingsAndSummaries', 'WorkingSchedule'],
-      delayBeforePlay: 5000 // 3 second delay before this video plays
+      src: "/videos/klingai-demo-003.mp4",
+      duration: 8,
+      delayBeforePlay: 2000, // 2 second delay
+      message: "Compiling information..."
     },
-    { src: "/videos/klingai-demo-003.mp4", duration: 10 },
     { src: "/videos/klingai-demo-004-1.mp4", duration: 10 },
     { src: "/videos/klingai-demo-004-2.mp4", duration: 10 },
     { src: "/videos/klingai-demo-005.mp4", duration: 5 },
@@ -42,6 +49,7 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
     { src: "/videos/klingai-demo-006-2.mp4", duration: 10 },
   ];
 
+  // Preload all videos when component mounts
   useEffect(() => {
     const preloadVideos = async () => {
       try {
@@ -64,24 +72,32 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
 
   const handleVideoEnd = () => {
     const currentVideo = videoData[currentVideoIndex];
-
-    // Call parent component with components to show
+    
+    // Show components associated with this video
     if (onVideoEnd) {
       onVideoEnd(currentVideo.showComponents);
     }
 
+    // Move to next video or end conversation
     if (currentVideoIndex < videoData.length - 1) {
       setCurrentVideoIndex(prev => prev + 1);
     } else {
-      setCurrentVideoIndex(0); // Loop or handle conversation end
+      setConversationEnded(true);
     }
   };
 
-  const handleStartConversation = async () => {
+  const handleStartConversation = () => {
     setStarted(true);
+    setConversationEnded(false);
+    setCurrentVideoIndex(0);
     if (onConversationStart) {
       onConversationStart();
     }
+  };
+
+  const handleRestartConversation = () => {
+    setCurrentVideoIndex(0);
+    setConversationEnded(false);
   };
 
   return (
@@ -99,20 +115,26 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
                 Loading Avatar...
               </>
             ) : (
-              "Start"
+              "Start Conversation"
             )}
           </button>
+        ) : conversationEnded ? (
+          <div className="conversation-ended">
+            <p>Conversation completed</p>
+            <button 
+              onClick={handleRestartConversation}
+              className="btn btn-secondary mt-2"
+            >
+              Restart Conversation
+            </button>
+          </div>
         ) : (
-          <>
-            <Video
-              sources={videoData.map(item => item.src)}
-              currentIndex={currentVideoIndex}
-              onEnd={handleVideoEnd}
-              onPauseStart={() => setIsPausing(true)}
-              onPauseEnd={() => setIsPausing(false)}
-              delayBeforePlay={videoData[currentVideoIndex].delayBeforePlay} // Pass the delay
-            />
-          </>
+          <Video
+            sources={videoData.map(item => item.src)}
+            currentIndex={currentVideoIndex}
+            onEnd={handleVideoEnd}
+            delayBeforePlay={videoData[currentVideoIndex].delayBeforePlay}
+          />
         )}
       </div>
     </Card>

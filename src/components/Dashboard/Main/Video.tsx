@@ -16,22 +16,22 @@ const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd, delayBe
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [isDelaying, setIsDelaying] = useState(false); // New state for delay
+  const [isDelaying, setIsDelaying] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    let playAttempt: NodeJS.Timeout;
-    let pauseTimeout: NodeJS.Timeout;
     let delayTimeout: NodeJS.Timeout;
+    let pauseTimeout: NodeJS.Timeout;
 
     const handleCanPlay = () => {
       setIsLoading(false);
       if (onLoadingChange) onLoadingChange(false);
       
+      // Apply delay only if specified
       if (delayBeforePlay > 0) {
-        setIsDelaying(true); // Show delay state
+        setIsDelaying(true);
         delayTimeout = setTimeout(() => {
           setIsDelaying(false);
           video.play()
@@ -53,60 +53,61 @@ const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd, delayBe
 
     const handleError = () => {
       setHasError(true);
-      if (onLoadingChange) onLoadingChange(false); // Notify parent
+      if (onLoadingChange) onLoadingChange(false);
       setIsLoading(false);
     };
 
     const handleEnded = () => {
       if (onPauseStart) onPauseStart();
       
-      // Start pause timer (3 seconds)
+      // Pause before next video or ending
       pauseTimeout = setTimeout(() => {
         if (onEnd) onEnd();
         if (onPauseEnd) onPauseEnd();
       }, 3000);
     };
 
-    // Set loading to true when video changes
+    // Initialize video
     setIsLoading(true);
     setIsDelaying(false);
     if (onLoadingChange) onLoadingChange(true);
     setHasError(false);
 
+    // Clear any existing event listeners first
+    video.removeEventListener('canplay', handleCanPlay);
+    video.removeEventListener('error', handleError);
+    video.removeEventListener('ended', handleEnded);
+
+    // Add new event listeners
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('error', handleError);
     video.addEventListener('ended', handleEnded);
 
+    // Set video source and load
+    video.src = sources[currentIndex];
     video.load();
-
-    playAttempt = setTimeout(() => {
-      if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
-        video.play().catch(console.error);
-      }
-    }, 500);
 
     return () => {
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('error', handleError);
       video.removeEventListener('ended', handleEnded);
-      clearTimeout(playAttempt);
-      clearTimeout(pauseTimeout);
       clearTimeout(delayTimeout);
+      clearTimeout(pauseTimeout);
     };
-  }, [currentIndex, onEnd, onPauseStart, onPauseEnd, delayBeforePlay, onLoadingChange]);
+  }, [currentIndex, onEnd, onPauseStart, onPauseEnd, delayBeforePlay, onLoadingChange, sources]);
 
   return (
     <div className="video-container">
       {(isLoading || isDelaying) && (
         <div className="loading-overlay">
           <div className="loading-spinner"></div>
-          <p>{isDelaying ? "" : "Loading avatar..."}</p>
+          <p>{isDelaying ? "Preparing response..." : "Loading avatar..."}</p>
         </div>
       )}
       
       {hasError && (
         <div className="error-overlay">
-          <p></p>
+          <p>Error loading video</p>
           <button onClick={() => {
             setHasError(false);
             setIsLoading(true);
@@ -122,6 +123,7 @@ const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd, delayBe
         preload="auto"
         playsInline
         className="avatar-video"
+        loop={false} // Explicitly disable looping
       >
         <source src={sources[currentIndex]} type="video/mp4" />
         Your browser does not support the video tag.
