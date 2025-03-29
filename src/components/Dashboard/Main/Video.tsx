@@ -8,12 +8,15 @@ interface VideoProps {
   currentIndex: number;
   onPauseStart?: () => void;
   onPauseEnd?: () => void;
+  delayBeforePlay?: number;
+  onLoadingChange?: (isLoading: boolean) => void;
 }
 
-const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd }: VideoProps) => {
+const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd, delayBeforePlay = 0, onLoadingChange }: VideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [isDelaying, setIsDelaying] = useState(false); // New state for delay
 
   useEffect(() => {
     const video = videoRef.current;
@@ -21,21 +24,36 @@ const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd }: Video
 
     let playAttempt: NodeJS.Timeout;
     let pauseTimeout: NodeJS.Timeout;
+    let delayTimeout: NodeJS.Timeout;
 
     const handleCanPlay = () => {
       setIsLoading(false);
-      video.play()
-        .then(() => {
-          setHasError(false);
-        })
-        .catch(error => {
-          console.error("Playback failed:", error);
-          setHasError(true);
-        });
+      if (onLoadingChange) onLoadingChange(false);
+      
+      if (delayBeforePlay > 0) {
+        setIsDelaying(true); // Show delay state
+        delayTimeout = setTimeout(() => {
+          setIsDelaying(false);
+          video.play()
+            .then(() => setHasError(false))
+            .catch(error => {
+              console.error("Playback failed:", error);
+              setHasError(true);
+            });
+        }, delayBeforePlay);
+      } else {
+        video.play()
+          .then(() => setHasError(false))
+          .catch(error => {
+            console.error("Playback failed:", error);
+            setHasError(true);
+          });
+      }
     };
 
     const handleError = () => {
       setHasError(true);
+      if (onLoadingChange) onLoadingChange(false); // Notify parent
       setIsLoading(false);
     };
 
@@ -49,7 +67,10 @@ const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd }: Video
       }, 3000);
     };
 
+    // Set loading to true when video changes
     setIsLoading(true);
+    setIsDelaying(false);
+    if (onLoadingChange) onLoadingChange(true);
     setHasError(false);
 
     video.addEventListener('canplay', handleCanPlay);
@@ -70,21 +91,22 @@ const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd }: Video
       video.removeEventListener('ended', handleEnded);
       clearTimeout(playAttempt);
       clearTimeout(pauseTimeout);
+      clearTimeout(delayTimeout);
     };
-  }, [currentIndex, onEnd, onPauseStart, onPauseEnd]);
+  }, [currentIndex, onEnd, onPauseStart, onPauseEnd, delayBeforePlay, onLoadingChange]);
 
   return (
     <div className="video-container">
-      {isLoading && (
+      {(isLoading || isDelaying) && (
         <div className="loading-overlay">
           <div className="loading-spinner"></div>
-          <p>Loading video...</p>
+          <p>{isDelaying ? "" : "Loading avatar..."}</p>
         </div>
       )}
       
       {hasError && (
         <div className="error-overlay">
-          <p>Failed to load video</p>
+          <p></p>
           <button onClick={() => {
             setHasError(false);
             setIsLoading(true);
@@ -97,7 +119,6 @@ const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd }: Video
         ref={videoRef}
         width="320"
         height="260"
-        muted
         preload="auto"
         playsInline
         className="avatar-video"

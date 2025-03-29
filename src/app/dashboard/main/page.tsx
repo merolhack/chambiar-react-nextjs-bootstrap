@@ -1,6 +1,8 @@
 // app/dashboard/main/page.tsx
 'use client';
 
+import { useState } from 'react';
+
 import CustomerRatings from "@/components/Dashboard/Restaurant/CustomerRatings";
 import Expense from "@/components/Dashboard/Restaurant/Expense";
 import LowStockAlerts from "@/components/Dashboard/Restaurant/LowStockAlerts";
@@ -26,57 +28,100 @@ import { Row, Col } from "react-bootstrap";
 import { withAuth } from '@/components/withAuth';
 
 function Page() {
+  const [visibleComponents, setVisibleComponents] = useState<string[]>([]);
+  const [conversationStarted, setConversationStarted] = useState(false);
+
+  const handleVideoEnd = (showComponents?: string[]) => {
+    if (showComponents) {
+      setVisibleComponents(prev => [...new Set([...prev, ...showComponents])]); // Ensure unique components
+    }
+  };
+
+  const handleConversationStart = () => {
+    setConversationStarted(true);
+    setVisibleComponents([]); // Hide all components when conversation starts
+  };
+
+  const isComponentVisible = (componentName: string) => {
+    // Only show if in visibleComponents AND conversation has started
+    return conversationStarted && visibleComponents.includes(componentName);
+  };
+
   return (
     <>
       <Row className="justify-content-center">
+        {/* Avatar is always visible */}
         <Col xxl={6}>
           <Row>
             <Col sm={12}>
-              <Avatar />
+              <Avatar
+                onVideoEnd={handleVideoEnd}
+                onConversationStart={handleConversationStart}
+              />
             </Col>
-            <Col sm={12}>
-              <TopActionItems />
-            </Col>
+
+            {/* Other components - only show if visible */}
+            {isComponentVisible('TopActionItems') && (
+              <Col sm={12}>
+                <TopActionItems />
+              </Col>
+            )}
           </Row>
         </Col>
 
         <Col xxl={6}>
-          <WorkingSchedule />
-
-          <KeyMeetingsAndSummaries />
+          {isComponentVisible('WorkingSchedule') && <WorkingSchedule />}
+          {isComponentVisible('KeyMeetingsAndSummaries') && <KeyMeetingsAndSummaries />}
         </Col>
 
-        <Col lg={12}>
-          <AIRecommendationsAndInsights />
-        </Col>
+        {/* Other components with visibility checks */}
+        {isComponentVisible('AIRecommendationsAndInsights') && (
+          <Col lg={12}>
+            <AIRecommendationsAndInsights />
+          </Col>
+        )}
 
-        <Col lg={12}>
-          <RecentOrdersList />
-        </Col>
+        {isComponentVisible('RecentOrdersList') && (
+          <Col lg={12}>
+            <RecentOrdersList />
+          </Col>
+        )}
 
-        <Col xxl={3}>
-          <OrderSummary />
-        </Col>
+        {isComponentVisible('OrderSummary') && (
+          <Col xxl={3}>
+            <OrderSummary />
+          </Col>
+        )}
 
-        <Col lg={6} xxl={6}>
-          <RevenueVSExpense />
-        </Col>
+        {isComponentVisible('RevenueVSExpense') && (
+          <Col lg={6} xxl={6}>
+            <RevenueVSExpense />
+          </Col>
+        )}
 
-        <Col xxl={3} lg={6}>
-          <LowStockAlerts />
-        </Col>
+        {isComponentVisible('LowStockAlerts') && (
+          <Col xxl={3} lg={6}>
+            <LowStockAlerts />
+          </Col>
+        )}
 
-        <Col lg={6} md={6} xl={6} xxl={4}>
-          <StaffPerformanceScores />
-        </Col>
+        {isComponentVisible('StaffPerformanceScores') && (
+          <Col lg={6} md={6} xl={6} xxl={4}>
+            <StaffPerformanceScores />
+          </Col>
+        )}
 
-        <Col lg={6} md={6} xl={6} xxl={4}>
-          <RevenueByBranches />
-        </Col>
+        {isComponentVisible('RevenueByBranches') && (
+          <Col lg={6} md={6} xl={6} xxl={4}>
+            <RevenueByBranches />
+          </Col>
+        )}
 
-        <Col lg={6} md={6} xl={6} xxl={4}>
-          <Tickets />
-        </Col>
+        {isComponentVisible('Tickets') && (
+          <Col lg={6} md={6} xl={6} xxl={4}>
+            <Tickets />
+          </Col>
+        )}
 
 
       </Row>
