@@ -119,7 +119,7 @@ const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd, delayBe
 
       <video
         ref={videoRef}
-        width="320"
+        width="480"
         height="260"
         preload="auto"
         playsInline

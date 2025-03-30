@@ -65,7 +65,7 @@
   --bs-success-60: #25B003;
   --bs-success-70: #82FC5A;
   --bs-success-80: #D8FFC8;
-  --bs-body-bg: #F6F7F9;
+  --bs-body-bg: #FFFFFF;
   --bs-danger-div: #FFCEA9;
   --bs-rating-color: #FE7A36;
   --bs-card-bg-c: #3584FC;
@@ -132,8 +132,8 @@
   --bs-body-line-height: 1.5;
   --bs-body-color: #64748B;
   --bs-body-color-rgb: 100, 116, 139;
-  --bs-body-bg: #F6F7F9;
-  --bs-body-bg-rgb: 246, 247, 249;
+  --bs-body-bg: #FFFFFF;
+  --bs-body-bg-rgb: 255, 255, 255;
   --bs-emphasis-color: #000;
   --bs-emphasis-color-rgb: 0, 0, 0;
   --bs-secondary-color: rgba(100, 116, 139, 0.75);
@@ -863,7 +863,7 @@ progress {
   --bs-body-line-height: 1.5;
   --bs-body-color: #64748B;
   --bs-body-color-rgb: 100, 116, 139;
-  --bs-body-bg: #F6F7F9;
+  --bs-body-bg: #FFFFFF;
   --bs-body-bg-rgb: 246, 247, 249;
   --bs-emphasis-color: #000;
   --bs-emphasis-color-rgb: 0, 0, 0;
@@ -23658,4 +23658,15 @@ Swiper Slider Style
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* DeepSeek scrolling */
+/* Ensure proper height calculations */
+html, body, #__next {
+  height: 100%;
+}
+
+/* Fix for scroll container */
+.main-content {
+  overflow-anchor: none; /* Prevents scroll jumping */
 }

@@ -12,7 +12,7 @@ import { getProfile } from "../../../services/users";
 import { getInitialPrompt } from "../../../services/prompts";
 import AlertDismissible from "../../AlertDismissible"
 
-const SignInForm: React.FC = () => {
+const SignInForm: React.FC = ({ layoutRef }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [profile, setProfile] = useState(null);

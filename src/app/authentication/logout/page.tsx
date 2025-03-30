@@ -1,17 +1,17 @@
-// app/authentication/sign-in/page.tsx
+// app/authentication/logout/page.tsx
 "use client"
 
 import { useRef } from 'react'
 
 import LayoutProvider from '@/providers/LayoutProvider';
 
-import SignInForm from "@/components/Authentication/SignInForm";
+import Logout from "@/components/Authentication/Logout";
 
 export default function Page() {
   const layoutRef = useRef(null);
   return (
     <LayoutProvider ref={layoutRef}>
-      <SignInForm layoutRef={layoutRef} />
+      <Logout layoutRef={layoutRef} />
     </LayoutProvider>
   );
 }

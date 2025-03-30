@@ -4,7 +4,7 @@ import { Row, Col, Form } from "react-bootstrap";
 import Link from "next/link";
 import Image from "next/image";
 
-const SignUpForm = () => {
+const SignUpForm = ({ layoutRef }) => {
   return (
     <>
       <div className="auth-main-content m-auto m-1230 px-3">

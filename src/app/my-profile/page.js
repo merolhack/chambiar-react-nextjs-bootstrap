@@ -1,6 +1,13 @@
 "use client";
-   
+
+import { useState, useEffect, useRef } from 'react';
+
 import { Row, Col, Breadcrumb } from "react-bootstrap";
+
+import LayoutProvider from '@/providers/LayoutProvider';
+
+import { withAuth } from '@/components/withAuth';
+
 import Welcome from '@/components/MyProfile/Welcome';
 import TotalProjects from '@/components/MyProfile/TotalProjects';
 import TotalOrders from '@/components/MyProfile/TotalOrders';
@@ -12,7 +19,7 @@ import ProjectAnalysis from '@/components/MyProfile/ProjectAnalysis';
 import ToDoList from '@/components/MyProfile/ToDoList';
 import RecentActivity from '@/components/MyProfile/RecentActivity';
 
-export default function Page() {
+function Page({ layoutRef }) {
   return (
     <>
       <div className="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
@@ -69,3 +76,16 @@ export default function Page() {
     </>
   );
 }
+
+// Create a wrapper component
+function PageWrapper() {
+  const layoutRef = useRef(null);
+
+  return (
+    <LayoutProvider ref={layoutRef}>
+      <Page layoutRef={layoutRef} />
+    </LayoutProvider>
+  );
+}
+
+export default withAuth(PageWrapper);

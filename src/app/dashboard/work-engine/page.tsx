@@ -1,8 +1,10 @@
 // app/dashboard/work-engine/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Row, Col } from "react-bootstrap";
+
+import LayoutProvider from '@/providers/LayoutProvider';
 
 import AnalyticsOverview from "@/components/Dashboard/WorkEngine/AnalyticsOverview";
 import Stats from "@/components/Dashboard/WorkEngine/Stats";
@@ -19,7 +21,9 @@ import TopBrowsingPagesTodayV2 from "@/components/Dashboard/WorkEngine/TopBrowsi
 import UsersByCountry from "@/components/Dashboard/Analytics/UsersByCountry";
 import AvatarWorkEngine from "@/components/Dashboard/Main/AvatarWorkEngine";
 
-export default function Page() {
+import { withAuth } from '@/components/withAuth';
+
+function Page({ layoutRef }) {
   const [visibleComponents, setVisibleComponents] = useState<string[]>([]);
   const [conversationStarted, setConversationStarted] = useState(false);
 
@@ -114,3 +118,16 @@ export default function Page() {
     </>
   );
 }
+
+// Create a wrapper component
+function PageWrapper() {
+  const layoutRef = useRef(null);
+  
+  return (
+    <LayoutProvider ref={layoutRef}>
+      <Page layoutRef={layoutRef} />
+    </LayoutProvider>
+  );
+}
+
+export default withAuth(PageWrapper);

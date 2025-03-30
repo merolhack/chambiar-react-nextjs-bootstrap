@@ -29,15 +29,13 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <LayoutProvider>
-          <ClientOnly>
-            {children}
-          </ClientOnly>
-        </LayoutProvider>
+        <ClientOnly>
+          {children}
+        </ClientOnly>
       </body>
     </html>
   );

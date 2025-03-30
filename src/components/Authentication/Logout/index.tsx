@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import Link from "next/link";
 import Image from "next/image";
 
-const Logout = () => {
+const Logout = ({ layoutRef }) => {
   return (
     <>
       <div className="auth-main-content m-auto m-1230 px-3">

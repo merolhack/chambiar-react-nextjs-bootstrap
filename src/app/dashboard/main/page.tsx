@@ -1,7 +1,9 @@
 // app/dashboard/main/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+import LayoutProvider from '@/providers/LayoutProvider';
 
 import CustomerRatings from "@/components/Dashboard/Restaurant/CustomerRatings";
 import Expense from "@/components/Dashboard/Restaurant/Expense";
@@ -41,13 +43,45 @@ import { Row, Col } from "react-bootstrap";
 
 import { withAuth } from '@/components/withAuth';
 
-function Page() {
+import styles from '../../../../styles/animations.module.css';
+
+function Page({ layoutRef }) {
   const [visibleComponents, setVisibleComponents] = useState<string[]>([]);
   const [conversationStarted, setConversationStarted] = useState(false);
+  const componentRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  // Scroll to the latest visible component
+  useEffect(() => {
+    if (visibleComponents.length > 0 && layoutRef?.current) {
+      const lastComponent = visibleComponents[visibleComponents.length - 1];
+      const componentElement = componentRefs.current[lastComponent];
+
+      if (componentElement) {
+        const isMobile = window.innerWidth < 768;
+
+        setTimeout(() => {
+          // Calculate scroll position accounting for the sidebar
+          const scrollPosition = componentElement.offsetTop - 100;
+
+          layoutRef.current.scrollTo({
+            top: scrollPosition,
+            behavior: isMobile ? 'auto' : 'smooth'
+          });
+        }, 500);
+      }
+    }
+  }, [visibleComponents, layoutRef]);
 
   const handleVideoEnd = (showComponents?: string[]) => {
     if (showComponents) {
       setVisibleComponents(prev => [...new Set([...prev, ...showComponents])]); // Ensure unique components
+    }
+  };
+
+  const registerRef = (componentName: string) => (el: HTMLDivElement | null) => {
+    componentRefs.current[componentName] = el;
+    if (el) {
+      el.classList.add(styles['scroll-margin']);
     }
   };
 
@@ -62,7 +96,7 @@ function Page() {
   };
 
   return (
-    <>
+    <div style={{ minHeight: '100%' }}>
       <Row className="justify-content-center">
         {/* Avatar is always visible */}
         <Col xxl={6}>
@@ -86,19 +120,19 @@ function Page() {
         <Col xxl={6}>
           <Row className="justify-content-center">
             {isComponentVisible('TopActions') && (
-              <Col xxl={4} lg={4} sm={4}>
+              <Col xxl={4} lg={4} sm={4} className={`${styles.slideIn} ${styles['delay-1']}`}>
                 <TopActions />
               </Col>)}
           </Row>
           <Row className="justify-content-center">
             {isComponentVisible('TopEmails') && (
-              <Col xxl={4} lg={4} sm={4}>
+              <Col xxl={4} lg={4} sm={4} className={`${styles.slideIn} ${styles['delay-2']}`}>
                 <TopEmails />
               </Col>)}
           </Row>
           <Row className="justify-content-center">
             {isComponentVisible('TopMeetings') && (
-              <Col xxl={4} lg={4} sm={4}>
+              <Col xxl={4} lg={4} sm={4} className={`${styles.slideIn} ${styles['delay-3']}`}>
                 <TopMeetings />
               </Col>)}
           </Row>
@@ -107,11 +141,11 @@ function Page() {
         <Col xxl={12}>
           <Row className="justify-content-center">
             {isComponentVisible('AIInsightHubspot') && (
-              <Col xxl={3} lg={3} sm={3}>
+              <Col xxl={3} lg={3} sm={3} className={`${styles.slideIn} ${styles['delay-1']}`} ref={registerRef('AIInsightHubspot')}>
                 <AIInsightHubspot />
               </Col>)}
             {isComponentVisible('HubspotScreenshot') && (
-              <Col xxl={9} lg={9} sm={9}>
+              <Col xxl={9} lg={9} sm={9} className={`${styles.slideIn} ${styles['delay-2']}`} ref={registerRef('HubspotScreenshot')}>
                 <HubspotScreenshot />
               </Col>)}
           </Row>
@@ -120,11 +154,11 @@ function Page() {
         <Col xxl={12}>
           <Row className="justify-content-center">
             {isComponentVisible('AIInsightExcel') && (
-              <Col xxl={3} lg={3} sm={3}>
+              <Col xxl={3} lg={3} sm={3} className={`${styles.slideIn} ${styles['delay-1']}`} ref={registerRef('AIInsightExcel')}>
                 <AIInsightExcel />
               </Col>)}
             {isComponentVisible('ExcelScreenshot') && (
-              <Col xxl={9} lg={9} sm={9}>
+              <Col xxl={9} lg={9} sm={9} className={`${styles.slideIn} ${styles['delay-2']}`} ref={registerRef('ExcelScreenshot')}>
                 <ExcelScreenshot />
               </Col>)}
           </Row>
@@ -133,11 +167,11 @@ function Page() {
         <Col xxl={12}>
           <Row className="justify-content-center">
             {isComponentVisible('AIInsightNotion') && (
-              <Col xxl={3} lg={3} sm={3}>
+              <Col xxl={3} lg={3} sm={3} className={`${styles.slideIn} ${styles['delay-1']}`} ref={registerRef('AIInsightNotion')}>
                 <AIInsightNotion />
               </Col>)}
             {isComponentVisible('NotionScreenshot') && (
-              <Col xxl={9} lg={9} sm={9}>
+              <Col xxl={9} lg={9} sm={9} className={`${styles.slideIn} ${styles['delay-2']}`} ref={registerRef('NotionScreenshot')}>
                 <NotionScreenshot />
               </Col>)}
           </Row>
@@ -199,8 +233,19 @@ function Page() {
 
 
       </Row>
-    </>
+    </div>
   );
 }
 
-export default withAuth(Page);
+// Create a wrapper component
+function PageWrapper() {
+  const layoutRef = useRef(null);
+
+  return (
+    <LayoutProvider ref={layoutRef}>
+      <Page layoutRef={layoutRef} />
+    </LayoutProvider>
+  );
+}
+
+export default withAuth(PageWrapper);
