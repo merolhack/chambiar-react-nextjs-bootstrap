@@ -22,7 +22,7 @@ const Profile = () => {
             <div className="d-flex align-items-center justify-content-between">
               <div className="d-none d-xxl-block">
                 <div className="d-flex align-content-center">
-                  <h3>Olivia</h3>
+                  <h3>Kyrie</h3>
                 </div>
               </div>
             </div>

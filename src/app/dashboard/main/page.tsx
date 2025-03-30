@@ -89,10 +89,14 @@ function Page() {
               <Col xxl={4} lg={4} sm={4}>
                 <TopActions />
               </Col>)}
+          </Row>
+          <Row className="justify-content-center">
             {isComponentVisible('TopEmails') && (
               <Col xxl={4} lg={4} sm={4}>
                 <TopEmails />
               </Col>)}
+          </Row>
+          <Row className="justify-content-center">
             {isComponentVisible('TopMeetings') && (
               <Col xxl={4} lg={4} sm={4}>
                 <TopMeetings />
@@ -102,11 +106,11 @@ function Page() {
 
         <Col xxl={12}>
           <Row className="justify-content-center">
-          {isComponentVisible('AIInsightHubspot') && (
+            {isComponentVisible('AIInsightHubspot') && (
               <Col xxl={3} lg={3} sm={3}>
                 <AIInsightHubspot />
               </Col>)}
-              {isComponentVisible('HubspotScreenshot') && (
+            {isComponentVisible('HubspotScreenshot') && (
               <Col xxl={9} lg={9} sm={9}>
                 <HubspotScreenshot />
               </Col>)}
@@ -115,11 +119,11 @@ function Page() {
 
         <Col xxl={12}>
           <Row className="justify-content-center">
-          {isComponentVisible('AIInsightExcel') && (
+            {isComponentVisible('AIInsightExcel') && (
               <Col xxl={3} lg={3} sm={3}>
                 <AIInsightExcel />
               </Col>)}
-              {isComponentVisible('ExcelScreenshot') && (
+            {isComponentVisible('ExcelScreenshot') && (
               <Col xxl={9} lg={9} sm={9}>
                 <ExcelScreenshot />
               </Col>)}
@@ -128,11 +132,11 @@ function Page() {
 
         <Col xxl={12}>
           <Row className="justify-content-center">
-          {isComponentVisible('AIInsightNotion') && (
+            {isComponentVisible('AIInsightNotion') && (
               <Col xxl={3} lg={3} sm={3}>
                 <AIInsightNotion />
               </Col>)}
-              {isComponentVisible('NotionScreenshot') && (
+            {isComponentVisible('NotionScreenshot') && (
               <Col xxl={9} lg={9} sm={9}>
                 <NotionScreenshot />
               </Col>)}
