@@ -4,12 +4,12 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-const AIInsightHubspot = () => {
+const AIInsightNotion = () => {
     return (
         <Card className="bg-white border-0 rounded-3 mb-4">
             <Card.Body className="p-4">
                 <h3>AI Insight</h3>
-                <h5>Hubspot</h5>
+                <h5>Notion</h5>
                 <p>4 Deal Stages</p>
                 <p>84 Total Deals</p>
                 <p>Most Stuck Early</p>
@@ -20,4 +20,4 @@ const AIInsightHubspot = () => {
     );
 }
 
-export default AIInsightHubspot;
+export default AIInsightNotion;

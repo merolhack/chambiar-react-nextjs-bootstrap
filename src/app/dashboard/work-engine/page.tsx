@@ -1,5 +1,9 @@
 // app/dashboard/work-engine/page.tsx
+'use client';
+
+import { useState } from 'react';
 import { Row, Col } from "react-bootstrap";
+
 import AnalyticsOverview from "@/components/Dashboard/WorkEngine/AnalyticsOverview";
 import Stats from "@/components/Dashboard/WorkEngine/Stats";
 import RealtimeActiveUsers from "@/components/Dashboard/WorkEngine/RealtimeActiveUsers";
@@ -13,10 +17,39 @@ import ClicksByKeywords from "@/components/Dashboard/WorkEngine/ClicksByKeywords
 import TopBrowsingPagesToday from "@/components/Dashboard/WorkEngine/TopBrowsingPagesToday";
 import TopBrowsingPagesTodayV2 from "@/components/Dashboard/WorkEngine/TopBrowsingPagesTodayV2";
 import UsersByCountry from "@/components/Dashboard/Analytics/UsersByCountry";
+import AvatarWorkEngine from "@/components/Dashboard/Main/AvatarWorkEngine";
 
 export default function Page() {
+  const [visibleComponents, setVisibleComponents] = useState<string[]>([]);
+  const [conversationStarted, setConversationStarted] = useState(false);
+
+  const handleVideoEnd = (showComponents?: string[]) => {
+    if (showComponents) {
+      setVisibleComponents(prev => [...new Set([...prev, ...showComponents])]); // Ensure unique components
+    }
+  };
+
+  const handleConversationStart = () => {
+    setConversationStarted(true);
+    setVisibleComponents([]); // Hide all components when conversation starts
+  };
+
+  const isComponentVisible = (componentName: string) => {
+    // Only show if in visibleComponents AND conversation has started
+    return conversationStarted && visibleComponents.includes(componentName);
+  };
+  
   return (
     <>
+      {/* <Row>
+        Avatar is always visible
+        <Col xs={12} sm={12} lg={8} xl={12} xxl={8}>
+          <AvatarWorkEngine
+            onVideoEnd={handleVideoEnd}
+            onConversationStart={handleConversationStart}
+          />
+        </Col>
+      </Row> */}
       <Row>
         <Col xs={12} sm={12} lg={8} xl={12} xxl={8}>
           <AnalyticsOverview />

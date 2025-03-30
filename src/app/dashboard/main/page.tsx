@@ -25,8 +25,15 @@ import AIRecommendationsAndInsights from "@/components/Dashboard/Main/AIRecommen
 import TopActions from "@/components/Dashboard/Main/TopActions";
 import TopMeetings from "@/components/Dashboard/Main/TopMeetings";
 import TopEmails from "@/components/Dashboard/Main/TopEmails";
+
 import AIInsightHubspot from "@/components/Dashboard/Main/AIInsightHubspot";
 import HubspotScreenshot from "@/components/Dashboard/Main/HubspotScreenshot";
+
+import AIInsightExcel from "@/components/Dashboard/Main/AIInsightExcel";
+import ExcelScreenshot from "@/components/Dashboard/Main/ExcelScreenshot";
+
+import AIInsightNotion from "@/components/Dashboard/Main/AIInsightNotion";
+import NotionScreenshot from "@/components/Dashboard/Main/NotionScreenshot";
 
 import CommunicationHub from "@/components/Dashboard/Main/CommunicationHub";
 
@@ -93,15 +100,41 @@ function Page() {
           </Row>
         </Col>
 
-        <Col xxl={6}>
+        <Col xxl={12}>
           <Row className="justify-content-center">
           {isComponentVisible('AIInsightHubspot') && (
-              <Col xxl={4} lg={4} sm={4}>
+              <Col xxl={3} lg={3} sm={3}>
                 <AIInsightHubspot />
               </Col>)}
               {isComponentVisible('HubspotScreenshot') && (
-              <Col xxl={8} lg={8} sm={8}>
+              <Col xxl={9} lg={9} sm={9}>
                 <HubspotScreenshot />
+              </Col>)}
+          </Row>
+        </Col>
+
+        <Col xxl={12}>
+          <Row className="justify-content-center">
+          {isComponentVisible('AIInsightExcel') && (
+              <Col xxl={3} lg={3} sm={3}>
+                <AIInsightExcel />
+              </Col>)}
+              {isComponentVisible('ExcelScreenshot') && (
+              <Col xxl={9} lg={9} sm={9}>
+                <ExcelScreenshot />
+              </Col>)}
+          </Row>
+        </Col>
+
+        <Col xxl={12}>
+          <Row className="justify-content-center">
+          {isComponentVisible('AIInsightNotion') && (
+              <Col xxl={3} lg={3} sm={3}>
+                <AIInsightNotion />
+              </Col>)}
+              {isComponentVisible('NotionScreenshot') && (
+              <Col xxl={9} lg={9} sm={9}>
+                <NotionScreenshot />
               </Col>)}
           </Row>
         </Col>

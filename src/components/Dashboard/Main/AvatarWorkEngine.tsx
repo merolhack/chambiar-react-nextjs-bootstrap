@@ -1,4 +1,4 @@
-// components/Dashboard/Main/Avatar.tsx
+// components/Dashboard/Main/AvatarWorkEngine.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -13,7 +13,7 @@ interface VideoData {
   message?: string; // Optional message to display during delay
 }
 
-const Avatar = ({ onVideoEnd, onConversationStart }: {
+const AvatarWorkEngine = ({ onVideoEnd, onConversationStart }: {
   onVideoEnd?: (showComponents?: string[]) => void;
   onConversationStart?: () => void;
 }) => {
@@ -25,38 +25,20 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
   // Video sources with durations, delays, and components to show
   const videoData: VideoData[] = [
     {
-      src: "/videos/klingai-demo-001-v2.mp4",
-      duration: 5,
-      delayBeforePlay: 5000, // 5 second delay
-      showComponents: ['TopActions', 'TopEmails', 'TopMeetings'],
-      message: "Listening..."
-    },
-    {
-      src: "/videos/klingai-demo-silence.mp4",
-      duration: 5,
-      delayBeforePlay: 5000, // 5 second delay
-      showComponents: ['AIInsightHubspot', 'HubspotScreenshot'],
-      message: "Listening..."
-    },
-    {
-      src: "/videos/klingai-demo-002-v2.mp4",
-      duration: 10,
-      delayBeforePlay: 5000, // 3 second delay
-      showComponents: ['AIInsightExcel', 'ExcelScreenshot'],
-      message: "Analyzing your request..."
-    },
-    {
       src: "/videos/klingai-demo-003-v2.mp4",
-      duration: 10,
-      delayBeforePlay: 5000, // 2 second delay
-      showComponents: ['AIInsightNotion', 'NotionScreenshot'],
+      duration: 8,
+      delayBeforePlay: 2000, // 2 second delay
+      showComponents: ['WorkingSchedule', 'KeyMeetingsAndSummaries'],
       message: "Compiling information..."
     },
     {
       src: "/videos/klingai-demo-004-v2.mp4", 
       duration: 10,
       delayBeforePlay: 2000, // 2 second delay
+      showComponents: ['AIRecommendationsAndInsights', 'RecentOrdersList'],
     },
+    { src: "/videos/klingai-demo-005.mp4", duration: 5 },
+    { src: "/videos/klingai-demo-006-v2.mp4", duration: 10 },
   ];
 
   // Preload all videos when component mounts
@@ -151,4 +133,4 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
   );
 };
 
-export default Avatar;
+export default AvatarWorkEngine;
