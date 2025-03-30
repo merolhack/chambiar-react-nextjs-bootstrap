@@ -41,7 +41,7 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
     {
       src: "/videos/klingai-demo-002-v2.mp4",
       duration: 10,
-      delayBeforePlay: 5000, // 3 second delay
+      delayBeforePlay: 7000, // 3 second delay
       showComponents: ['AIInsightExcel', 'ExcelScreenshot'],
       message: "Analyzing your request..."
     },

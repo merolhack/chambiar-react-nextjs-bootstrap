@@ -48,7 +48,7 @@ const AIInsightExcel = () => {
                         <Table className="align-middle border-0 analytics-bu-by-users">
                             <thead>
                                 <tr className="border-bottom">
-                                    <th scope="col" className="text-center bg-transparent">Stock</th>
+                                    <th scope="col" className="text-start bg-transparent">Stock</th>
                                     <th scope="col" className="text-end bg-transparent">Gain</th>
                                     <th scope="col" className="text-end bg-transparent">Yield</th>
                                 </tr>
@@ -56,8 +56,8 @@ const AIInsightExcel = () => {
                             <tbody>
                                 {excelData.map((browser, index) => (
                                     <tr key={index}>
-                                        <td className="text-end fw-medium">{browser.stock}</td>
-                                        <td className="text-end fw-medium">{browser.gain}</td>
+                                        <td className="text-start fw-medium">{browser.stock}</td>
+                                        <td className="text-start fw-medium">{browser.gain}</td>
                                         <td className="text-end fw-medium">{browser.yield}</td>
                                     </tr>
                                 ))}
