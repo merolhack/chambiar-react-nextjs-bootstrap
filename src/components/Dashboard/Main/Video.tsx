@@ -101,7 +101,7 @@ const Video = ({ sources, onEnd, currentIndex, onPauseStart, onPauseEnd, delayBe
       {(isLoading || isDelaying) && (
         <div className="loading-overlay">
           <div className="loading-spinner"></div>
-          <p>{isDelaying ? "Preparing response..." : "Loading avatar..."}</p>
+          <p>{isDelaying ? "Listening..." : "Loading avatar..."}</p>
         </div>
       )}
       

@@ -27,10 +27,10 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
       src: "/videos/klingai-demo-001-v2.mp4",
       duration: 5,
       delayBeforePlay: 5000, // 5 second delay
-      message: "Preparing response..."
+      message: "Listening..."
     },
     { 
-      src: "/videos/klingai-demo-002.mp4", 
+      src: "/videos/klingai-demo-002-v2.mp4", 
       duration: 10,
       delayBeforePlay: 3000, // 3 second delay
       showComponents: ['TopActionItems', 'KeyMeetingsAndSummaries', 'WorkingSchedule'],
@@ -42,11 +42,9 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
       delayBeforePlay: 2000, // 2 second delay
       message: "Compiling information..."
     },
-    { src: "/videos/klingai-demo-004-1.mp4", duration: 10 },
-    { src: "/videos/klingai-demo-004-2.mp4", duration: 10 },
+    { src: "/videos/klingai-demo-004-v2.mp4", duration: 10 },
     { src: "/videos/klingai-demo-005.mp4", duration: 5 },
-    { src: "/videos/klingai-demo-006-1.mp4", duration: 10 },
-    { src: "/videos/klingai-demo-006-2.mp4", duration: 10 },
+    { src: "/videos/klingai-demo-006-v2.mp4", duration: 10 },
   ];
 
   // Preload all videos when component mounts

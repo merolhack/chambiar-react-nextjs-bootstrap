@@ -34,7 +34,7 @@ const LeftSidebar = ({ toogleActive }) => {
       <div className={`sidebar-area ${pathname === "/dashboard/beauty-salon/" && isDark ? "dark" : ""}`}>
         <div className="logo position-relative">
           <Link
-            href="/dashboard/restaurant/"
+            href="/dashboard/main/"
             className="d-block text-decoration-none position-relative"
           >
             <Image
@@ -83,16 +83,6 @@ const LeftSidebar = ({ toogleActive }) => {
                       }`}
                     >
                       Work engine
-                    </Link>
-                  </li>
-                  <li className="menu-item">
-                    <Link
-                      href="/dashboard/restaurant/"
-                      className={`menu-link ${pathname === "/dashboard/restaurant/" ? "active" : ""
-                        }`}
-                    >
-                      Restaurant
-                      <span className="hot tag">New</span>
                     </Link>
                   </li>
                   <li className="menu-item">
