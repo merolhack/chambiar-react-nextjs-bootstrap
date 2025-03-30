@@ -24,7 +24,7 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
   // Video sources with durations, delays, and components to show
   const videoData: VideoData[] = [
     {
-      src: "/videos/klingai-demo-001.mp4",
+      src: "/videos/klingai-demo-001-v2.mp4",
       duration: 5,
       delayBeforePlay: 5000, // 5 second delay
       message: "Preparing response..."
@@ -37,7 +37,7 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
       message: "Analyzing your request..."
     },
     {
-      src: "/videos/klingai-demo-003.mp4",
+      src: "/videos/klingai-demo-003-v2.mp4",
       duration: 8,
       delayBeforePlay: 2000, // 2 second delay
       message: "Compiling information..."
@@ -115,7 +115,7 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
                 Loading Avatar...
               </>
             ) : (
-              "Start Conversation"
+              "Start"
             )}
           </button>
         ) : conversationEnded ? (
