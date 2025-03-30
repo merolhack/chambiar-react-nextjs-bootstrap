@@ -7,121 +7,53 @@ import { Card, Table, Dropdown } from "react-bootstrap";
 const CommunicationHub = () => {
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5); // Number of items per page
+  const [itemsPerPage] = useState(6); // Number of items per page
 
   useEffect(() => {
     // Simulate API call
     const mockOrders = [
       // Add more mock data to test pagination
       {
-        code: "#001",
-        item: "Fish Cutlet",
-        image: "/images/order-1.jpg",
-        quantity: 5,
-        customer: "Johnna Loren",
-        location: "Washington, D.C.",
-        deliveryTime: "10:05 AM",
-        price: 35.75,
-        status: "Delivered",
+        image: "/images/icons/icons8-gmail-48.png",
+        sender: "Lucan Tran",
+        summary: "Bug Fix Needs Sprint Reprioritization",
+        action: "Reply",
+        priority: "Low"
       },
       {
-        code: "#002",
-        item: "Pea Creamy Soup",
-        image: "/images/order-2.jpg",
-        quantity: 1,
-        customer: "Skyler White",
-        location: "Los Angeles, CA",
-        deliveryTime: "11:15 AM",
-        price: 24.3,
-        status: "Processing",
+        image: "/images/icons/icons8-slack-80.png",
+        sender: "Rachel Park",
+        summary: "Review Launch Email Plan",
+        action: "Review",
+        priority: "Medium"
       },
       {
-        code: "#003",
-        item: "Macaroon 02",
-        image: "/images/order-3.jpg",
-        quantity: 2,
-        customer: "Jonathon Watson",
-        location: "New York",
-        deliveryTime: "11:30 AM",
-        price: 21.15,
-        status: "Cancelled",
+        image: "/images/icons/icons8-notion-48.png",
+        sender: "Chambiar System",
+        summary: "Updated Forecast",
+        action: "Approval",
+        priority: "High"
       },
       {
-        code: "#004",
-        item: "Healthy Salad Bowl",
-        image: "/images/order-4.jpg",
-        quantity: 1,
-        customer: "Walter White",
-        location: "San Jose, CA",
-        deliveryTime: "11:52 AM",
-        price: 12.2,
-        status: "Delivered",
+        image: "/images/icons/icons8-gmail-48.png",
+        sender: "Diana Cruz",
+        summary: "Compilance Docs Due Today",
+        action: "Reply",
+        priority: "High"
       },
       {
-        code: "#005",
-        item: "Pizza",
-        image: "/images/order-5.jpg",
-        quantity: 3,
-        customer: "Alice Johnson",
-        location: "Chicago, IL",
-        deliveryTime: "12:15 PM",
-        price: 45.0,
-        status: "Delivered",
+        image: "/images/icons/hubspot-256.png",
+        sender: "Sarah Liang",
+        summary: "Client Call Summary Posted",
+        action: "Review",
+        priority: "Medium"
       },
       {
-        code: "#006",
-        item: "Burger",
-        image: "/images/order-1.jpg",
-        quantity: 2,
-        customer: "Bob Smith",
-        location: "Houston, TX",
-        deliveryTime: "12:30 PM",
-        price: 18.5,
-        status: "Processing",
-      },
-      {
-        code: "#007",
-        item: "Sushi",
-        image: "/images/order-2.jpg",
-        quantity: 4,
-        customer: "Charlie Brown",
-        location: "Phoenix, AZ",
-        deliveryTime: "12:45 PM",
-        price: 32.0,
-        status: "Cancelled",
-      },
-      {
-        code: "#008",
-        item: "Pasta",
-        image: "/images/order-3.jpg",
-        quantity: 1,
-        customer: "Diana Prince",
-        location: "Philadelphia, PA",
-        deliveryTime: "01:00 PM",
-        price: 22.75,
-        status: "Delivered",
-      },
-      {
-        code: "#009",
-        item: "Salad",
-        image: "/images/order-4.jpg",
-        quantity: 2,
-        customer: "Eve Adams",
-        location: "San Antonio, TX",
-        deliveryTime: "01:15 PM",
-        price: 15.0,
-        status: "Processing",
-      },
-      {
-        code: "#010",
-        item: "Steak",
-        image: "/images/order-5.jpg",
-        quantity: 1,
-        customer: "Frank Castle",
-        location: "San Diego, CA",
-        deliveryTime: "01:30 PM",
-        price: 50.0,
-        status: "Delivered",
+        image: "/images/icons/icons8-slack-80.png",
+        sender: "Michael Riley",
+        summary: "Final Approval Needed - Q2 Designs",
+        action: "Approval",
+        priority: "High"
       },
     ];
 
@@ -150,19 +82,6 @@ const CommunicationHub = () => {
     }
   };
 
-  const getStatusStyle = (status) => {
-    switch (status) {
-      case "Delivered":
-        return { backgroundColor: "#D8FFC8", color: "#25b003" };
-      case "Processing":
-        return { backgroundColor: "#EEF6FF", color: "#3584fc" };
-      case "Cancelled":
-        return { backgroundColor: "#FFE8D4", color: "#EE3E08" };
-      default:
-        return { backgroundColor: "#EEE", color: "#666" };
-    }
-  };
-
   return (
     <Card className="bg-white border-0 rounded-3 mb-4">
       <Card.Body className="p-4">
@@ -175,7 +94,7 @@ const CommunicationHub = () => {
               id="dropdown-basic"
               className="dropdown-toggle bg-border-color border text-body rounded-2"
             >
-              Monthly
+              
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="bg-white border box-shadow">
@@ -201,47 +120,27 @@ const CommunicationHub = () => {
                 <tr className="border-bottom">
                   <th className="bg-transparent text-body fw-medium">
                     <span className="fs-10 text-body-color-60 fw-bold letter-spacing-1">
-                      CODE
+                      Platform
                     </span>
                   </th>
                   <th className="bg-transparent text-body fw-medium">
                     <span className="fs-10 text-body-color-60 fw-bold letter-spacing-1">
-                      ITEM
+                      Sender
                     </span>
                   </th>
                   <th className="bg-transparent text-body fw-medium">
                     <span className="fs-10 text-body-color-60 fw-bold letter-spacing-1">
-                      QUANTITY
+                      Summary
                     </span>
                   </th>
                   <th className="bg-transparent text-body fw-medium">
                     <span className="fs-10 text-body-color-60 fw-bold letter-spacing-1">
-                      CUSTOMER
+                      Action
                     </span>
                   </th>
                   <th className="bg-transparent text-body fw-medium">
                     <span className="fs-10 text-body-color-60 fw-bold letter-spacing-1">
-                      LOCATION
-                    </span>
-                  </th>
-                  <th className="bg-transparent text-body fw-medium">
-                    <span className="fs-10 text-body-color-60 fw-bold letter-spacing-1">
-                      DELIVERY TIME
-                    </span>
-                  </th>
-                  <th className="bg-transparent text-body fw-medium">
-                    <span className="fs-10 text-body-color-60 fw-bold letter-spacing-1">
-                      PRICE
-                    </span>
-                  </th>
-                  <th className="bg-transparent text-body fw-medium">
-                    <span className="fs-10 text-body-color-60 fw-bold letter-spacing-1">
-                      STATUS
-                    </span>
-                  </th>
-                  <th className="text-end bg-transparent text-body fw-medium">
-                    <span className="fs-10 text-body-color-60 fw-bold letter-spacing-1">
-                      ACTION
+                      Priority
                     </span>
                   </th>
                 </tr>
@@ -249,9 +148,6 @@ const CommunicationHub = () => {
               <tbody>
                 {currentItems.map((order) => (
                   <tr key={order.code}>
-                    <td className="fs-12 fw-semibold text-body-color-50">
-                      {order.code}
-                    </td>
                     <td>
                       <div className="d-flex align-items-center">
                         <div className="flex-shrink-0">
@@ -263,58 +159,19 @@ const CommunicationHub = () => {
                             height={30}
                           />
                         </div>
-                        <div className="flex-grow-1 ms-2">
-                          <h4 className="fs-14 fw-semibold mb-0 text-secondary-50">
-                            {order.item}
-                          </h4>
-                        </div>
                       </div>
                     </td>
                     <td className="fs-12 fw-semibold text-body-color-50">
-                      {order.quantity}
+                      {order.sender}
                     </td>
                     <td className="fs-12 fw-semibold text-body-color-50">
-                      {order.customer}
+                      {order.summary}
                     </td>
                     <td className="fs-12 fw-semibold text-body-color-50">
-                      {order.location}
+                      {order.action}
                     </td>
                     <td className="fs-12 fw-semibold text-body-color-50">
-                      {order.deliveryTime}
-                    </td>
-                    <td className="fs-12 fw-semibold text-body-color-50">
-                      $ {order.price.toFixed(2)}
-                    </td>
-                    <td>
-                      <span
-                        className="d-inline-block rounded-pill fs-12 fw-medium"
-                        style={{
-                          ...getStatusStyle(order.status),
-                          padding: "4px 10px",
-                          lineHeight: 1,
-                        }}
-                      >
-                        {order.status}
-                      </span>
-                    </td>
-                    <td className="text-end">
-                      <div className="d-flex justify-content-end align-items-center gap-1">
-                        <button className="ps-0 border-0 bg-transparent lh-1 position-relative top-2">
-                          <i className="material-symbols-outlined fs-16 text-primary">
-                            visibility
-                          </i>
-                        </button>
-                        <button className="ps-0 border-0 bg-transparent lh-1 position-relative top-2">
-                          <i className="material-symbols-outlined fs-16 text-primary-div-50">
-                            edit
-                          </i>
-                        </button>
-                        <button className="ps-0 border-0 bg-transparent lh-1 position-relative top-2">
-                          <i className="material-symbols-outlined fs-16 text-danger">
-                            delete
-                          </i>
-                        </button>
-                      </div>
+                      {order.priority}
                     </td>
                   </tr>
                 ))}

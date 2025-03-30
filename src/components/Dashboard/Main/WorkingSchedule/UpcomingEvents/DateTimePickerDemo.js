@@ -11,7 +11,7 @@ const DateTimePickerDemo = () => {
       <DateTimePicker
         onChange={setSelectedDate}
         value={selectedDate}
-        format="dd mm y" // Format for display (e.g., "2024-10-29 3:30 PM")
+        format="dd MMM y" // Format for display (e.g., "2024-10-29 3:30 PM")
         className="date-time-picker-demo"
       />
     </>

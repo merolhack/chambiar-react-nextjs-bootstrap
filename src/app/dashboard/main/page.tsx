@@ -19,8 +19,8 @@ import Tickets from "@/components/Dashboard/Restaurant/Tickets";
 import Order from "@/components/Dashboard/Restaurant/TotalOrders";
 
 import Avatar from "@/components/Dashboard/Main/Avatar";
-import TopActionItems from "@/components/Dashboard/Main/TopActionItems";
-import WorkingSchedule from "@/components/Dashboard/Main/WorkingSchedule";
+
+
 import KeyMeetingsAndSummaries from "@/components/Dashboard/Main/KeyMeetingsAndSummaries";
 import AIRecommendationsAndInsights from "@/components/Dashboard/Main/AIRecommendationsAndInsights";
 
@@ -36,8 +36,6 @@ import ExcelScreenshot from "@/components/Dashboard/Main/ExcelScreenshot";
 
 import AIInsightNotion from "@/components/Dashboard/Main/AIInsightNotion";
 import NotionScreenshot from "@/components/Dashboard/Main/NotionScreenshot";
-
-import CommunicationHub from "@/components/Dashboard/Main/CommunicationHub";
 
 import { Row, Col } from "react-bootstrap";
 
@@ -107,13 +105,6 @@ function Page({ layoutRef }) {
                 onConversationStart={handleConversationStart}
               />
             </Col>
-
-            {/* Other components - only show if visible */}
-            {isComponentVisible('TopActionItems') && (
-              <Col sm={12}>
-                <TopActionItems />
-              </Col>
-            )}
           </Row>
         </Col>
 
@@ -178,7 +169,6 @@ function Page({ layoutRef }) {
         </Col>
 
         <Col xxl={6}>
-          {isComponentVisible('WorkingSchedule') && <WorkingSchedule />}
           {isComponentVisible('KeyMeetingsAndSummaries') && <KeyMeetingsAndSummaries />}
         </Col>
 

@@ -1,7 +1,9 @@
 // app/dashboard/personalized/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+import LayoutProvider from '@/providers/LayoutProvider';
 
 import Avatar from "@/components/Dashboard/Personalized/Avatar";
 
@@ -9,7 +11,14 @@ import { Row, Col } from "react-bootstrap";
 
 import { withAuth } from '@/components/withAuth';
 
-function Page() {
+import TopActionItems from "@/components/Dashboard/Main/TopActionItems";
+import WorkingSchedule from "@/components/Dashboard/Main/WorkingSchedule";
+import CommunicationHub from "@/components/Dashboard/Personalized/CommunicationHub";
+import AIInsights from "@/components/Dashboard/Personalized/AIInsights";
+import DailyTaskList from "@/components/Dashboard/Personalized/DailyTaskList";
+import KeyMetrics from "@/components/Dashboard/Personalized/KeyMetrics";
+
+function Page({ layoutRef }) {
   const [visibleComponents, setVisibleComponents] = useState<string[]>([]);
   const [conversationStarted, setConversationStarted] = useState(false);
 
@@ -21,7 +30,7 @@ function Page() {
 
   const handleConversationStart = () => {
     setConversationStarted(true);
-    setVisibleComponents([]); // Hide all components when conversation starts
+    setVisibleComponents(['WorkingSchedule', 'TopActionItems', 'CommunicationHub', 'AIInsights', 'DailyTaskList', 'KeyMetrics']); // Hide all components when conversation starts
   };
 
   const isComponentVisible = (componentName: string) => {
@@ -40,41 +49,62 @@ function Page() {
                 onVideoEnd={handleVideoEnd}
                 onConversationStart={handleConversationStart}
               />
+              {isComponentVisible('WorkingSchedule') && (
+                <WorkingSchedule />
+              )}
             </Col>
-
-            {/* Other components - only show if visible */}
-            {isComponentVisible('TopActionItems') && (
-              <Col sm={12}>
-
-              </Col>
-            )}
           </Row>
         </Col>
 
         <Col xxl={6}>
           <Row className="justify-content-center">
-            {isComponentVisible('TopActions') && (
-              <Col xxl={4} lg={4} sm={4}>
-
-              </Col>)}
-          </Row>
-          <Row className="justify-content-center">
-            {isComponentVisible('TopEmails') && (
-              <Col xxl={4} lg={4} sm={4}>
-
-              </Col>)}
-          </Row>
-          <Row className="justify-content-center">
-            {isComponentVisible('TopMeetings') && (
-              <Col xxl={4} lg={4} sm={4}>
-
-              </Col>)}
+            {isComponentVisible('TopActionItems') && (
+              <Col sm={12}>
+                <TopActionItems />
+              </Col>
+            )}
           </Row>
         </Col>
-
+      </Row>
+      <Row className="justify-content-center">
+        {isComponentVisible('CommunicationHub') && (
+          <Col sm={12}>
+            <CommunicationHub />
+          </Col>
+        )}
+      </Row>
+      <Row className="justify-content-center">
+        {isComponentVisible('AIInsights') && (
+          <Col sm={12}>
+            <AIInsights />
+          </Col>
+        )}
+      </Row>
+      <Row className="justify-content-center">
+        {isComponentVisible('DailyTaskList') && (
+          <Col xs={8} md={8} lg={8} xl={8} xxl={8}>
+            <DailyTaskList />
+          </Col>
+        )}
+        {isComponentVisible('KeyMetrics') && (
+          <Col xs={4} md={4} lg={4} xl={4} xxl={4}>
+            <KeyMetrics />
+          </Col>
+        )}
       </Row>
     </>
   );
 }
 
-export default withAuth(Page);
+// Create a wrapper component
+function PageWrapper() {
+  const layoutRef = useRef(null);
+
+  return (
+    <LayoutProvider ref={layoutRef}>
+      <Page layoutRef={layoutRef} />
+    </LayoutProvider>
+  );
+}
+
+export default withAuth(PageWrapper);
