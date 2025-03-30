@@ -25,6 +25,8 @@ import AIRecommendationsAndInsights from "@/components/Dashboard/Main/AIRecommen
 import TopActions from "@/components/Dashboard/Main/TopActions";
 import TopMeetings from "@/components/Dashboard/Main/TopMeetings";
 import TopEmails from "@/components/Dashboard/Main/TopEmails";
+import AIInsightHubspot from "@/components/Dashboard/Main/AIInsightHubspot";
+import HubspotScreenshot from "@/components/Dashboard/Main/HubspotScreenshot";
 
 import CommunicationHub from "@/components/Dashboard/Main/CommunicationHub";
 
@@ -87,6 +89,19 @@ function Page() {
             {isComponentVisible('TopMeetings') && (
               <Col xxl={4} lg={4} sm={4}>
                 <TopMeetings />
+              </Col>)}
+          </Row>
+        </Col>
+
+        <Col xxl={6}>
+          <Row className="justify-content-center">
+          {isComponentVisible('AIInsightHubspot') && (
+              <Col xxl={4} lg={4} sm={4}>
+                <AIInsightHubspot />
+              </Col>)}
+              {isComponentVisible('HubspotScreenshot') && (
+              <Col xxl={8} lg={8} sm={8}>
+                <HubspotScreenshot />
               </Col>)}
           </Row>
         </Col>

@@ -27,19 +27,28 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
       src: "/videos/klingai-demo-001-v2.mp4",
       duration: 5,
       delayBeforePlay: 5000, // 5 second delay
+      showComponents: ['TopActions', 'TopEmails', 'TopMeetings'],
       message: "Listening..."
     },
-    { 
+    {
+      src: "/videos/klingai-demo-001-2-v2.mp4",
+      duration: 5,
+      delayBeforePlay: 5000, // 5 second delay
+      showComponents: ['AIInsightHubspot', 'HubspotScreenshot'],
+      message: "Listening..."
+    },
+    {
       src: "/videos/klingai-demo-002-v2.mp4", 
       duration: 10,
-      delayBeforePlay: 3000, // 3 second delay
-      showComponents: ['TopActions', 'TopEmails', 'TopMeetings'],
+      delayBeforePlay: 12000, // 3 second delay
+      showComponents: ['AIInsightHubspot'],
       message: "Analyzing your request..."
     },
     {
       src: "/videos/klingai-demo-003-v2.mp4",
       duration: 8,
       delayBeforePlay: 2000, // 2 second delay
+      showComponents: ['AIInsightHubspot'],
       message: "Compiling information..."
     },
     { src: "/videos/klingai-demo-004-v2.mp4", duration: 10 },
