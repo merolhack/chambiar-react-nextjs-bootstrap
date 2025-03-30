@@ -1,6 +1,7 @@
 "use client";
 
 import { Card } from "react-bootstrap";
+import DateTimePickerDemo from "./DateTimePickerDemo";
 
 const UpcomingEvents = () => {
   return (
@@ -8,9 +9,8 @@ const UpcomingEvents = () => {
       <div className="upcoming-events position-relative">
         <Card className="bg-white border-0 rounded-3 mb-4">
           <Card.Body className="p-4">
-            <div className="mb-3 mb-lg-4">
+            <DateTimePickerDemo />
 
-            </div>
 
             <div className="upcoming-events-list">
               <Card className="bg-chambiar-bg border-0 rounded-3 mb-4">

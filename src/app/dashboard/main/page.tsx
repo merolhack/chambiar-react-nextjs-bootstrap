@@ -21,6 +21,11 @@ import TopActionItems from "@/components/Dashboard/Main/TopActionItems";
 import WorkingSchedule from "@/components/Dashboard/Main/WorkingSchedule";
 import KeyMeetingsAndSummaries from "@/components/Dashboard/Main/KeyMeetingsAndSummaries";
 import AIRecommendationsAndInsights from "@/components/Dashboard/Main/AIRecommendationsAndInsights";
+
+import TopActions from "@/components/Dashboard/Main/TopActions";
+import TopMeetings from "@/components/Dashboard/Main/TopMeetings";
+import TopEmails from "@/components/Dashboard/Main/TopEmails";
+
 import CommunicationHub from "@/components/Dashboard/Main/CommunicationHub";
 
 import { Row, Col } from "react-bootstrap";
@@ -66,6 +71,23 @@ function Page() {
                 <TopActionItems />
               </Col>
             )}
+          </Row>
+        </Col>
+
+        <Col xxl={6}>
+          <Row className="justify-content-center">
+            {isComponentVisible('TopActions') && (
+              <Col xxl={4} lg={4} sm={4}>
+                <TopActions />
+              </Col>)}
+            {isComponentVisible('TopEmails') && (
+              <Col xxl={4} lg={4} sm={4}>
+                <TopEmails />
+              </Col>)}
+            {isComponentVisible('TopMeetings') && (
+              <Col xxl={4} lg={4} sm={4}>
+                <TopMeetings />
+              </Col>)}
           </Row>
         </Col>
 

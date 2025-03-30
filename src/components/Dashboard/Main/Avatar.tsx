@@ -33,7 +33,7 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
       src: "/videos/klingai-demo-002-v2.mp4", 
       duration: 10,
       delayBeforePlay: 3000, // 3 second delay
-      showComponents: ['TopActionItems', 'KeyMeetingsAndSummaries', 'WorkingSchedule'],
+      showComponents: ['TopActions', 'TopEmails', 'TopMeetings'],
       message: "Analyzing your request..."
     },
     {
