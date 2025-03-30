@@ -51,7 +51,7 @@ const KeyMetrics = () => {
         colors: "#64748B",
       },
       markers: {
-        shape: 'diamond',
+        shape: 'square',
         width: 9,
         radius: 2,
         height: 9,

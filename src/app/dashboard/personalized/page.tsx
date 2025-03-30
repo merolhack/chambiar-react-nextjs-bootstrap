@@ -17,6 +17,7 @@ import CommunicationHub from "@/components/Dashboard/Personalized/CommunicationH
 import AIInsights from "@/components/Dashboard/Personalized/AIInsights";
 import DailyTaskList from "@/components/Dashboard/Personalized/DailyTaskList";
 import KeyMetrics from "@/components/Dashboard/Personalized/KeyMetrics";
+import WorkEngineReport from "@/components/Dashboard/Personalized/WorkEngineReport";
 
 function Page({ layoutRef }) {
   const [visibleComponents, setVisibleComponents] = useState<string[]>([]);
@@ -30,7 +31,7 @@ function Page({ layoutRef }) {
 
   const handleConversationStart = () => {
     setConversationStarted(true);
-    setVisibleComponents(['WorkingSchedule', 'TopActionItems', 'CommunicationHub', 'AIInsights', 'DailyTaskList', 'KeyMetrics']); // Hide all components when conversation starts
+    setVisibleComponents(['WorkingSchedule', 'TopActionItems', 'CommunicationHub', 'AIInsights', 'DailyTaskList', 'KeyMetrics', 'WorkEngineReport']); // Hide all components when conversation starts
   };
 
   const isComponentVisible = (componentName: string) => {
@@ -89,6 +90,13 @@ function Page({ layoutRef }) {
         {isComponentVisible('KeyMetrics') && (
           <Col xs={4} md={4} lg={4} xl={4} xxl={4}>
             <KeyMetrics />
+          </Col>
+        )}
+      </Row>
+      <Row className="justify-content-center">
+        {isComponentVisible('WorkEngineReport') && (
+          <Col sm={12}>
+            <WorkEngineReport />
           </Col>
         )}
       </Row>

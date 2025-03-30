@@ -23670,3 +23670,8 @@ html, body, #__next {
 .main-content {
   overflow-anchor: none; /* Prevents scroll jumping */
 }
+
+/* Work Engine report */
+.work-engine-report-content {
+  border: 1px;
+}
