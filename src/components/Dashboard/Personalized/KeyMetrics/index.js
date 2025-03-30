@@ -11,7 +11,7 @@ const KeyMetrics = () => {
     });
   }, []);
 
-  const series = [55, 44, 30, 12, 22];
+  const series = [55, 44, 30, 12];
 
   const options = {
     chart: {
@@ -19,12 +19,12 @@ const KeyMetrics = () => {
         enabled: false,
       },
       toolbar: {
-        show: true,
+        show: false,
       },
     },
 
-    labels: ["Completed", "In Progress", "Pending", "Active", "Cancelled"],
-    colors: ["#37D80A", "#605DFF", "#AD63F6", "#3584FC", "#FD5812"],
+    labels: ["Solved", "In Progress", "Pending", "Complete"],
+    colors: ["#003048", "#007d87", "#00dfd6", "#bababa"],
     dataLabels: {
       enabled: false,
     },
@@ -66,17 +66,17 @@ const KeyMetrics = () => {
       <Card className="bg-white border-0 rounded-3 mb-4 z-0">
         <Card.Body className="p-4">
           <div className="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3 mb-lg-30">
-            <h3 className="mb-0">Tasks Overview</h3>
+            <h3 className="mb-0">Key Metrics</h3>
 
             <Form.Select
               className="month-select form-control p-0 h-auto border-0"
               aria-label="Default select example"
             >
-              <option defaultValue="0">Select</option>
-              <option defaultValue="1">This Day</option>
-              <option defaultValue="2">This Weekly</option>
-              <option defaultValue="3">This Monthly</option>
-              <option defaultValue="4">This Yearly</option>
+              <option defaultValue="1">Last 7 days</option>
+              <option defaultValue="2">This Day</option>
+              <option defaultValue="3">This Weekly</option>
+              <option defaultValue="4">This Monthly</option>
+              <option defaultValue="5">This Yearly</option>
             </Form.Select>
           </div>
 

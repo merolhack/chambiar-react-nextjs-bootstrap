@@ -106,13 +106,13 @@ const DailyTaskList = () => {
                       <tr key={i}>
                         <td className="text-body">{item.taskTitle}</td>
                         <td className="text-body">{item.dueTime}</td>
-                        <td className="text-body">{item.priority}</td>
+                        <td className="text-body text-uppercase">{item.priority}</td>
                         <td className="text-body">{item.status}</td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="7" className="text-center">
+                      <td colSpan={4} className="text-center">
                         No matching results found.
                       </td>
                     </tr>
@@ -193,7 +193,7 @@ const DailyTaskList = () => {
       </Card>
 
       {/* Modal */}
-      <div className={`custom-modal right ${isShowModal ? "" : "show"}`}>
+      <div className={`custom-modal right ${isShowModal ? "show" : ""}`}>
         <div className="custom-modal-content position-relative z-3">
           <div className="border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
             <h3 className="fs-18 mb-0">Create Task</h3>
