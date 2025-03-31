@@ -121,8 +121,8 @@ const Video = memo(forwardRef<VideoHandle, VideoProps>(
 
         <video
           ref={videoRef}
-          width="480"
-          height="260"
+          width="780"
+          height="560"
           preload="auto"
           playsInline
           className="avatar-video"

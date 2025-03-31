@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Card, Form } from "react-bootstrap";
 
-const DeviceSessions = () => {
+const TeamTimeAllocation = () => {
   const [Chart, setChart] = useState();
   useEffect(() => {
     import("react-apexcharts").then((mod) => {
@@ -187,4 +187,4 @@ const DeviceSessions = () => {
   );
 };
 
-export default DeviceSessions;
+export default TeamTimeAllocation;

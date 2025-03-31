@@ -25,7 +25,7 @@ const BrowserUsedByUsers = () => {
     {
       action: "Auto-snoozed non-urgent tasks after 6pm",
       timeSaved: "2 hrs",
-      outcome: "Eficciency",
+      outcome: "Efficiency",
     },
     {
       action: "AI Coworker attended meeting",
