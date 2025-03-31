@@ -1,12 +1,11 @@
 // app/dashboard/work-engine/page.tsx
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react'; // Add useCallback
 import { Row, Col } from "react-bootstrap";
 
 import LayoutProvider from '@/providers/LayoutProvider';
-
-import Avatar from "@/components/Dashboard/Personalized/Avatar";
+import { withAuth } from '@/components/withAuth';
 
 import AnalyticsOverview from "@/components/Dashboard/WorkEngine/AnalyticsOverview";
 import Stats from "@/components/Dashboard/WorkEngine/Stats";
@@ -19,108 +18,179 @@ import Sessions from "@/components/Dashboard/Analytics/Sessions";
 import SessionsByChannel from "@/components/Dashboard/WorkEngine/SessionsByChannel";
 import ClicksByKeywords from "@/components/Dashboard/WorkEngine/ClicksByKeywords";
 import TopBrowsingPagesToday from "@/components/Dashboard/WorkEngine/TopBrowsingPagesToday";
-import TopBrowsingPagesTodayV2 from "@/components/Dashboard/WorkEngine/TopBrowsingPagesTodayV2";
 import UsersByCountry from "@/components/Dashboard/Analytics/UsersByCountry";
-import AvatarWorkEngine from "@/components/Dashboard/Main/AvatarWorkEngine";
+import TopBrowsingPagesTodayV2 from "@/components/Dashboard/WorkEngine/TopBrowsingPagesTodayV2";
+import AvatarWorkEngine from "@/components/Dashboard/WorkEngine/AvatarWorkEngine";
 
-import { withAuth } from '@/components/withAuth';
+import styles from '../../../../styles/animations.module.css';
 
 function Page({ layoutRef }) {
   const [visibleComponents, setVisibleComponents] = useState<string[]>([]);
   const [conversationStarted, setConversationStarted] = useState(false);
+  const componentRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const prevVisibleComponents = useRef<string[]>([]);
 
-  const handleVideoEnd = (showComponents?: string[]) => {
-    if (showComponents) {
-      setVisibleComponents(prev => [...new Set([...prev, ...showComponents])]); // Ensure unique components
+  useEffect(() => {
+    const newComponents = visibleComponents.filter(
+      component => !prevVisibleComponents.current.includes(component)
+    );
+    
+    newComponents.forEach(component => {
+      const ref = componentRefs.current[component];
+      if (ref) {
+        ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    prevVisibleComponents.current = visibleComponents;
+  }, [visibleComponents]);
+
+  // Memoize the registerRef function
+  const registerRef = useCallback((componentName: string) => (el: HTMLDivElement | null) => {
+    componentRefs.current[componentName] = el;
+    if (el) {
+      el.classList.add(styles['scroll-margin']);
     }
-  };
+  }, []);
 
-  const handleConversationStart = () => {
+  // Wrap handlers with useCallback
+  const handleVideoEnd = useCallback((showComponents?: string[]) => {
+    if (showComponents) {
+      setVisibleComponents(prev => [...new Set([...prev, ...showComponents])]);
+    }
+  }, []);
+
+  const handleConversationStart = useCallback(() => {
     setConversationStarted(true);
-    setVisibleComponents([]); // Hide all components when conversation starts
-  };
+    setVisibleComponents([]);
+    
+    const componentsOrder = [
+      'RealtimeActiveUsers',
+      'AnalyticsOverview',
+      'BrowserUsedByUsers',
+      'DeviceSessions',
+      'Clicks',
+      'Impressions',
+      'Sessions',
+      'SessionsByChannel',
+      'ClicksByKeywords',
+      'TopBrowsingPagesToday',
+      'UsersByCountry',
+      'TopBrowsingPagesTodayV2'
+    ];
+
+    componentsOrder.forEach((component, index) => {
+      setTimeout(() => {
+        setVisibleComponents(prev => [...prev, component]);
+      }, index * 2000);
+    });
+  }, []); // Empty dependency array ensures stable reference
 
   const isComponentVisible = (componentName: string) => {
-    // Only show if in visibleComponents AND conversation has started
     return conversationStarted && visibleComponents.includes(componentName);
   };
-  
+
   return (
     <>
       <Row>
-        <Col xs={12} sm={12} lg={8} xl={12} xxl={8}>
+        <Col xs={6} sm={6} lg={6} xl={6} xxl={6}>
           <AvatarWorkEngine
             onVideoEnd={handleVideoEnd}
             onConversationStart={handleConversationStart}
           />
         </Col>
+        {isComponentVisible('RealtimeActiveUsers') && (
+          <Col xs={6} sm={6} lg={6} xl={6} xxl={6} className={`${styles.slideIn} ${styles['delay-2']}`} ref={registerRef('RealtimeActiveUsers')}>
+            <RealtimeActiveUsers />
+          </Col>
+        )}
       </Row>
       <Row>
         <Col xs={12} sm={12} lg={8} xl={12} xxl={8}>
-          <AnalyticsOverview />
-
-          <Stats />
+          {isComponentVisible('AnalyticsOverview') && (
+            <div className={`${styles.slideIn} ${styles['delay-1']}`} ref={registerRef('AnalyticsOverview')}>
+              <AnalyticsOverview />
+            </div>
+          )}
+          {/*<Stats />*/}
         </Col>
 
-        <Col xs={12} sm={12} lg={4} xl={12} xxl={4}>
-          <RealtimeActiveUsers />
-        </Col>
+        
       </Row>
 
       <Row>
-        <Col xs={12} lg={12} xl={12} xxl={7}>
-          <BrowserUsedByUsers />
-        </Col>
+        {isComponentVisible('BrowserUsedByUsers') && (
+          <Col xs={12} lg={12} xl={12} xxl={7} className={`${styles.slideIn} ${styles['delay-3']}`} ref={registerRef('BrowserUsedByUsers')}>
+            <BrowserUsedByUsers />
+          </Col>
+        )}
 
-        <Col xs={12} lg={12} xl={12} xxl={5}>
-          <DeviceSessions />
-        </Col>
+        {isComponentVisible('DeviceSessions') && (
+          <Col xs={12} lg={12} xl={12} xxl={5} className={`${styles.slideIn} ${styles['delay-4']}`} ref={registerRef('DeviceSessions')}>
+            <DeviceSessions />
+          </Col>
+        )}
       </Row>
 
       <Row className="justify-content-center">
-        <Col xs={12} md={6} xl={6} xxl={4}>
-          <Clicks />
-        </Col>
+        {isComponentVisible('Clicks') && (
+          <Col xs={12} md={6} xl={6} xxl={4} className={`${styles.slideIn} ${styles['delay-5']}`} ref={registerRef('Clicks')}>
+            <Clicks />
+          </Col>
+        )}
 
-        <Col xs={12} md={6} xl={6} xxl={4}>
-          <Impressions />
-        </Col>
+        {isComponentVisible('Impressions') && (
+          <Col xs={12} md={6} xl={6} xxl={4} className={`${styles.slideIn} ${styles['delay-6']}`} ref={registerRef('Impressions')}>
+            <Impressions />
+          </Col>
+        )}
 
-        <Col xs={12} md={6} xl={6} xxl={4}>
-          <Sessions />
-        </Col>
+        {isComponentVisible('Sessions') && (
+          <Col xs={12} md={6} xl={6} xxl={4} className={`${styles.slideIn} ${styles['delay-7']}`} ref={registerRef('Sessions')}>
+            <Sessions />
+          </Col>
+        )}
       </Row>
 
       <Row>
-        <Col xs={12} md={12} lg={12} xl={5}>
-          <SessionsByChannel />
-        </Col>
+        {isComponentVisible('SessionsByChannel') && (
+          <Col xs={12} md={12} lg={12} xl={5} className={`${styles.slideIn} ${styles['delay-8']}`} ref={registerRef('SessionsByChannel')}>
+            <SessionsByChannel />
+          </Col>
+        )}
 
-        <Col xs={12} md={12} lg={12} xl={7}>
-          <ClicksByKeywords />
-        </Col>
+        {isComponentVisible('ClicksByKeywords') && (
+          <Col xs={12} md={12} lg={12} xl={7} className={`${styles.slideIn} ${styles['delay-9']}`} ref={registerRef('ClicksByKeywords')}>
+            <ClicksByKeywords />
+          </Col>
+        )}
       </Row>
 
       <Row>
-        <Col xs={12} md={12} lg={12} xl={12} xxl={8}>
-          <TopBrowsingPagesToday />
-        </Col>
+        {isComponentVisible('TopBrowsingPagesToday') && (
+          <Col xs={12} md={12} lg={12} xl={12} xxl={8} className={`${styles.slideIn} ${styles['delay-10']}`} ref={registerRef('TopBrowsingPagesToday')}>
+            <TopBrowsingPagesToday />
+          </Col>
+        )}
 
-        <Col xs={12} md={12} lg={12} xl={12} xxl={4}>
-          <UsersByCountry />
-        </Col>
+        {isComponentVisible('UsersByCountry') && (
+          <Col xs={12} md={12} lg={12} xl={12} xxl={4} className={`${styles.slideIn} ${styles['delay-11']}`} ref={registerRef('UsersByCountry')}>
+            <UsersByCountry />
+          </Col>
+        )}
       </Row>
 
       <Row>
-        <Col xs={12} md={12} lg={12} xl={12} xxl={12}>
-          <TopBrowsingPagesTodayV2 />
-        </Col>
+        {isComponentVisible('TopBrowsingPagesTodayV2') && (
+          <Col xs={12} md={12} lg={12} xl={12} xxl={12} className={`${styles.slideIn} ${styles['delay-12']}`} ref={registerRef('TopBrowsingPagesTodayV2')}>
+            <TopBrowsingPagesTodayV2 />
+          </Col>
+        )}
       </Row>
     </>
   );
 }
 
-// Create a wrapper component
 function PageWrapper() {
   const layoutRef = useRef(null);
   

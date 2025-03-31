@@ -1,33 +1,48 @@
-// components/Dashboard/Main/AvatarWorkEngine.tsx
+// components/Dashboard/WorkEngine/AvatarWorkEngine.tsx
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Card } from "react-bootstrap";
-import Video from "@/components/Dashboard/Main/Video";
+import Video, { VideoHandle } from "@/components/Dashboard/WorkEngine/Video";
 
 interface VideoData {
   src: string;
   duration: number;
   showComponents?: string[];
   delayBeforePlay?: number;
-  message?: string; // Optional message to display during delay
+  message?: string;
 }
 
-const AvatarWorkEngine = ({ onVideoEnd, onConversationStart }: {
+interface AvatarWorkEngineProps {
   onVideoEnd?: (showComponents?: string[]) => void;
   onConversationStart?: () => void;
-}) => {
+}
+
+const AvatarWorkEngine = ({ onVideoEnd, onConversationStart }: AvatarWorkEngineProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [started, setStarted] = useState(false);
   const [isPreloading, setIsPreloading] = useState(true);
   const [conversationEnded, setConversationEnded] = useState(false);
+  const videoRef = useRef<VideoHandle>(null);
 
-  // Video sources with durations, delays, and components to show
   const videoData: VideoData[] = [
-    { src: "/videos/klingai-demo-006-v2.mp4", duration: 10 },
+    {
+      src: "/videos/klingai-demo-silence.mp4",
+      duration: 3,
+      delayBeforePlay: 0, // 5 second delay
+      showComponents: [],
+      message: "Listening..."
+    },
+    {
+      src: "/videos/klingai-demo-006-v2.mp4",
+      duration: 10,
+      delayBeforePlay: 1000,
+      showComponents: []
+    },
   ];
 
-  // Preload all videos when component mounts
+  const currentVideo = videoData[currentVideoIndex];
+
   useEffect(() => {
     const preloadVideos = async () => {
       try {
@@ -48,34 +63,34 @@ const AvatarWorkEngine = ({ onVideoEnd, onConversationStart }: {
     preloadVideos();
   }, []);
 
-  const handleVideoEnd = () => {
-    const currentVideo = videoData[currentVideoIndex];
+  const handleVideoEnd = useCallback(() => {
+    onVideoEnd?.(currentVideo.showComponents);
 
-    // Show components associated with this video
-    if (onVideoEnd) {
-      onVideoEnd(currentVideo.showComponents);
-    }
-
-    // Move to next video or end conversation
     if (currentVideoIndex < videoData.length - 1) {
+      // Play next video without unmounting
+      const nextVideo = videoData[currentVideoIndex + 1];
+      videoRef.current?.playNext(nextVideo.src);
       setCurrentVideoIndex(prev => prev + 1);
     } else {
       setConversationEnded(true);
     }
-  };
+  }, [currentVideoIndex, onVideoEnd, videoData]);
 
-  const handleStartConversation = () => {
+  const handleStartConversation = useCallback(() => {
+    // Reset video state before starting
+    videoRef.current?.reset();
+    
     setStarted(true);
     setConversationEnded(false);
     setCurrentVideoIndex(0);
-    if (onConversationStart) {
-      onConversationStart();
-    }
-  };
+    onConversationStart?.();
+  }, [onConversationStart]);
 
   const handleRestartConversation = () => {
+    videoRef.current?.reset();
     setCurrentVideoIndex(0);
     setConversationEnded(false);
+    setStarted(false);
   };
 
   return (
@@ -108,10 +123,10 @@ const AvatarWorkEngine = ({ onVideoEnd, onConversationStart }: {
           </div>
         ) : (
           <Video
-            sources={videoData.map(item => item.src)}
-            currentIndex={currentVideoIndex}
+            ref={videoRef}
+            source={currentVideo.src}
             onEnd={handleVideoEnd}
-            delayBeforePlay={videoData[currentVideoIndex].delayBeforePlay}
+            delayBeforePlay={currentVideo.delayBeforePlay}
           />
         )}
       </div>

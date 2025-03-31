@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import Video from "@/components/Dashboard/Main/Video";
+import { useRouter } from "next/navigation";
 
 interface VideoData {
   src: string;
@@ -17,6 +18,7 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
   onVideoEnd?: (showComponents?: string[]) => void;
   onConversationStart?: () => void;
 }) => {
+  const router = useRouter(); // Initialize the router
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [started, setStarted] = useState(false);
   const [isPreloading, setIsPreloading] = useState(true);
@@ -74,6 +76,14 @@ const Avatar = ({ onVideoEnd, onConversationStart }: {
       setCurrentVideoIndex(prev => prev + 1);
     } else {
       setConversationEnded(true);
+
+      // Redirect after 5 seconds
+      const redirectTimer = setTimeout(() => {
+        router.push("/dashboard/work-engine/");
+      }, 5000);
+  
+      // Cleanup the timer if component unmounts
+      return () => clearTimeout(redirectTimer);
     }
   };
 
