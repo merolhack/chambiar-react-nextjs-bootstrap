@@ -10,7 +10,7 @@ import { withAuth } from '@/components/withAuth';
 import AnalyticsOverview from "@/components/Dashboard/WorkEngine/AnalyticsOverview";
 import Stats from "@/components/Dashboard/WorkEngine/Stats";
 import RealtimeActiveUsers from "@/components/Dashboard/WorkEngine/RealtimeActiveUsers";
-import BrowserUsedByUsers from "@/components/Dashboard/Analytics/BrowserUsedByUsers";
+import BrowserUsedByUsers from "@/components/Dashboard/WorkEngine/BrowserUsedByUsers";
 import DeviceSessions from "@/components/Dashboard/WorkEngine/DeviceSessions";
 import Clicks from "@/components/Dashboard/Analytics/Clicks";
 import Impressions from "@/components/Dashboard/Analytics/Impressions";
@@ -67,6 +67,7 @@ function Page({ layoutRef }) {
     const componentsOrder = [
       'RealtimeActiveUsers',
       'AnalyticsOverview',
+      'TopBrowsingPagesToday',
       'BrowserUsedByUsers',
       'DeviceSessions',
       'Clicks',
@@ -74,7 +75,7 @@ function Page({ layoutRef }) {
       'Sessions',
       'SessionsByChannel',
       'ClicksByKeywords',
-      'TopBrowsingPagesToday',
+      
       'UsersByCountry',
       'TopBrowsingPagesTodayV2'
     ];
@@ -98,6 +99,11 @@ function Page({ layoutRef }) {
             onVideoEnd={handleVideoEnd}
             onConversationStart={handleConversationStart}
           />
+          {isComponentVisible('AnalyticsOverview') && (
+            <div className={`${styles.slideIn} ${styles['delay-1']}`} ref={registerRef('AnalyticsOverview')}>
+              <AnalyticsOverview />
+            </div>
+          )}
         </Col>
         {isComponentVisible('RealtimeActiveUsers') && (
           <Col xs={6} sm={6} lg={6} xl={6} xxl={6} className={`${styles.slideIn} ${styles['delay-2']}`} ref={registerRef('RealtimeActiveUsers')}>
@@ -106,16 +112,17 @@ function Page({ layoutRef }) {
         )}
       </Row>
       <Row>
-        <Col xs={12} sm={12} lg={8} xl={12} xxl={8}>
-          {isComponentVisible('AnalyticsOverview') && (
-            <div className={`${styles.slideIn} ${styles['delay-1']}`} ref={registerRef('AnalyticsOverview')}>
-              <AnalyticsOverview />
-            </div>
-          )}
-          {/*<Stats />*/}
-        </Col>
+        {isComponentVisible('TopBrowsingPagesToday') && (
+          <Col xs={12} md={12} lg={12} xl={12} xxl={8} className={`${styles.slideIn} ${styles['delay-10']}`} ref={registerRef('TopBrowsingPagesToday')}>
+            <TopBrowsingPagesToday />
+          </Col>
+        )}
 
-        
+        {isComponentVisible('UsersByCountry') && (
+          <Col xs={12} md={12} lg={12} xl={12} xxl={4} className={`${styles.slideIn} ${styles['delay-11']}`} ref={registerRef('UsersByCountry')}>
+            <UsersByCountry />
+          </Col>
+        )}
       </Row>
 
       <Row>
@@ -166,19 +173,7 @@ function Page({ layoutRef }) {
         )}
       </Row>
 
-      <Row>
-        {isComponentVisible('TopBrowsingPagesToday') && (
-          <Col xs={12} md={12} lg={12} xl={12} xxl={8} className={`${styles.slideIn} ${styles['delay-10']}`} ref={registerRef('TopBrowsingPagesToday')}>
-            <TopBrowsingPagesToday />
-          </Col>
-        )}
-
-        {isComponentVisible('UsersByCountry') && (
-          <Col xs={12} md={12} lg={12} xl={12} xxl={4} className={`${styles.slideIn} ${styles['delay-11']}`} ref={registerRef('UsersByCountry')}>
-            <UsersByCountry />
-          </Col>
-        )}
-      </Row>
+      
 
       <Row>
         {isComponentVisible('TopBrowsingPagesTodayV2') && (

@@ -147,7 +147,7 @@ const RealtimeActiveUsers = () => {
             <Row>
               <Col sm={10}>
                 <span className="fs-14 fw-semibold text-white">
-                  Top Active Pages
+                  Top Active Projects
                 </span>
               </Col>
               <Col sm={2}>
