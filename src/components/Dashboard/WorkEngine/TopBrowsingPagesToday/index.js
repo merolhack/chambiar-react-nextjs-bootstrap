@@ -176,7 +176,7 @@ const TopBrowsingPagesToday = () => {
                       </td>
                       <td className="fw-medium">{item.source}</td>
                       <td className="fw-medium">{item.time}</td>
-                      <td className="text-end fw-medium">{item.views}</td>
+                      <td className="text-center fw-medium">{item.views}</td>
                       <td className="text-end fw-medium">{item.bounceRate}</td>
                     </tr>
                   ))

@@ -8,88 +8,87 @@ const TopBrowsingPagesTodayV2 = () => {
   const data = [
     {
       url: "Maria Rogers",
-      source: "Organic",
-      time: "3m 45s",
-      views: 350,
-      bounceRate: "30.5%",
+      source: "8",
+      time: "8",
+      views: 85,
+      bounceRate: "30",
     },
     {
       url: "Erika Smith",
-      source: "Paid",
-      time: "7m 00s",
-      views: 400,
-      bounceRate: "24.9%",
+      source: "8",
+      time: "9",
+      views: 70,
+      bounceRate: "24",
     },
     {
       url: "Olivia Jackson",
-      source: "Direct",
-      time: "2m 30s",
-      views: 125,
-      bounceRate: "50.0%",
+      source: "7",
+      time: "6",
+      views: 80,
+      bounceRate: "50",
     },
     {
-      url: "/realtime-users",
-      source: "Referral",
-      time: "3m 00s",
-      views: 190,
-      bounceRate: "40.2%",
+      url: "Vanessa Hernandez",
+      source: "9",
+      time: "5",
+      views: 75,
+      bounceRate: "40",
     },
     {
-      url: "/account-preferences",
-      source: "Organic",
-      time: "2m 50s",
-      views: 180,
-      bounceRate: "42.1%",
+      url: "Francisco Marron",
+      source: "5",
+      time: "3",
+      views: 90,
+      bounceRate: "42",
     },
     {
-      url: "/apis-and-reports",
-      source: "Paid",
-      time: "4m 15s",
-      views: 320,
-      bounceRate: "28.7%",
-    },
-    {
-      url: "/apis-and-reports",
-      source: "Paid",
-      time: "4m 15s",
-      views: 320,
-      bounceRate: "28.7%",
+      url: "Stephanie Wong",
+      source: "3",
+      time: "4",
+      views: 80,
+      bounceRate: "28",
     },
     {
       url: "Maria Rogers",
-      source: "Organic",
-      time: "3m 45s",
-      views: 350,
-      bounceRate: "30.5%",
-    },
-
-    {
-      url: "Olivia Jackson",
-      source: "Direct",
-      time: "2m 30s",
-      views: 125,
-      bounceRate: "50.0%",
-    },
-    {
-      url: "/realtime-users",
-      source: "Referral",
-      time: "3m 00s",
-      views: 190,
-      bounceRate: "40.2%",
-    },
-    {
-      url: "/account-preferences",
-      source: "Organic",
-      time: "2m 50s",
-      views: 180,
-      bounceRate: "42.1%",
+      source: "8",
+      time: "8",
+      views: 85,
+      bounceRate: "30",
     },
     {
       url: "Erika Smith",
-      source: "Paid",
-      time: "7m 00s",
-      views: 400,
-      bounceRate: "24.9%",
+      source: "8",
+      time: "9",
+      views: 70,
+      bounceRate: "24",
+    },
+    {
+      url: "Olivia Jackson",
+      source: "7",
+      time: "6",
+      views: 80,
+      bounceRate: "50",
+    },
+    {
+      url: "Vanessa Hernandez",
+      source: "9",
+      time: "5",
+      views: 75,
+      bounceRate: "40",
+    },
+    {
+      url: "Francisco Marron",
+      source: "5",
+      time: "3",
+      views: 90,
+      bounceRate: "42",
+    },
+    {
+      url: "Stephanie Wong",
+      source: "3",
+      time: "4",
+      views: 80,
+      bounceRate: "28",
     },
   ];
 
@@ -126,7 +125,7 @@ const TopBrowsingPagesTodayV2 = () => {
     <Card className="bg-white border-0 rounded-3 mb-4">
       <Card.Body className="p-4">
         <div className="d-flex justify-content-between align-items-center flex-wrap gap-3 pb-3 mb-1">
-          <h3 className="mb-0">Top Browsing Pages Today</h3>
+          <h3 className="mb-0">Team Snapshot</h3>
 
           <Form className="position-relative table-src-form me-0">
             <Form.Control
@@ -149,19 +148,19 @@ const TopBrowsingPagesTodayV2 = () => {
               <thead>
                 <tr className="border-bottom">
                   <th scope="col" className="bg-transparent">
-                    Page URL
+                    Individual
                   </th>
                   <th scope="col" className="bg-transparent">
-                    Source
+                    Opportunity score
                   </th>
                   <th scope="col" className="bg-transparent">
-                    Avg Time
+                    Workload Score
                   </th>
                   <th scope="col" className="bg-transparent text-end">
-                    Page Views
+                    OEI
                   </th>
                   <th scope="col" className="bg-transparent text-end">
-                    Bounce Rate (%)
+                    Efficiency Index
                   </th>
                 </tr>
               </thead>
@@ -207,16 +206,15 @@ const TopBrowsingPagesTodayV2 = () => {
                     disabled={currentPage === 1}
                   >
                     <span className="material-symbols-outlined">
-	keyboard_arrow_left
-</span>
+                      keyboard_arrow_left
+                    </span>
                   </Button>
                 </li>
                 {Array.from({ length: totalPages }, (_, i) => (
                   <li key={i} className="page-item">
                     <Button
-                      className={`page-link ${
-                        currentPage === i + 1 ? "active" : ""
-                      }`}
+                      className={`page-link ${currentPage === i + 1 ? "active" : ""
+                        }`}
                       onClick={() => handlePageChange(i + 1)}
                     >
                       {i + 1}
@@ -231,8 +229,8 @@ const TopBrowsingPagesTodayV2 = () => {
                     disabled={currentPage === totalPages}
                   >
                     <span className="material-symbols-outlined">
-	keyboard_arrow_right
-</span>
+                      keyboard_arrow_right
+                    </span>
                   </Button>
                 </li>
               </ul>

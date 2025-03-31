@@ -18,7 +18,6 @@ import Sessions from "@/components/Dashboard/Analytics/Sessions";
 import SessionsByChannel from "@/components/Dashboard/WorkEngine/SessionsByChannel";
 import ClicksByKeywords from "@/components/Dashboard/WorkEngine/ClicksByKeywords";
 import TopBrowsingPagesToday from "@/components/Dashboard/WorkEngine/TopBrowsingPagesToday";
-import UsersByCountry from "@/components/Dashboard/Analytics/UsersByCountry";
 import TopBrowsingPagesTodayV2 from "@/components/Dashboard/WorkEngine/TopBrowsingPagesTodayV2";
 import AvatarWorkEngine from "@/components/Dashboard/WorkEngine/AvatarWorkEngine";
 
@@ -75,8 +74,6 @@ function Page({ layoutRef }) {
       'Sessions',
       'SessionsByChannel',
       'ClicksByKeywords',
-      
-      'UsersByCountry',
       'TopBrowsingPagesTodayV2'
     ];
 
@@ -118,11 +115,6 @@ function Page({ layoutRef }) {
           </Col>
         )}
 
-        {isComponentVisible('UsersByCountry') && (
-          <Col xs={12} md={12} lg={12} xl={12} xxl={4} className={`${styles.slideIn} ${styles['delay-11']}`} ref={registerRef('UsersByCountry')}>
-            <UsersByCountry />
-          </Col>
-        )}
       </Row>
 
       <Row>
@@ -135,26 +127,6 @@ function Page({ layoutRef }) {
         {isComponentVisible('DeviceSessions') && (
           <Col xs={12} lg={12} xl={12} xxl={5} className={`${styles.slideIn} ${styles['delay-4']}`} ref={registerRef('DeviceSessions')}>
             <DeviceSessions />
-          </Col>
-        )}
-      </Row>
-
-      <Row className="justify-content-center">
-        {isComponentVisible('Clicks') && (
-          <Col xs={12} md={6} xl={6} xxl={4} className={`${styles.slideIn} ${styles['delay-5']}`} ref={registerRef('Clicks')}>
-            <Clicks />
-          </Col>
-        )}
-
-        {isComponentVisible('Impressions') && (
-          <Col xs={12} md={6} xl={6} xxl={4} className={`${styles.slideIn} ${styles['delay-6']}`} ref={registerRef('Impressions')}>
-            <Impressions />
-          </Col>
-        )}
-
-        {isComponentVisible('Sessions') && (
-          <Col xs={12} md={6} xl={6} xxl={4} className={`${styles.slideIn} ${styles['delay-7']}`} ref={registerRef('Sessions')}>
-            <Sessions />
           </Col>
         )}
       </Row>
