@@ -1,7 +1,8 @@
 // app/components/Authentication/SignInForm/index.tsx
 "use client"; // Mark this component as a Client Component
 
-import { useEffect, useState } from "react";
+// SignInForm component definition
+import React, { useEffect, useState, MutableRefObject } from "react";
 import { Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { redirect, useRouter } from 'next/navigation'; // Changed from redirect to useRouter
 
@@ -12,7 +13,11 @@ import { getProfile } from "../../../services/users";
 import { getInitialPrompt } from "../../../services/prompts";
 import AlertDismissible from "../../AlertDismissible"
 
-const SignInForm: React.FC = ({ layoutRef }) => {
+interface SignInFormProps {
+  layoutRef: MutableRefObject<any>;
+}
+
+function SignInForm({ layoutRef }: SignInFormProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [profile, setProfile] = useState(null);

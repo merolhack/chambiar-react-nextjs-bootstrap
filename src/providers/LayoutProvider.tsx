@@ -1,14 +1,18 @@
 // providers/LayoutProvider.jsx
 "use client";
 
-import React, { useState, useRef, forwardRef } from "react";
+import React, { useState, useRef, forwardRef, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import LeftSidebar from "@/components/Layout/LeftSidebar";
 import TopNavbar from "@/components/Layout/TopNavbar";
 import Footer from "@/components/Layout/Footer";
 import ControlPanel from "@/components/Layout/ControlPanel";
 
-const LayoutProvider = forwardRef(({ children }, ref) => {
+interface LayoutProviderProps {
+  children?: ReactNode;
+}
+
+const LayoutProvider = forwardRef<any, LayoutProviderProps>(({ children }, ref) => {
   const [active, setActive] = useState(false);
   const pathname = usePathname();
 

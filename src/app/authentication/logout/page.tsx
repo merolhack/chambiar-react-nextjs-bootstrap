@@ -1,11 +1,8 @@
-// app/authentication/logout/page.tsx
 "use client"
 
 import { useRef } from 'react'
-
-import LayoutProvider from '@/providers/LayoutProvider';
-
-import Logout from "@/components/Authentication/Logout";
+import LayoutProvider from '@/providers/LayoutProvider'
+import Logout from "@/components/Authentication/Logout"
 
 export default function Page() {
   const layoutRef = useRef(null);

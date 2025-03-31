@@ -2,10 +2,8 @@
 "use client"
 
 import { useRef } from 'react'
-
-import LayoutProvider from '@/providers/LayoutProvider';
-
-import SignInForm from "@/components/Authentication/SignInForm";
+import LayoutProvider from '@/providers/LayoutProvider'
+import SignInForm from "@/components/Authentication/SignInForm"
 
 export default function Page() {
   const layoutRef = useRef(null);

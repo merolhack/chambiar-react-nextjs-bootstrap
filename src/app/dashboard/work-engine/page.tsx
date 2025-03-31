@@ -6,6 +6,8 @@ import { Row, Col } from "react-bootstrap";
 
 import LayoutProvider from '@/providers/LayoutProvider';
 
+import Avatar from "@/components/Dashboard/Personalized/Avatar";
+
 import AnalyticsOverview from "@/components/Dashboard/WorkEngine/AnalyticsOverview";
 import Stats from "@/components/Dashboard/WorkEngine/Stats";
 import RealtimeActiveUsers from "@/components/Dashboard/WorkEngine/RealtimeActiveUsers";
@@ -45,15 +47,14 @@ function Page({ layoutRef }) {
   
   return (
     <>
-      {/* <Row>
-        Avatar is always visible
+      <Row>
         <Col xs={12} sm={12} lg={8} xl={12} xxl={8}>
           <AvatarWorkEngine
             onVideoEnd={handleVideoEnd}
             onConversationStart={handleConversationStart}
           />
         </Col>
-      </Row> */}
+      </Row>
       <Row>
         <Col xs={12} sm={12} lg={8} xl={12} xxl={8}>
           <AnalyticsOverview />

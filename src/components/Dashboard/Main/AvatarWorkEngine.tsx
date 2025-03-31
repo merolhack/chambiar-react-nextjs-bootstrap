@@ -24,20 +24,6 @@ const AvatarWorkEngine = ({ onVideoEnd, onConversationStart }: {
 
   // Video sources with durations, delays, and components to show
   const videoData: VideoData[] = [
-    {
-      src: "/videos/klingai-demo-003-v2.mp4",
-      duration: 8,
-      delayBeforePlay: 2000, // 2 second delay
-      showComponents: ['WorkingSchedule', 'KeyMeetingsAndSummaries'],
-      message: "Compiling information..."
-    },
-    {
-      src: "/videos/klingai-demo-004-v2.mp4", 
-      duration: 10,
-      delayBeforePlay: 2000, // 2 second delay
-      showComponents: ['AIRecommendationsAndInsights', 'RecentOrdersList'],
-    },
-    { src: "/videos/klingai-demo-005.mp4", duration: 5 },
     { src: "/videos/klingai-demo-006-v2.mp4", duration: 10 },
   ];
 

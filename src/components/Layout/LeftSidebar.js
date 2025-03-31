@@ -94,7 +94,7 @@ const LeftSidebar = ({ toogleActive }) => {
                       Work engine
                     </Link>
                   </li>
-                  <li className="menu-item">
+                  {/*<li className="menu-item">
                     <Link
                       href="/dashboard/coworker/"
                       className={`menu-link ${pathname === "/dashboard/coworker/" ? "active" : ""
@@ -102,8 +102,7 @@ const LeftSidebar = ({ toogleActive }) => {
                     >
                       CoWorker
                     </Link>
-                  </li>
-
+                  </li>*/}
                 </ul>
               </Accordion.Body>
             </Accordion.Item>
