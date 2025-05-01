@@ -38,7 +38,7 @@ const SignUpForm = ({ layoutRef }) => {
                 />
               </div>
 
-              <h3 className="fs-28 mb-2">Sign up to Chambiar Dashboard</h3>
+              <h3 className="fs-28 mb-2">Get Started with Chambiar</h3>
               <p className="fw-medium fs-16 mb-4">
                 Sign up with social account or enter your details
               </p>
