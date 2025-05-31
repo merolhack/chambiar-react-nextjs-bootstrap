@@ -61,7 +61,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/dashboard/main',
+        destination: '/dashboard/connections',
         permanent: true,
       },
     ]
