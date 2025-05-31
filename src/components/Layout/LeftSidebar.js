@@ -68,6 +68,15 @@ const LeftSidebar = ({ toogleActive }) => {
                 <ul className="sub-menu">
                   <li className="menu-item">
                     <Link
+                      href="/dashboard/connections/"
+                      className={`menu-link ${pathname === "/dashboard/connections/" ? "active" : ""
+                        }`}
+                    >
+                      Connections
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link
                       href="/dashboard/main/"
                       className={`menu-link ${pathname === "/dashboard/main/" ? "active" : ""
                         }`}

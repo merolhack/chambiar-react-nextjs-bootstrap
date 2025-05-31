@@ -57,7 +57,7 @@ function SignInForm({ layoutRef }: SignInFormProps) {
       // console.log(statusResponse);
 
       // Immediate redirect after successful login
-      router.push('/dashboard/main');
+      router.push('/dashboard/connections');
       router.refresh(); // Ensure the page refreshes to apply auth changes
 
       // Use window.location for immediate, reliable redirect
