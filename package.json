@@ -6,7 +6,7 @@
     "node": "20.x"
   },
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS='--inspect' next dev -p 3000 --turbopack",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev -p 3001 --turbopack --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

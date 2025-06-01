@@ -66,6 +66,10 @@ const nextConfig = {
       },
     ]
   },
+  allowedDevOrigins: [
+    'windows-computer.io',
+    '192.168.1.12'
+  ],
 };
 
 export default nextConfig;
