@@ -1,63 +1,64 @@
 // src/app/dashboard/connections/components/GoogleDocs.tsx
 'use client';
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
+
+// SERVER_URL is used here for the redirect.
+const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
 
 interface GoogleDocsProps {
     isSignedIn: boolean;
     userId: string | null;
+    authAttemptFailed?: boolean;
 }
 
-export default function GoogleDocs({ isSignedIn, userId }: GoogleDocsProps) {
-    const router = useRouter();
-    const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
-
-    const signIn = () => {
-        console.log('Signing in with Google...');
-        console.log(`${SERVER_URL}/auth/google?userId=${userId}`);
-        if (userId) {
-            // Set cookie for backend authentication
-            document.cookie = `userId=${userId}; path=/; SameSite=Lax; Secure`;
-            window.location.href = `${SERVER_URL}/auth/google?userId=${userId}`;
-        } else {
-            router.push('/auth/login');
+export default function GoogleDocs({ isSignedIn, userId, authAttemptFailed }: GoogleDocsProps) {
+    const signInToGoogle = () => {
+        if (!SERVER_URL) {
+            console.error("GoogleDocs: Client configuration error: NEXT_PUBLIC_API_HOST is not defined.");
+            alert("Configuration error. Cannot connect to Google.");
+            return;
         }
+        if (!userId) {
+            console.error("GoogleDocs: User information is missing. Cannot initiate Google sign-in.");
+            alert("User session error. Please try logging in again or refresh the page.");
+            return;
+        }
+        // Parent will clear explicitAuthNeeded upon successful re-fetch (after OAuth redirect and page reload)
+        // and seeing isAuthenticated = true.
+        window.location.href = `${SERVER_URL}/auth/google?userId=${userId}`;
     };
 
-    return (
-        <div className="p-4 border rounded-lg shadow-sm bg-white">
-            <h2 className="text-xl font-bold mb-4 flex items-center">
-                <i className="ri-google-fill text-blue-500 mr-2 text-xl"></i>
-                Google Docs
-            </h2>
-
-            {isSignedIn ? (
-                <div className="text-center py-8">
-                    <div className="flex justify-center mb-3">
-                        <i className="ri-checkbox-circle-fill text-green-500 text-3xl"></i>
-                    </div>
-                    <p className="text-green-600 font-medium mb-1">
-                        Successfully authenticated
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                        Your Google account is now connected to our platform
-                    </p>
+    if (isSignedIn && !authAttemptFailed) {
+        return (
+            <div className="text-center py-4">
+                <div className="d-flex justify-content-center mb-2">
+                    <i className="ri-checkbox-circle-fill text-success" style={{ fontSize: '1.5rem' }}></i>
                 </div>
-            ) : (
-                <div className="flex flex-col items-center">
-                    <p className="text-gray-600 mb-4 text-center">
-                        Connect your Google account to access your documents
-                    </p>
-                    <button
-                        onClick={signIn}
-                        className="w-full py-2 px-4 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition flex items-center justify-center shadow-sm"
-                    >
-                        <i className="ri-google-fill text-blue-500 mr-2 text-xl"></i>
-                        Sign in with Google
-                    </button>
-                </div>
-            )}
-        </div>
-    );
+                <p className="text-success small mb-1">
+                    Authenticated for Google Documents
+                </p>
+            </div>
+        );
+    } else {
+        return (
+            <div className="d-flex flex-column align-items-center mt-2">
+                <p className="text-muted mb-3 text-center small">
+                    {authAttemptFailed
+                        ? "To finish enabling Google Documents, please connect your Google account."
+                        : "Connect your Google account to access your documents."}
+                </p>
+                <Button
+                    onClick={signInToGoogle}
+                    variant="outline-primary"
+                    size="sm"
+                    className="w-auto"
+                >
+                    <i className="ri-google-fill me-2"></i>
+                    Sign in with Google
+                </Button>
+            </div>
+        );
+    }
 }

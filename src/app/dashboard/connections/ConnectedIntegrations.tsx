@@ -1,14 +1,16 @@
 // src/app/dashboard/connections/ConnectedIntegrations.tsx
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react'; // Added useRef
 import { useRouter } from 'next/navigation';
 import { Card, Button, Row, Col, Form } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
 import { updateIntegrationStatus } from '@/services/integrationService';
 import { checkStatus } from "../../../services/auth";
 import GoogleDocs from './components/GoogleDocs';
+// Import or define GoogleDisplayComponent if you use it for Calendar/Gmail
+// For example, if it's in its own file:
+// import GoogleDisplayComponent from './components/GoogleDisplayComponent';
 
-// Updated Remixicon mappings
 const icons = {
     file: <i className="ri-file-text-line" style={{ fontSize: '1.25rem' }} />,
     calendar: <i className="ri-calendar-line" style={{ fontSize: '1.25rem' }} />,
@@ -16,127 +18,208 @@ const icons = {
     slack: <i className="ri-slack-line" style={{ fontSize: '1.25rem' }} />,
     building: <i className="ri-building-line" style={{ fontSize: '1.25rem' }} />,
     mail: <i className="ri-mail-line" style={{ fontSize: '1.25rem' }} />,
-    excel: <i className="ri-file-excel-line" style={{ fontSize: '1.25rem' }} />,          // For Excel
-    notion: <i className="ri-notion-line" style={{ fontSize: '1.25rem' }} />,             // For Notion
-    video: <i className="ri-video-line" style={{ fontSize: '1.25rem' }} />,               // For Zoom
+    excel: <i className="ri-file-excel-line" style={{ fontSize: '1.25rem' }} />,
+    notion: <i className="ri-notion-line" style={{ fontSize: '1.25rem' }} />,
+    video: <i className="ri-video-line" style={{ fontSize: '1.25rem' }} />,
 };
 
-const integrations = [
-    {
-        name: 'Google Documents',
-        key: 'google_documents',
-        icon: icons.file,
-    },
-    {
-        name: 'Google Calendar',
-        key: 'google_calendar',
-        icon: icons.calendar,
-    },
-    {
-        name: 'Gmail',
-        key: 'gmail',
-        icon: icons.mail,
-    },
-    {
-        name: 'Office 365: Excel',
-        key: 'office_365_excel',
-        icon: icons.excel,
-    },
-    {
-        name: 'Slack',
-        key: 'slack',
-        icon: icons.slack,
-    },
-    {
-        name: 'HubSpot CRM',
-        key: 'hubspot_crm',
-        icon: icons.building,
-    },
-    {
-        name: 'Notion',
-        key: 'notion',
-        icon: icons.notion,
-    },
-    {
-        name: 'Zoom',
-        key: 'zoom',
-        icon: icons.video,
-    },
+const integrationsList = [
+    { name: 'Google Documents', key: 'google_documents', icon: icons.file, isGoogleAuthDependent: true },
+    { name: 'Google Calendar', key: 'google_calendar', icon: icons.calendar, isGoogleAuthDependent: true },
+    { name: 'Gmail', key: 'gmail', icon: icons.mail, isGoogleAuthDependent: true },
+    { name: 'Office 365: Excel', key: 'office_365_excel', icon: icons.excel },
+    { name: 'Slack', key: 'slack', icon: icons.slack },
+    { name: 'HubSpot CRM', key: 'hubspot_crm', icon: icons.building },
+    { name: 'Notion', key: 'notion', icon: icons.notion },
+    { name: 'Zoom', key: 'zoom', icon: icons.video },
 ];
+
+type AuthStatusKeys = 'google_documents' | 'google_calendar' | 'slack' | 'gmail';
+type AuthStatusState = Record<AuthStatusKeys, boolean>;
 
 export default function ConnectedIntegrations() {
     const [userId, setUserId] = useState<string | null>(null);
     const [enabled, setEnabled] = useState<Record<string, boolean>>({});
-    const [authStatus, setAuthStatus] = useState({
+    const [authStatus, setAuthStatus] = useState<AuthStatusState>({
         google_documents: false,
         google_calendar: false,
         slack: false,
         gmail: false,
     });
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [explicitAuthNeeded, setExplicitAuthNeeded] = useState<Record<string, boolean>>({});
     const router = useRouter();
 
+    // Refs to hold current state values for use in useCallback without adding them as dependencies
+    const authStatusRef = useRef(authStatus);
+    const explicitAuthNeededRef = useRef(explicitAuthNeeded);
+
     useEffect(() => {
-        const initState = integrations.reduce((acc, { key }) => {
+        authStatusRef.current = authStatus;
+    }, [authStatus]);
+
+    useEffect(() => {
+        explicitAuthNeededRef.current = explicitAuthNeeded;
+    }, [explicitAuthNeeded]);
+
+    const fetchAndSetAuthStatus = useCallback(async () => {
+        // setLoading(true) will be handled by the calling useEffect or function
+        try {
+            const status = await checkStatus();
+            console.log('Auth status response from backend:', status);
+
+            const newAuthStatusUpdate: Partial<AuthStatusState> = {};
+            const newEnabledStateUpdate: Partial<Record<string, boolean>> = {};
+            const updatedExplicitAuthNeededKeys: Record<string, boolean> = {};
+            let needsExplicitAuthUpdate = false;
+
+            if (status && status.userId) {
+                setUserId(status.userId);
+            }
+
+            if (status && status.integrations) {
+                integrationsList.forEach(({ key, isGoogleAuthDependent }) => {
+                    const integrationData = status.integrations[key];
+                    newEnabledStateUpdate[key] = integrationData?.enabled || false;
+
+                    if (Object.prototype.hasOwnProperty.call(authStatusRef.current, key)) {
+                        const isAuthenticated = integrationData?.isAuthenticated || false;
+                        newAuthStatusUpdate[key as AuthStatusKeys] = isAuthenticated;
+
+                        if (isGoogleAuthDependent && isAuthenticated && explicitAuthNeededRef.current[key]) {
+                            updatedExplicitAuthNeededKeys[key] = false; // Mark for setting to false
+                            needsExplicitAuthUpdate = true;
+                        }
+                    }
+                });
+
+                setAuthStatus(prev => ({...prev, ...newAuthStatusUpdate}));
+                setEnabled(prev => ({...prev, ...newEnabledStateUpdate}));
+
+                if (needsExplicitAuthUpdate) {
+                    setExplicitAuthNeeded(prev => {
+                        const nextState = {...prev};
+                        for (const keyToUpdate in updatedExplicitAuthNeededKeys) {
+                            if (Object.prototype.hasOwnProperty.call(updatedExplicitAuthNeededKeys, keyToUpdate)) {
+                                nextState[keyToUpdate] = updatedExplicitAuthNeededKeys[keyToUpdate];
+                            }
+                        }
+                        return nextState;
+                    });
+                }
+            } else {
+                console.warn('ConnectedIntegrations: Received unexpected status object or missing integrations:', status);
+                const defaultAuthState: AuthStatusState = { google_documents: false, google_calendar: false, slack: false, gmail: false };
+                setAuthStatus(defaultAuthState);
+                const defaultEnabledState = integrationsList.reduce((acc, { key }) => {
+                    acc[key] = false; return acc;
+                }, {} as Record<string, boolean>);
+                setEnabled(defaultEnabledState);
+                setExplicitAuthNeeded({});
+            }
+        } catch (error: any) {
+            console.error('ConnectedIntegrations: Failed to check auth status:', error.response?.data || error.message);
+            if (error.response && error.response.status === 401) {
+                console.warn("ConnectedIntegrations: App session may have expired during status check. Login required.");
+                // As per user request, redirect is removed. Consider alternative UI feedback.
+                // router.push('/auth/login');
+            } else {
+                console.error("ConnectedIntegrations: Could not load integration statuses due to an unexpected error.");
+            }
+        }
+        // setLoading(false) will be handled by the calling useEffect or function
+    }, [router]); // setUserId is stable from useState
+
+    useEffect(() => {
+        const initState = integrationsList.reduce((acc, { key }) => {
             acc[key] = false;
             return acc;
         }, {} as Record<string, boolean>);
-
         setEnabled(initState);
-        checkAuthStatus();
-    }, [])
+        setExplicitAuthNeeded({}); // Initialize explicitAuthNeeded
+        setLoading(true);
+        fetchAndSetAuthStatus().finally(() => {
+            setLoading(false);
+        });
+    }, [fetchAndSetAuthStatus]);
 
-    const checkAuthStatus = async () => {
-        setLoading(true)
-        try {
-            const status = await checkStatus()
-            console.log('Auth status:', status);
 
-            // Store user ID from response
-            setUserId(status.userId);
-            // Setting the correct authentication status
-            setAuthStatus({
-                google_documents: status.integrations.google_documents.isAuthenticated,
-                google_calendar: status.integrations.google_calendar.isAuthenticated,
-                slack: status.integrations.slack.isAuthenticated,
-                gmail: status.integrations.gmail.isAuthenticated,
-            });
-            // Setting the state for enabled integrations
-            setEnabled((prev) => ({
-                ...prev,
-                ...integrations.reduce(
-                    (acc, { key }) => {
-                        acc[key] = status.integrations[key]?.enabled || false;
-                        return acc;
-                    },
-                    {} as Record<string, boolean>
-                ),
-            }));
-        } catch (error) {
-            console.error('Failed to check auth status:', error);
-        } finally {
-            setLoading(false)
-        }
-    };
+    const handleToggleIntegration = async (integrationKey: string) => {
+        const integrationMeta = integrationsList.find(i => i.key === integrationKey);
+        if (!integrationMeta) return;
 
-    const toggleIntegration = async (key: string) => {
-        const newEnabled = { ...enabled, [key]: !enabled[key] };
-        setEnabled(newEnabled);
+        const intendedToBeEnabled = !enabled[integrationKey];
+        const originalEnabledStateForKey = enabled[integrationKey];
+        const originalAuthStatusForKey = authStatus[integrationKey as AuthStatusKeys]; // Use current authStatus
+
+        setEnabled(prev => ({ ...prev, [integrationKey]: intendedToBeEnabled }));
+        // Optimistically clear any explicit auth need prompts for this integration
+        setExplicitAuthNeeded(prev => ({ ...prev, [integrationKey]: false }));
+
 
         try {
-            await updateIntegrationStatus(key, newEnabled[key]);
-        } catch (error) {
-            console.error('Update failed:', error);
-            setEnabled(prev => ({ ...prev, [key]: !newEnabled[key] }));
+            const backendResponse = await updateIntegrationStatus(integrationKey, intendedToBeEnabled);
+
+            if (backendResponse && backendResponse[integrationKey]) {
+                setEnabled(prev => ({ ...prev, [integrationKey]: backendResponse[integrationKey].enabled }));
+                if (Object.prototype.hasOwnProperty.call(authStatus, integrationKey)) { // Check against current authStatus state
+                    const isAuthenticated = backendResponse[integrationKey].isAuthenticated;
+                    setAuthStatus(prev => ({ ...prev, [integrationKey as AuthStatusKeys]: isAuthenticated }));
+                    // If successfully authenticated, ensure explicit auth needed flag is false
+                    if (integrationMeta.isGoogleAuthDependent && isAuthenticated) {
+                        setExplicitAuthNeeded(prev => ({ ...prev, [integrationKey]: false }));
+                    }
+                }
+            } else {
+                console.warn('ConnectedIntegrations: Unexpected response from updateIntegrationStatus, reverting UI and refreshing all statuses.');
+                setEnabled(prev => ({ ...prev, [integrationKey]: originalEnabledStateForKey }));
+                 if (Object.prototype.hasOwnProperty.call(authStatus, integrationKey)) {
+                    setAuthStatus(prev => ({ ...prev, [integrationKey as AuthStatusKeys]: originalAuthStatusForKey }));
+                }
+                setLoading(true); // Show loading while refreshing all statuses
+                fetchAndSetAuthStatus().finally(() => setLoading(false));
+            }
+        } catch (error: any) {
+            console.error(`ConnectedIntegrations: Update failed for integration ${integrationKey}:`, error.response?.data || error.message);
+            // Revert optimistic UI changes
+            setEnabled(prev => ({ ...prev, [integrationKey]: originalEnabledStateForKey }));
+            if (Object.prototype.hasOwnProperty.call(authStatus, integrationKey)) {
+                setAuthStatus(prev => ({ ...prev, [integrationKey as AuthStatusKeys]: originalAuthStatusForKey }));
+            }
+
+            if (error.response && error.response.status === 401) {
+                const errorMessage = error.response.data?.message?.toLowerCase() || "";
+                const googleAuthNeededKeywords = [
+                    "google authentication required", "base google authentication is required",
+                    "google token expired, please re-authenticate", "google authentication is invalid"
+                ];
+
+                if (integrationMeta.isGoogleAuthDependent && googleAuthNeededKeywords.some(keyword => errorMessage.includes(keyword))) {
+                    if (!userId) { // userId from state
+                        console.error("ConnectedIntegrations: User ID is missing. Cannot signal Google authentication requirement. App session might be invalid.");
+                        // As per user request, redirect is removed. Consider alternative UI feedback.
+                        // router.push('/auth/login');
+                        return;
+                    }
+                    // Signal that this specific integration needs explicit Google Auth
+                    setExplicitAuthNeeded(prev => ({ ...prev, [integrationKey]: true }));
+                    console.log(`ConnectedIntegrations: Signaled ${integrationKey} that explicit Google Auth is needed.`);
+                } else {
+                    console.warn(`ConnectedIntegrations: Application authentication error for ${integrationKey}: ${errorMessage}. Login required.`);
+                    // As per user request, redirect is removed. Consider alternative UI feedback.
+                    // router.push('/auth/login');
+                }
+            } else {
+                console.error(`ConnectedIntegrations: Server or network error for ${integrationKey}: ${error.response?.data?.message || error.message}`);
+                // UI reverted, error logged. Consider showing a generic error message to the user.
+            }
         }
     };
 
     if (loading) {
         return (
-            <div className="d-flex justify-content-center mt-5">
-                <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div>
+            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
+                <div className="spinner-border" role="status"><span className="visually-hidden">Loading...</span></div>
             </div>
         );
     }
@@ -147,36 +230,31 @@ export default function ConnectedIntegrations() {
                 <Card className="shadow-sm h-100">
                     <Card.Body>
                         <Card.Title className="mb-4">Connected Integrations</Card.Title>
-
-                        {integrations.map(({ name, icon, key }) => (
-                            <div key={key} className="d-flex justify-content-between align-items-center mb-3">
-                                <div className="d-flex align-items-center">
-                                    <span className="me-2" style={{ width: '24px', display: 'inline-block' }}>
-                                        {icon}
-                                    </span>
-                                    <span>{name}</span>
+                        {integrationsList.map(({ name, icon, key }) => (
+                            <React.Fragment key={key}>
+                                <div className="d-flex justify-content-between align-items-center mb-3">
+                                    <div className="d-flex align-items-center">
+                                        <span className="me-2" style={{ width: '24px', display: 'inline-block' }}>{icon}</span>
+                                        <span>{name}</span>
+                                    </div>
+                                    <Form.Check
+                                        type="switch"
+                                        id={`switch-${key}`}
+                                        checked={enabled[key] || false}
+                                        onChange={() => handleToggleIntegration(key)}
+                                        // Allow toggling for integrations that have defined auth interactions or are not auth dependent
+                                        // For this example, keeping the original logic, review if all integrations should be toggleable
+                                        disabled={
+                                            !(key === 'google_documents' ||
+                                            key === 'google_calendar' ||
+                                            key === 'gmail' ||
+                                            key === 'slack') // Assuming these are the ones with interactive auth flows handled
+                                        }
+                                    />
                                 </div>
-
-                                <Form.Check
-                                    type="switch"
-                                    id={`switch-${key}`}
-                                    checked={enabled[key] || false}
-                                    onChange={() => toggleIntegration(key)}
-                                    disabled={
-                                        key !== 'google_documents' &&
-                                        key !== 'google_calendar' &&
-                                        key !== 'gmail' &&
-                                        key !== 'slack'
-                                    }
-                                />
-                            </div>
+                            </React.Fragment>
                         ))}
-
-                        <Button
-                            variant="primary"
-                            className="w-100 mt-4"
-                            onClick={() => router.push('/ai')}
-                        >
+                        <Button variant="primary" className="w-100 mt-4" onClick={() => router.push('/ai')}>
                             Start
                         </Button>
                     </Card.Body>
@@ -184,80 +262,96 @@ export default function ConnectedIntegrations() {
             </Col>
 
             <Col md={9}>
-                {(enabled.slack || enabled.google_documents || enabled.google_calendar || enabled.gmail) && (
-                    <Card className="shadow-sm h-100">
+                {/* Google Docs Section */}
+                {(enabled.google_documents || explicitAuthNeeded.google_documents) && (
+                    <Card className="shadow-sm h-100 mb-3">
                         <Card.Body>
-                            {/* Google Docs Section */}
-                            {enabled.google_documents && (
-                                <div className="mb-4">
-                                    <div className="d-flex justify-content-between align-items-center mb-2">
-                                        <h5>Google Documents</h5>
-                                        <p className="text-muted mb-0">
-                                            {authStatus.google_documents ? (
-                                                <span className="text-success">
-                                                    <i className="ri-checkbox-circle-fill me-1"></i> Authenticated
-                                                </span>
-                                            ) : (
-                                                <span className="text-warning">
-                                                    <i className="ri-error-warning-fill me-1"></i> Needs authentication
-                                                </span>
-                                            )}
-                                        </p>
-                                    </div>
-                                    <GoogleDocs
-                                        isSignedIn={authStatus.google_documents}
-                                        userId={userId}
-                                    />
-                                </div>
-                            )}
+                             <div className="d-flex justify-content-between align-items-center mb-2">
+                                <h5>Google Documents</h5>
+                                <p className="text-muted mb-0">
+                                    {authStatus.google_documents && !explicitAuthNeeded.google_documents ? (
+                                        <span className="text-success"><i className="ri-checkbox-circle-fill me-1"></i> Authenticated</span>
+                                    ) : (
+                                        <span className="text-warning"><i className="ri-error-warning-fill me-1"></i> Needs authentication</span>
+                                    )}
+                                </p>
+                            </div>
+                            <GoogleDocs
+                                isSignedIn={authStatus.google_documents}
+                                userId={userId}
+                                authAttemptFailed={explicitAuthNeeded.google_documents || false}
+                            />
+                        </Card.Body>
+                    </Card>
+                )}
 
-                            {enabled.google_calendar && (
-                                <div className="mb-4">
-                                    <h5>Google Calendar</h5>
-                                    <p className="text-muted">
-                                        {authStatus.google_calendar ?
-                                            <span className="text-success">
-                                                <i className="ri-checkbox-circle-fill me-1"></i> Authenticated
-                                            </span> :
-                                            <span className="text-warning">
-                                                <i className="ri-error-warning-fill me-1"></i> Needs authentication
-                                            </span>
-                                        }
-                                    </p>
-                                </div>
-                            )}
+                {/* Google Calendar Section - Assuming GoogleDisplayComponent exists and is imported */}
+                {/*
+                {(enabled.google_calendar || explicitAuthNeeded.google_calendar) && (
+                     <Card className="shadow-sm h-100 mb-3">
+                        <Card.Body>
+                            <div className="d-flex justify-content-between align-items-center mb-2">
+                                <h5>Google Calendar</h5>
+                                <p className="text-muted mb-0">
+                                    {authStatus.google_calendar && !explicitAuthNeeded.google_calendar ? (
+                                        <span className="text-success"><i className="ri-checkbox-circle-fill me-1"></i> Authenticated</span>
+                                    ) : (
+                                        <span className="text-warning"><i className="ri-error-warning-fill me-1"></i> Needs authentication</span>
+                                    )}
+                                </p>
+                            </div>
+                            <GoogleDisplayComponent
+                                serviceName="Google Calendar"
+                                isSignedIn={authStatus.google_calendar}
+                                userId={userId}
+                                authAttemptFailed={explicitAuthNeeded.google_calendar || false}
+                            />
+                        </Card.Body>
+                    </Card>
+                )}
+                */}
 
-                            {enabled.slack && (
-                                <div className="mb-4">
-                                    <h5>Slack</h5>
-                                    <p className="text-muted">
-                                        {authStatus.slack ?
-                                            <span className="text-success">
-                                                <i className="ri-checkbox-circle-fill me-1"></i> Authenticated
-                                            </span> :
-                                            <span className="text-warning">
-                                                <i className="ri-error-warning-fill me-1"></i> Needs authentication
-                                            </span>
-                                        }
-                                    </p>
-                                </div>
-                            )}
-
-                            {enabled.gmail && (
-                                <div>
-                                    <h5>Gmail</h5>
-                                    <p className="text-muted">
-                                        {authStatus.gmail ?
-                                            <span className="text-success">
-                                                <i className="ri-checkbox-circle-fill me-1"></i> Authenticated
-                                            </span> :
-                                            <span className="text-warning">
-                                                <i className="ri-error-warning-fill me-1"></i> Needs authentication
-                                            </span>
-                                        }
-                                    </p>
-                                </div>
-                            )}
+                {/* Gmail Section - Assuming GoogleDisplayComponent exists and is imported */}
+                {/*
+                {(enabled.gmail || explicitAuthNeeded.gmail) && (
+                    <Card className="shadow-sm h-100 mb-3">
+                        <Card.Body>
+                            <div className="d-flex justify-content-between align-items-center mb-2">
+                                <h5>Gmail</h5>
+                                <p className="text-muted mb-0">
+                                    {authStatus.gmail && !explicitAuthNeeded.gmail ?
+                                        (<span className="text-success"><i className="ri-checkbox-circle-fill me-1"></i> Authenticated</span>) :
+                                        (<span className="text-warning"><i className="ri-error-warning-fill me-1"></i> Needs authentication</span>)
+                                    }
+                                </p>
+                            </div>
+                            <GoogleDisplayComponent
+                                serviceName="Gmail"
+                                isSignedIn={authStatus.gmail}
+                                userId={userId}
+                                authAttemptFailed={explicitAuthNeeded.gmail || false}
+                            />
+                        </Card.Body>
+                    </Card>
+                )}
+                */}
+                
+                {enabled.slack && (
+                     <Card className="shadow-sm h-100 mb-3">
+                        <Card.Body>
+                            <div className="d-flex justify-content-between align-items-center mb-2">
+                                <h5>Slack</h5>
+                                <p className="text-muted mb-0">
+                                    {authStatus.slack ?
+                                        (<span className="text-success"><i className="ri-checkbox-circle-fill me-1"></i> Authenticated</span>) :
+                                        (<span className="text-warning"><i className="ri-error-warning-fill me-1"></i> Needs authentication</span>)
+                                    }
+                                </p>
+                            </div>
+                             {/* If Slack needs a similar auth prompt component, it would be rendered here,
+                                 passing relevant props like isSignedIn={authStatus.slack}, userId,
+                                 and potentially a flag like authAttemptFailed={explicitAuthNeeded.slack || false}
+                             */}
                         </Card.Body>
                     </Card>
                 )}
