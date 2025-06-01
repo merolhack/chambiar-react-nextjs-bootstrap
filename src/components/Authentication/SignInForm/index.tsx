@@ -48,13 +48,23 @@ function SignInForm({ layoutRef }: SignInFormProps) {
       if (!loginResponse?.access_token) {
         throw new Error("No access token received");
       }
+      
+      // Clear localStorage to ensure no old data remains
+      localStorage.clear();
 
       console.log('loginResponse', loginResponse);
       localStorage.setItem("access_token", loginResponse.access_token);
 
       // Check status
-      // const statusResponse = await checkStatus();
-      // console.log(statusResponse);
+      const statusResponse = await checkStatus();
+      console.log(statusResponse);
+
+      // Fetch profile data
+      const userProfile = await getProfile();
+      localStorage.setItem("user_profile_firstname", userProfile.firstName);
+      localStorage.setItem("user_profile_lastname", userProfile.lastName);
+      localStorage.setItem("user_profile_phoneNumber", userProfile.phoneNumber);
+      localStorage.setItem("user_profile_email", userProfile.email);
 
       // Immediate redirect after successful login
       router.push('/dashboard/connections');
@@ -62,10 +72,6 @@ function SignInForm({ layoutRef }: SignInFormProps) {
 
       // Use window.location for immediate, reliable redirect
       // window.location.href = '/dashboard/restaurant';
-
-      // Fetch profile
-      // const profileResponse = await getProfile();
-      // setProfile(profileResponse);
 
       // Fetch initial prompts
       // const promptsResponse = await getInitialPrompt();

@@ -4,6 +4,8 @@ import { Dropdown } from "react-bootstrap";
 import Image from "next/image"; 
 
 const Profile = () => {
+  const firstName = localStorage.getItem('user_profile_firstname');
+  const lastName = localStorage.getItem('user_profile_lastname');
   return (
     <>
       <Dropdown className="admin-profile">
@@ -22,7 +24,7 @@ const Profile = () => {
             <div className="d-flex align-items-center justify-content-between">
               <div className="d-none d-xxl-block">
                 <div className="d-flex align-content-center">
-                  <h3>Kyrie</h3>
+                  <h3>{firstName}</h3>
                 </div>
               </div>
             </div>
@@ -41,7 +43,7 @@ const Profile = () => {
               />
             </div>
             <div className="flex-grow-1 ms-2">
-              <h3 className="fw-medium">Olivia John</h3>
+              <h3 className="fw-medium">{firstName} {lastName}</h3>
               <span className="fs-12">Marketing Manager</span>
             </div>
           </div>

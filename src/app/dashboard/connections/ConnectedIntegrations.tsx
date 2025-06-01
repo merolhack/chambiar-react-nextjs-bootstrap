@@ -1,9 +1,12 @@
+// src/app/dashboard/connections/ConnectedIntegrations.tsx
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, Button, Row, Col, Form } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
 import { updateIntegrationStatus } from '@/services/integrationService';
+import { checkStatus } from "../../../services/auth";
+import GoogleDocs from './components/GoogleDocs';
 
 // Updated Remixicon mappings
 const icons = {
@@ -13,7 +16,6 @@ const icons = {
     slack: <i className="ri-slack-line" style={{ fontSize: '1.25rem' }} />,
     building: <i className="ri-building-line" style={{ fontSize: '1.25rem' }} />,
     mail: <i className="ri-mail-line" style={{ fontSize: '1.25rem' }} />,
-    // NEW ICONS ADDED
     excel: <i className="ri-file-excel-line" style={{ fontSize: '1.25rem' }} />,          // For Excel
     notion: <i className="ri-notion-line" style={{ fontSize: '1.25rem' }} />,             // For Notion
     video: <i className="ri-video-line" style={{ fontSize: '1.25rem' }} />,               // For Zoom
@@ -63,6 +65,7 @@ const integrations = [
 ];
 
 export default function ConnectedIntegrations() {
+    const [userId, setUserId] = useState<string | null>(null);
     const [enabled, setEnabled] = useState<Record<string, boolean>>({});
     const [authStatus, setAuthStatus] = useState({
         google_documents: false,
@@ -80,7 +83,41 @@ export default function ConnectedIntegrations() {
         }, {} as Record<string, boolean>);
 
         setEnabled(initState);
-    }, []);
+        checkAuthStatus();
+    }, [])
+
+    const checkAuthStatus = async () => {
+        setLoading(true)
+        try {
+            const status = await checkStatus()
+            console.log('Auth status:', status);
+
+            // Store user ID from response
+            setUserId(status.userId);
+            // Setting the correct authentication status
+            setAuthStatus({
+                google_documents: status.integrations.google_documents.isAuthenticated,
+                google_calendar: status.integrations.google_calendar.isAuthenticated,
+                slack: status.integrations.slack.isAuthenticated,
+                gmail: status.integrations.gmail.isAuthenticated,
+            });
+            // Setting the state for enabled integrations
+            setEnabled((prev) => ({
+                ...prev,
+                ...integrations.reduce(
+                    (acc, { key }) => {
+                        acc[key] = status.integrations[key]?.enabled || false;
+                        return acc;
+                    },
+                    {} as Record<string, boolean>
+                ),
+            }));
+        } catch (error) {
+            console.error('Failed to check auth status:', error);
+        } finally {
+            setLoading(false)
+        }
+    };
 
     const toggleIntegration = async (key: string) => {
         const newEnabled = { ...enabled, [key]: !enabled[key] };
@@ -150,19 +187,27 @@ export default function ConnectedIntegrations() {
                 {(enabled.slack || enabled.google_documents || enabled.google_calendar || enabled.gmail) && (
                     <Card className="shadow-sm h-100">
                         <Card.Body>
+                            {/* Google Docs Section */}
                             {enabled.google_documents && (
                                 <div className="mb-4">
-                                    <h5>Google Documents</h5>
-                                    <p className="text-muted">
-                                        {authStatus.google_documents ?
-                                            <span className="text-success">
-                                                <i className="ri-checkbox-circle-fill me-1"></i> Authenticated
-                                            </span> :
-                                            <span className="text-warning">
-                                                <i className="ri-error-warning-fill me-1"></i> Needs authentication
-                                            </span>
-                                        }
-                                    </p>
+                                    <div className="d-flex justify-content-between align-items-center mb-2">
+                                        <h5>Google Documents</h5>
+                                        <p className="text-muted mb-0">
+                                            {authStatus.google_documents ? (
+                                                <span className="text-success">
+                                                    <i className="ri-checkbox-circle-fill me-1"></i> Authenticated
+                                                </span>
+                                            ) : (
+                                                <span className="text-warning">
+                                                    <i className="ri-error-warning-fill me-1"></i> Needs authentication
+                                                </span>
+                                            )}
+                                        </p>
+                                    </div>
+                                    <GoogleDocs
+                                        isSignedIn={authStatus.google_documents}
+                                        userId={userId}
+                                    />
                                 </div>
                             )}
 

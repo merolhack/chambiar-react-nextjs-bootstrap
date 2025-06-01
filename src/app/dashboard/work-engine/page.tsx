@@ -141,8 +141,6 @@ function Page({ layoutRef }) {
         )}
       </Row>
 
-
-
       <Row>
         {isComponentVisible('TopBrowsingPagesTodayV2') && (
           <Col xs={12} md={12} lg={12} xl={12} xxl={12} className={`${styles.slideIn} ${styles['delay-12']}`} ref={registerRef('TopBrowsingPagesTodayV2')}>

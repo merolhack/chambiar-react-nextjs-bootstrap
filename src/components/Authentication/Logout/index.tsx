@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Logout = ({ layoutRef }) => {
+  const firstName = localStorage.getItem('user_profile_firstname');
+  const lastName = localStorage.getItem('user_profile_lastname');
   return (
     <>
       <div className="auth-main-content m-auto m-1230 px-3">
@@ -53,7 +55,7 @@ const Logout = ({ layoutRef }) => {
                     }}
                   />
                 </div>
-                <h5 className="m-0 fs-16">Olivia John</h5>
+                <h5 className="m-0 fs-16">{firstName} {lastName}</h5>
               </div>
 
               <Link
