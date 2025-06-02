@@ -286,29 +286,6 @@ export default function ConnectedIntegrations() {
             <Col md={9}>
                 {/* Google Docs Section */}
                 {(enabled.google_documents || explicitAuthNeeded.google_documents) && (
-                    <Card className="shadow-sm h-100 mb-3">
-                        <Card.Body>
-                            <div className="d-flex justify-content-between align-items-center mb-2">
-                                <h5>Google Documents</h5>
-                                <p className="text-muted mb-0">
-                                    {authStatus.google_documents && !explicitAuthNeeded.google_documents ? (
-                                        <span className="text-success"><i className="ri-checkbox-circle-fill me-1"></i> Authenticated</span>
-                                    ) : (
-                                        <span className="text-warning"><i className="ri-error-warning-fill me-1"></i> Needs authentication</span>
-                                    )}
-                                </p>
-                            </div>
-                            <GoogleDocs
-                                isSignedIn={authStatus.google_documents}
-                                userId={userId}
-                                authAttemptFailed={explicitAuthNeeded.google_documents || false}
-                            />
-                        </Card.Body>
-                    </Card>
-                )}
-
-                {/* Google Docs Section */}
-                {(enabled.google_documents || explicitAuthNeeded.google_documents) && (
                     <Card className="shadow-sm mb-3"> {/* Removed h-100 to allow natural height */}
                         <Card.Body>
                             <div className="d-flex justify-content-between align-items-center mb-2">

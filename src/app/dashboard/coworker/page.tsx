@@ -1,3 +1,4 @@
+// src/app/dashboard/coworker/page.tsx
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -8,94 +9,55 @@ import LayoutProvider from '@/providers/LayoutProvider';
 
 import { withAuth } from '@/components/withAuth';
 
-import Welcome from '@/components/Dashboard/eCommerce/Welcome';
-import TotalSales from '@/components/Dashboard/eCommerce/TotalSales';
-import TotalOrders from '@/components/Dashboard/eCommerce/TotalOrders';
-import TotalCustomers from '@/components/Dashboard/eCommerce/TotalCustomers';
-import TotalRevenue from '@/components/Dashboard/eCommerce/TotalRevenue';
-import SalesByLocations from '@/components/Dashboard/eCommerce/SalesByLocations';
-import TopSellingProducts from '@/components/Dashboard/eCommerce/TopSellingProducts';
-import RecentOrders from '@/components/Dashboard/eCommerce/RecentOrders';
-import OrderSummary from '@/components/Dashboard/eCommerce/OrderSummary';
-import RecentTransactions from '@/components/Dashboard/eCommerce/RecentTransactions';
-import ReturningCustomerRate from '@/components/Dashboard/eCommerce/ReturningCustomerRate';
+import LiveKitVideoCall from "./LiveKitVideoCall"; // Import the LiveKit component
 
 function Page({ layoutRef }) {
-  const onIframeLoad = async (e) => {
-    const iframeAPI = e.target.contentWindow;
-    window.addEventListener('message', function (e) {
-      e.data === 'ready' &&
-        iframeAPI &&
-        iframeAPI.postMessage({ test: 123 }, '*');
-    });
-  };
+    const [showLiveKitCall, setShowLiveKitCall] = useState(false);
 
-  return (
-    <>
-      <Row>
-        <Col xs={12} lg={8}>
-          <iframe
-            autoFocus={true}
-            src="https://kitt2.trembit.com/"
-            title="coach"
-            allow="camera; microphone; fullscreen; speacker;"
-            style={{ width: '90%', minHeight: '75vh' }}
-            onLoad={onIframeLoad}
-          />
-        </Col>
+    // Ensure NEXT_PUBLIC_LIVEKIT_URL is available, otherwise provide a fallback or error
+    const liveKitServerUrl = process.env.NEXT_PUBLIC_LIVEKIT_URL;
 
-        <Col xs={12} lg={4}>
-          <TotalOrders />
+    const handleLiveKitCallEnd = () => {
+        setShowLiveKitCall(false);
+        console.log("LiveKit call has ended.");
+    };
 
-          <TotalCustomers />
-
-          <TotalRevenue />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col xs={12} lg={12} xl={5}>
-          <SalesByLocations />
-        </Col>
-
-        <Col xs={12} lg={12} xl={7}>
-          <TopSellingProducts />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col xs={12} lg={12} xl={8}>
-          <RecentOrders />
-        </Col>
-
-        <Col xs={12} lg={12} xl={4}>
-          <OrderSummary />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col xs={12} lg={4}>
-          <RecentTransactions />
-        </Col>
-
-        <Col xs={12} lg={8}>
-          <ReturningCustomerRate />
-        </Col>
-      </Row>
-    </>
-  );
+    return (
+        <>
+            <Row>
+                <Col xs={12} lg={8}>
+                    {liveKitServerUrl ? (
+                        <Row className="justify-content-center">
+                            <Col xs={12} className="p-0"> {/* Use p-0 or adjust padding as needed */}
+                                <LiveKitVideoCall
+                                    roomName="ChambiarMainDashboardRoom" // Use a dynamic or configured room name
+                                    participantName="DashboardUser" // Use a dynamic participant name (e.g., from user data)
+                                    serverUrl={liveKitServerUrl}
+                                    onCallEnd={handleLiveKitCallEnd}
+                                />
+                            </Col>
+                        </Row>
+                    ) : (
+                        <Row className="justify-content-center">
+                            <Col xs={12}><p className="text-danger p-3">LiveKit URL is not configured. Video call cannot be started.</p></Col>
+                        </Row>
+                    )}
+                </Col>
+            </Row>
+        </>
+    );
 }
 
 
 // Create a wrapper component
 function PageWrapper() {
-  const layoutRef = useRef(null);
+    const layoutRef = useRef(null);
 
-  return (
-    <LayoutProvider ref={layoutRef}>
-      <Page layoutRef={layoutRef} />
-    </LayoutProvider>
-  );
+    return (
+        <LayoutProvider ref={layoutRef}>
+            <Page layoutRef={layoutRef} />
+        </LayoutProvider>
+    );
 }
 
 export default withAuth(PageWrapper);
