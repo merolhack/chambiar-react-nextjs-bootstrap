@@ -2,9 +2,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { LiveKitRoom, VideoConference } from '@livekit/components-react';
-import '@livekit/components-styles'; // Default LiveKit styles
-// import '@livekit/components-styles/prefabs'; // Or prefab styles for more opinionated defaults
+import {
+  LiveKitRoom,
+  ControlBar,
+  FocusLayout,
+  RoomAudioRenderer,
+} from '@livekit/components-react';
+import type { ControlBarControls } from '@livekit/components-react';
+import '@livekit/components-styles';
 
 interface LiveKitVideoCallProps {
   roomName: string;
@@ -25,7 +30,7 @@ export default function LiveKitVideoCall({
   useEffect(() => {
     let active = true;
     const fetchToken = async () => {
-      setError(null); // Reset error on new attempt
+      setError(null);
       try {
         const resp = await fetch(
           `/api/livekit-token?room=${encodeURIComponent(roomName)}&participant=${encodeURIComponent(participantName)}`
@@ -62,14 +67,25 @@ export default function LiveKitVideoCall({
     return <div style={{ padding: '1rem' }}>Loading video session...</div>;
   }
 
+  // Define which controls to show/hide for the ControlBar
+  const customControls: ControlBarControls = {
+    microphone: true,      // Keep microphone button visible
+    camera: false,         // Hide camera button
+    chat: false,           // Hide chat button
+    screenShare: false,    // Hide screen share button
+    leave: false,          // Hide leave button
+    // Add other controls like 'settings: true' or 'participants: true' if you want them visible
+  };
+
   return (
-    <div style={{ height: 'calc(100vh - 150px)', width: '100%' }}> {/* Example Styling: Adjust as needed */}
+    // It's good practice to add data-lk-theme for styling context from @livekit/components-styles
+    <div style={{ height: 'calc(100vh - 150px)', width: '100%' }} data-lk-theme="default">
       <LiveKitRoom
         token={token}
         serverUrl={serverUrl}
-        connect={true}
-        // audio={true} // Set default states if needed
-        // video={true}
+        connect={true} // Automatically connect to the room
+        audio={true}   // Request audio permissions and connect with audio enabled
+        video={false}   // Request video permissions and connect with video enabled
         onDisconnected={() => {
           console.log('Disconnected from LiveKit room');
           if (onCallEnd) {
@@ -77,12 +93,14 @@ export default function LiveKitVideoCall({
           }
         }}
       >
-        {/* VideoConference provides a full-featured, prebuilt UI */}
-        <VideoConference />
-        {/* Alternatively, you can build a custom UI using individual components:
-          <ParticipantsView />
-          <ControlBar controls={{ microphone: true, camera: true, screenShare: true, chat: true, leave: true }} />
-        */}
+        {/* RoomAudioRenderer is essential for hearing other participants */}
+        <RoomAudioRenderer />
+
+        {/* Custom layout structure */}
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+          {/* Control bar at the bottom */}
+          <ControlBar controls={customControls} />
+        </div>
       </LiveKitRoom>
     </div>
   );

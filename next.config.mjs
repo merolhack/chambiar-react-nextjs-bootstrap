@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 const backendHost = process.env.NEXT_PUBLIC_API_HOST || 'https://chambiar-prod-backend-app-563127813488.us-central1.run.app';
+const livekitHttpHost = 'https://chambiar-v2-249l8jl8.livekit.cloud';
+const livekitWsHost = 'wss://chambiar-v2-249l8jl8.livekit.cloud';
 
 const securityHeaders = [
   {
@@ -35,7 +37,7 @@ const securityHeaders = [
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       img-src 'self' data:;
       font-src 'self' data: https://fonts.gstatic.com;
-      connect-src 'self' ${backendHost};
+      connect-src 'self' ${backendHost} ${livekitHttpHost} ${livekitWsHost};
       frame-src 'none';
       object-src 'none';
     `.replace(/\n/g, '').replace(/\s{2,}/g, ' ').trim()
