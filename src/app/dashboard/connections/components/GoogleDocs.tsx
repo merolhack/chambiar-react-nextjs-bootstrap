@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
+import { getGoogleDocsAuthUrl } from '@/services/integrationService';
 
 // SERVER_URL is used here for the redirect.
 const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
@@ -15,11 +16,6 @@ interface GoogleDocsProps {
 
 export default function GoogleDocs({ isSignedIn, userId, authAttemptFailed }: GoogleDocsProps) {
     const signInToGoogle = () => {
-        if (!SERVER_URL) {
-            console.error("GoogleDocs: Client configuration error: NEXT_PUBLIC_API_HOST is not defined.");
-            alert("Configuration error. Cannot connect to Google.");
-            return;
-        }
         if (!userId) {
             console.error("GoogleDocs: User information is missing. Cannot initiate Google sign-in.");
             alert("User session error. Please try logging in again or refresh the page.");
@@ -27,7 +23,7 @@ export default function GoogleDocs({ isSignedIn, userId, authAttemptFailed }: Go
         }
         // Parent will clear explicitAuthNeeded upon successful re-fetch (after OAuth redirect and page reload)
         // and seeing isAuthenticated = true.
-        window.location.href = `${SERVER_URL}/auth/google?userId=${userId}`;
+        window.location.href = getGoogleDocsAuthUrl(userId);
     };
 
     if (isSignedIn && !authAttemptFailed) {

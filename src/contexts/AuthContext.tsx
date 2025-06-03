@@ -1,7 +1,8 @@
 // contexts/AuthContext.tsx
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { useRouter } from 'next/router';
-import { login as apiLogin, checkStatus } from '../services/auth';
+import { login as apiLogin } from '../services/auth';
+import { checkStatus } from '@/services/integrationService';
 
 interface AuthContextType {
     user: { token: string } | null;

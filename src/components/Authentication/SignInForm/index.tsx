@@ -8,7 +8,8 @@ import { redirect, useRouter } from 'next/navigation'; // Changed from redirect 
 
 import Link from "next/link";
 import Image from "next/image";
-import { login, checkStatus } from "../../../services/auth";
+import { login } from "../../../services/auth";
+import { checkStatus } from '@/services/integrationService';
 import { getProfile } from "../../../services/users";
 import { getInitialPrompt } from "../../../services/prompts";
 import AlertDismissible from "../../AlertDismissible"
@@ -48,7 +49,7 @@ function SignInForm({ layoutRef }: SignInFormProps) {
       if (!loginResponse?.access_token) {
         throw new Error("No access token received");
       }
-      
+
       // Clear localStorage to ensure no old data remains
       localStorage.clear();
 

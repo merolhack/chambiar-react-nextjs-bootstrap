@@ -30,21 +30,3 @@ export const getProfile = async () => {
     throw error.response ? error.response.data : error.message;
   }
 };
-
-export const checkStatus = async () => {
-  try {
-    const response = await apiClient.post('/integrations/check-status');
-    return response.data;
-  } catch (error) {
-    throw error.response ? error.response.data : error.message;
-  }
-};
-
-export const updateStatus = async (integration, enabled) => {
-  try {
-    const response = await apiClient.post('/integrations/update-status', { integration, enabled });
-    return response.data;
-  } catch (error) {
-    throw error.response ? error.response.data : error.message;
-  }
-};

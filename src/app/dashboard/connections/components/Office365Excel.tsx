@@ -25,7 +25,7 @@ export default function Office365Excel({ isSignedIn, userId, authAttemptFailed }
             return;
         }
         // IMPORTANT: Replace '/auth/microsoft' with your actual backend endpoint for Microsoft OAuth
-        window.location.href = `${SERVER_URL}/auth/microsoft?userId=${userId}`;
+        window.location.href = `${SERVER_URL}/office365-excel/initiate-microsoft-oauth?userId=${userId}`;
     };
 
     if (isSignedIn && !authAttemptFailed) {

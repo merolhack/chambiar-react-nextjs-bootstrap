@@ -4,8 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'; // Adde
 import { useRouter } from 'next/navigation';
 import { Card, Button, Row, Col, Form } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
-import { updateIntegrationStatus } from '@/services/integrationService';
-import { checkStatus } from "../../../services/auth";
+import { checkStatus, updateIntegrationStatus } from '@/services/integrationService';
 
 import GoogleDocs from './components/GoogleDocs';
 import GoogleCalendar from './components/GoogleCalendar';

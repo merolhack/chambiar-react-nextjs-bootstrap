@@ -1,6 +1,15 @@
 // src/services/integrationService.ts
 import apiClient from './api';
 
+export const checkStatus = async () => {
+  try {
+    const response = await apiClient.post('/integrations/check-status');
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : error.message;
+  }
+};
+
 export const updateIntegrationStatus = async (integration: string, enabled: boolean) => {
   try {
     const response = await apiClient.post('/integrations/update-status', { integration, enabled });
@@ -21,3 +30,9 @@ export const sendSlackAuthCode = async (code: string) => {
     throw error; // Rethrow to be handled by the calling component
   }
 };
+
+export const getGoogleDocsAuthUrl = (userId: string) => {
+  // This function returns the Google Docs authorization URL
+  const apiHost = process.env.NEXT_PUBLIC_API_HOST;
+  return `${apiHost}/auth/google?userId=${userId}`;
+}
