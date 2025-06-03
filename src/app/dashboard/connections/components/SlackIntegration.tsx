@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
+import { sendSlackAuthCode } from '../../../../services/integrationService';
 
 const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
 
@@ -48,51 +49,25 @@ export default function SlackIntegration({ isSignedIn, userId, authAttemptFailed
         const slackCode = urlParams.get('code');
 
         if (slackCode && userId) {
-            // Remove the code from URL to prevent re-processing on refresh/navigation
             const newUrl = window.location.pathname + urlParams.toString().replace(/&?code=[^&]+/, '').replace(/^\?$/, '');
             window.history.replaceState({}, document.title, newUrl);
 
             console.log("Slack code found:", slackCode);
-            sendCodeToBackend(slackCode);
+            handleSlackCallback(slackCode); // Call the renamed handler
         }
-    }, [userId]); // Rerun if userId changes (e.g., after login)
+    }, [userId]);
 
-    const sendCodeToBackend = async (code: string) => {
-        if (!SERVER_URL) {
-            console.error("SlackIntegration: NEXT_PUBLIC_API_HOST is not defined. Cannot send code to backend.");
-            if (onIntegrationFailure) onIntegrationFailure();
-            return;
-        }
-
+    // Renamed and simplified handler that calls the service
+    const handleSlackCallback = async (code: string) => {
         try {
-            const response = await fetch(`${SERVER_URL}/slack/auth`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    // IMPORTANT: Use a dynamically obtained token here
-                    'Authorization': `Bearer ${TEMP_AUTH_TOKEN}`,
-                    // The Cookie header is typically managed by the browser automatically if your API sets cookies.
-                    // If you need to send it explicitly and it's an HttpOnly cookie, you cannot do it from client-side JS.
-                    // The cURL example includes a Cookie header, but this is usually handled by the browser itself for same-origin requests or if credentials are included.
-                },
-                body: JSON.stringify({ code: code }),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Slack token exchange successful:', data);
-                alert('Successfully connected to Slack!');
-                if (onIntegrationSuccess) onIntegrationSuccess(); // Notify parent component
-            } else {
-                const errorData = await response.json();
-                console.error('Slack token exchange failed:', response.status, errorData);
-                alert(`Failed to connect to Slack: ${errorData.message || response.statusText}`);
-                if (onIntegrationFailure) onIntegrationFailure(); // Notify parent component
-            }
+            const data = await sendSlackAuthCode(code); // Use the imported service function
+            console.log('Slack token exchange successful:', data);
+            alert('Successfully connected to Slack!');
+            if (onIntegrationSuccess) onIntegrationSuccess();
         } catch (error) {
-            console.error('Error sending Slack code to backend:', error);
-            alert('An error occurred while connecting to Slack.');
+            // Error is already logged in the service, decide on UI feedback here
+            const errorMessage = error.response?.data?.message || error.message || 'Failed to connect to Slack.';
+            alert(`Failed to connect to Slack: ${errorMessage}`);
             if (onIntegrationFailure) onIntegrationFailure();
         }
     };
