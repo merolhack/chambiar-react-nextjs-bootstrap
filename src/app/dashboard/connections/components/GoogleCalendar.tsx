@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
+import { getGoogleDocsAuthUrl } from '@/services/integrationService';
 
 interface GoogleCalendarProps {
     isSignedIn: boolean;
@@ -12,6 +13,7 @@ interface GoogleCalendarProps {
 
 export default function GoogleCalendar({ isSignedIn, userId, authAttemptFailed }: GoogleCalendarProps) {
     const signInToGoogle = () => {
+        // Check if userId is available before proceeding
         if (!userId) {
             console.error("GoogleCalendar: User information is missing. Cannot initiate Google sign-in.");
             alert("User session error. Please try logging in again or refresh the page.");
@@ -19,7 +21,7 @@ export default function GoogleCalendar({ isSignedIn, userId, authAttemptFailed }
         }
         // Parent will clear explicitAuthNeeded upon successful re-fetch (after OAuth redirect and page reload)
         // and seeing isAuthenticated = true.
-        window.location.href = `${SERVER_URL}/auth/google?userId=${userId}`;
+        window.location.href = getGoogleDocsAuthUrl(userId);
     };
 
     if (isSignedIn && !authAttemptFailed) {
