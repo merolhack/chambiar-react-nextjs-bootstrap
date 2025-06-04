@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
+import { getGoogleDocsAuthUrl } from '@/services/integrationService';
 
 interface GmailProps {
     isSignedIn: boolean;
@@ -17,7 +18,7 @@ export default function Gmail({ isSignedIn, userId, authAttemptFailed }: GmailPr
             alert("User session error. Please try logging in again or refresh the page.");
             return;
         }
-        window.location.href = `${SERVER_URL}/auth/google?userId=${userId}`;
+        window.location.href = getGoogleDocsAuthUrl(userId);
     };
 
     if (isSignedIn && !authAttemptFailed) {
