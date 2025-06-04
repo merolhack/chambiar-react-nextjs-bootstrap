@@ -3,8 +3,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
-
-const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
+import { getHubspotAuthUrl } from '@/services/integrationService';
 
 interface HubSpotCrmProps {
     isSignedIn: boolean;
@@ -14,18 +13,13 @@ interface HubSpotCrmProps {
 
 export default function HubSpotCrm({ isSignedIn, userId, authAttemptFailed }: HubSpotCrmProps) {
     const signInToHubSpot = () => {
-        if (!SERVER_URL) {
-            console.error("HubSpotCrm: Client configuration error: NEXT_PUBLIC_API_HOST is not defined.");
-            alert("Configuration error. Cannot connect to HubSpot.");
-            return;
-        }
         if (!userId) {
             console.error("HubSpotCrm: User information is missing. Cannot initiate HubSpot sign-in.");
             alert("User session error. Please try logging in again or refresh the page.");
             return;
         }
         // IMPORTANT: Replace '/auth/hubspot' with your actual backend endpoint for HubSpot OAuth
-        window.location.href = `${SERVER_URL}/auth/hubspot?userId=${userId}`;
+        window.location.href = getHubspotAuthUrl(userId);
     };
 
     if (isSignedIn && !authAttemptFailed) {

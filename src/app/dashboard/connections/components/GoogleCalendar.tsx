@@ -4,9 +4,6 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
 
-// SERVER_URL is used here for the redirect.
-const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
-
 interface GoogleCalendarProps {
     isSignedIn: boolean;
     userId: string | null;
@@ -15,11 +12,6 @@ interface GoogleCalendarProps {
 
 export default function GoogleCalendar({ isSignedIn, userId, authAttemptFailed }: GoogleCalendarProps) {
     const signInToGoogle = () => {
-        if (!SERVER_URL) {
-            console.error("GoogleCalendar: Client configuration error: NEXT_PUBLIC_API_HOST is not defined.");
-            alert("Configuration error. Cannot connect to Google.");
-            return;
-        }
         if (!userId) {
             console.error("GoogleCalendar: User information is missing. Cannot initiate Google sign-in.");
             alert("User session error. Please try logging in again or refresh the page.");

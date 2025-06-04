@@ -3,8 +3,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
-
-const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
+import { getOffice365ExcelAuthUrl } from '@/services/integrationService';
 
 interface Office365ExcelProps {
     isSignedIn: boolean;
@@ -14,18 +13,13 @@ interface Office365ExcelProps {
 
 export default function Office365Excel({ isSignedIn, userId, authAttemptFailed }: Office365ExcelProps) {
     const signInToMicrosoft = () => {
-        if (!SERVER_URL) {
-            console.error("Office365Excel: Client configuration error: NEXT_PUBLIC_API_HOST is not defined.");
-            alert("Configuration error. Cannot connect to Microsoft.");
-            return;
-        }
         if (!userId) {
             console.error("Office365Excel: User information is missing. Cannot initiate Microsoft sign-in.");
             alert("User session error. Please try logging in again or refresh the page.");
             return;
         }
         // IMPORTANT: Replace '/auth/microsoft' with your actual backend endpoint for Microsoft OAuth
-        window.location.href = `${SERVER_URL}/office365-excel/initiate-microsoft-oauth?userId=${userId}`;
+        window.location.href = getOffice365ExcelAuthUrl(userId);
     };
 
     if (isSignedIn && !authAttemptFailed) {

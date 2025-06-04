@@ -5,9 +5,6 @@ import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
 import { getGoogleDocsAuthUrl } from '@/services/integrationService';
 
-// SERVER_URL is used here for the redirect.
-const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
-
 interface GoogleDocsProps {
     isSignedIn: boolean;
     userId: string | null;

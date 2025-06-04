@@ -3,8 +3,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
-
-const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
+import { getNotionAuthUrl } from '@/services/integrationService';
 
 interface NotionIntegrationProps {
     isSignedIn: boolean;
@@ -14,18 +13,13 @@ interface NotionIntegrationProps {
 
 export default function NotionIntegration({ isSignedIn, userId, authAttemptFailed }: NotionIntegrationProps) {
     const signInToNotion = () => {
-        if (!SERVER_URL) {
-            console.error("NotionIntegration: Client configuration error: NEXT_PUBLIC_API_HOST is not defined.");
-            alert("Configuration error. Cannot connect to Notion.");
-            return;
-        }
         if (!userId) {
             console.error("NotionIntegration: User information is missing. Cannot initiate Notion sign-in.");
             alert("User session error. Please try logging in again or refresh the page.");
             return;
         }
         // IMPORTANT: Replace '/auth/notion' with your actual backend endpoint for Notion OAuth
-        window.location.href = `${SERVER_URL}/auth/notion?userId=${userId}`;
+        window.location.href = getNotionAuthUrl(userId);
     };
 
     if (isSignedIn && !authAttemptFailed) {

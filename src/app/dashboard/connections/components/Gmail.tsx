@@ -4,8 +4,6 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
 
-const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
-
 interface GmailProps {
     isSignedIn: boolean;
     userId: string | null;
@@ -14,11 +12,6 @@ interface GmailProps {
 
 export default function Gmail({ isSignedIn, userId, authAttemptFailed }: GmailProps) {
     const signInToGoogle = () => {
-        if (!SERVER_URL) {
-            console.error("Gmail: Client configuration error: NEXT_PUBLIC_API_HOST is not defined.");
-            alert("Configuration error. Cannot connect to Google.");
-            return;
-        }
         if (!userId) {
             console.error("Gmail: User information is missing. Cannot initiate Google sign-in.");
             alert("User session error. Please try logging in again or refresh the page.");

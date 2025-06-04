@@ -3,8 +3,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
-
-const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
+import { getZoomAuthUrl } from '@/services/integrationService';
 
 interface ZoomIntegrationProps {
     isSignedIn: boolean;
@@ -14,18 +13,13 @@ interface ZoomIntegrationProps {
 
 export default function ZoomIntegration({ isSignedIn, userId, authAttemptFailed }: ZoomIntegrationProps) {
     const signInToZoom = () => {
-        if (!SERVER_URL) {
-            console.error("ZoomIntegration: Client configuration error: NEXT_PUBLIC_API_HOST is not defined.");
-            alert("Configuration error. Cannot connect to Zoom.");
-            return;
-        }
         if (!userId) {
             console.error("ZoomIntegration: User information is missing. Cannot initiate Zoom sign-in.");
             alert("User session error. Please try logging in again or refresh the page.");
             return;
         }
         // IMPORTANT: Replace '/auth/zoom' with your actual backend endpoint for Zoom OAuth
-        window.location.href = `${SERVER_URL}/auth/zoom?userId=${userId}`;
+        window.location.href = getZoomAuthUrl(userId);
     };
 
     if (isSignedIn && !authAttemptFailed) {

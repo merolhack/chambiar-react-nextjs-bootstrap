@@ -5,8 +5,6 @@ import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
 import { sendSlackAuthCode } from '../../../../services/integrationService';
 
-const SERVER_URL = process.env.NEXT_PUBLIC_API_HOST;
-
 interface SlackIntegrationProps {
     isSignedIn: boolean;
     userId: string | null;
@@ -18,11 +16,6 @@ interface SlackIntegrationProps {
 
 export default function SlackIntegration({ isSignedIn, userId, authAttemptFailed, onIntegrationSuccess, onIntegrationFailure }: SlackIntegrationProps) {
     const signInToSlack = () => {
-        if (!SERVER_URL) {
-            console.error("SlackIntegration: Client configuration error: NEXT_PUBLIC_API_HOST is not defined.");
-            alert("Configuration error. Cannot connect to Slack.");
-            return;
-        }
         if (!userId) {
             console.error("SlackIntegration: User information is missing. Cannot initiate Slack sign-in.");
             alert("User session error. Please try logging in again or refresh the page.");

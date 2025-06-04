@@ -36,3 +36,27 @@ export const getGoogleDocsAuthUrl = (userId: string) => {
   const apiHost = process.env.NEXT_PUBLIC_API_HOST;
   return `${apiHost}/auth/google?userId=${userId}`;
 }
+
+export const getOffice365ExcelAuthUrl = (userId: string) => {
+  // This function returns the Office 365 Excel authorization URL
+  const apiHost = process.env.NEXT_PUBLIC_API_HOST;
+  return `${apiHost}/auth/office365-excel?userId=${userId}`;
+}
+
+export const getHubspotAuthUrl = (userId: string) => {
+  // This function returns the HubSpot authorization URL
+  const apiHost = process.env.NEXT_PUBLIC_API_HOST;
+  return `${apiHost}/auth/hubspot?userId=${userId}`;
+}
+
+export const getNotionAuthUrl = (userId: string) => {
+  // This function returns the Notion authorization URL
+  const apiHost = process.env.NEXT_PUBLIC_API_HOST;
+  return `${apiHost}/auth/notion?userId=${userId}`;
+}
+
+export const getZoomAuthUrl = (userId: string) => {
+  // This function returns the Zoom authorization URL
+  const apiHost = process.env.NEXT_PUBLIC_API_HOST;
+  return `${apiHost}/auth/zoom?userId=${userId}`;
+}
