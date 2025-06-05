@@ -1,6 +1,8 @@
 // src/services/integrationService.ts
 import apiClient from './api';
 
+const apiHost = process.env.NEXT_PUBLIC_API_HOST || 'https://chambiar-prod-backend-app-563127813488.us-central1.run.app';
+
 export const checkStatus = async () => {
   try {
     const response = await apiClient.post('/integrations/check-status');
@@ -33,30 +35,35 @@ export const sendSlackAuthCode = async (code: string) => {
 
 export const getGoogleDocsAuthUrl = (userId: string) => {
   // This function returns the Google Docs authorization URL
-  const apiHost = process.env.NEXT_PUBLIC_API_HOST;
-  return `${apiHost}/auth/google?userId=${userId}`;
+  return `${apiHost}/auth/google-docs?userId=${userId}`;
+}
+
+export const getGoogleCalendarAuthUrl = (userId: string) => {
+  // This function returns the Google Calendar authorization URL
+  return `${apiHost}/auth/google-calendar?userId=${userId}`;
+}
+
+export const getGoogleGmailAuthUrl = (userId: string) => {
+  // This function returns the Google Docs authorization URL
+  return `${apiHost}/auth/google-gmail?userId=${userId}`;
 }
 
 export const getOffice365ExcelAuthUrl = (userId: string) => {
   // This function returns the Office 365 Excel authorization URL
-  const apiHost = process.env.NEXT_PUBLIC_API_HOST;
   return `${apiHost}/auth/office365-excel?userId=${userId}`;
 }
 
 export const getHubspotAuthUrl = (userId: string) => {
   // This function returns the HubSpot authorization URL
-  const apiHost = process.env.NEXT_PUBLIC_API_HOST;
   return `${apiHost}/auth/hubspot?userId=${userId}`;
 }
 
 export const getNotionAuthUrl = (userId: string) => {
   // This function returns the Notion authorization URL
-  const apiHost = process.env.NEXT_PUBLIC_API_HOST;
   return `${apiHost}/auth/notion?userId=${userId}`;
 }
 
 export const getZoomAuthUrl = (userId: string) => {
   // This function returns the Zoom authorization URL
-  const apiHost = process.env.NEXT_PUBLIC_API_HOST;
   return `${apiHost}/auth/zoom?userId=${userId}`;
 }
