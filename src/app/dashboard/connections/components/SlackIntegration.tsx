@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import 'remixicon/fonts/remixicon.css';
-import { sendSlackAuthCode } from '../../../../services/integrationService';
+import { getSlackAuthUrl, sendSlackAuthCode } from '../../../../services/integrationService';
 
 interface SlackIntegrationProps {
     isSignedIn: boolean;
@@ -15,26 +15,20 @@ interface SlackIntegrationProps {
 }
 
 export default function SlackIntegration({ isSignedIn, userId, authAttemptFailed, onIntegrationSuccess, onIntegrationFailure }: SlackIntegrationProps) {
-    const signInToSlack = () => {
+    const signInToSlack = async () => {
         if (!userId) {
             console.error("SlackIntegration: User information is missing. Cannot initiate Slack sign-in.");
             alert("User session error. Please try logging in again or refresh the page.");
             return;
         }
-        // Slack OAuth URL from your legacy Slack.tsx
-        const clientId = "7878698019540.7894321828534";
-        const scope = "incoming-webhook";
-        // This comprehensive user_scope is from your Slack.tsx file
-        const userScope = "bookmarks:read,bookmarks:write,channels:history,channels:read,channels:write,channels:write.invites,channels:write.topic,chat:write,groups:history,groups:read,groups:write,groups:write.invites,groups:write.topic,im:history,im:read,im:write,im:write.topic,mpim:history,mpim:read,mpim:write,users.profile:read,users.profile:write,users:read,users:write,users:read.email";
-
-        // IMPORTANT: Define your redirect URI. This URI must be registered in your Slack App settings.
-        // It should be a page in your Next.js app that can handle the callback (e.g., this current page or a dedicated one).
-        // For example, if this component is at '/dashboard/connections', that could be your redirect URI.
-        const redirectUri = window.location.origin + window.location.pathname; // Or your specific callback URL like `${window.location.origin}/slack/callback`
-
-        const slackAuthUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=${scope}&user_scope=${userScope}&redirect_uri=${encodeURIComponent(redirectUri)}`;
-
-        window.location.href = slackAuthUrl;
+        try {
+            const url = getSlackAuthUrl(userId);
+            window.location.href = url;
+        } catch (error) {
+            console.error("Slack auth failed:", error);
+            alert("Failed to connect to Slack. Please try again.");
+            if (onIntegrationFailure) onIntegrationFailure();
+        }
     };
 
     useEffect(() => {

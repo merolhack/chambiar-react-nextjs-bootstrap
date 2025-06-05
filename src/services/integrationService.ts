@@ -48,6 +48,11 @@ export const getGoogleGmailAuthUrl = (userId: string) => {
   return `${apiHost}/auth/google-gmail?userId=${userId}`;
 }
 
+export const getSlackAuthUrl = (userId: string) => {
+  // This function returns the Slack authorization URL
+  return `${apiHost}/slack/auth-url?userId=${userId}`;
+}
+
 export const getOffice365ExcelAuthUrl = (userId: string) => {
   // This function returns the Office 365 Excel authorization URL
   return `${apiHost}/auth/office365-excel?userId=${userId}`;
