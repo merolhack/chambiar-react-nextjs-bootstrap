@@ -55,7 +55,7 @@ export const getSlackAuthUrl = (userId: string) => {
 
 export const getOffice365ExcelAuthUrl = (userId: string) => {
   // This function returns the Office 365 Excel authorization URL
-  return `${apiHost}/auth/office365-excel?userId=${userId}`;
+  return `${apiHost}/office365-excel/initiate-microsoft-oauth?userId=${userId}`;
 }
 
 export const getHubspotAuthUrl = (userId: string) => {
